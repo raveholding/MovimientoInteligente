@@ -21,3 +21,8 @@ que se abre directo en el navegador, sin instalar nada. Los datos quedan en el n
 - Los comprobantes son internos y no tienen validez fiscal. La factura electrónica se emite en ARCA.
 - Huella y NFC se simulan en la demo. En producción necesitan un lector conectado y un programa que lo conecte.
 - Los datos, teléfonos y precios que trae son de demostración.
+
+## Desarrollo
+
+Sistema desarrollado por **Vincular Business**: digitalización, software de gestión y fidelización para comercios y servicios de Argentina.
+WhatsApp (387) 4484132 · vincularbusiness@gmail.com
