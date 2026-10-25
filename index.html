@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Jost:wght@300;400;500;600&display=swap">
 <style>
-/* Concepto: panel de cristal flotando sobre un fondo de nebulosa nocturna (el astronauta y la medusa del logo).
+/* Concepto: paneles de cristal flotando sobre una nebulosa nocturna (el astronauta y la medusa del logo).
    Bento-grid, vitromorfosis, oscuro por defecto con tema claro alternativo. */
 :root{
   --bg:#060b21; --glass:rgba(255,255,255,.065); --glass-2:rgba(255,255,255,.11); --rim:rgba(255,255,255,.22);
@@ -42,38 +42,43 @@
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--font-u);font-size:16px;line-height:1.45;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 80px;min-height:100vh}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:70}
 .aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:radial-gradient(520px 420px at 12% 8%,var(--blob1),transparent 70%),radial-gradient(560px 460px at 92% 18%,var(--blob3),transparent 70%),radial-gradient(600px 480px at 70% 98%,var(--blob2),transparent 70%)}
-.wrap{max-width:1120px;margin:0 auto;min-width:0}
+.wrap{max-width:1180px;margin:0 auto;min-width:0}
 h1,h2,h3{font-family:var(--font-d);font-weight:600;margin:0;text-wrap:balance;letter-spacing:-.01em}
 h1{font-size:clamp(26px,5vw,36px);line-height:1.1}
 h2{font-size:21px}
 h3{font-size:17px}
 .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{border-radius:12px;display:block;border:1px solid var(--line)}
-.b1{font-weight:300;font-size:15px;letter-spacing:.08em;line-height:1.1}
+.b1{font-weight:300;font-size:15px;letter-spacing:.08em;line-height:1.1;overflow-wrap:anywhere}
 .b2{font-weight:600;font-size:12px;letter-spacing:.3em;margin-top:3px;color:var(--teal)}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctrl select{min-height:44px;width:auto;padding:6px 12px;font-size:14px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--glass);color:var(--muted);font:500 14px var(--font-u);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--teal);color:var(--on-solid);border-color:transparent;font-weight:600}
 nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;padding:8px 0;background:var(--bg)}
 nav.tabs .scroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px}
 nav.tabs .scroll::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;min-height:48px;padding:0 18px;border-radius:14px;border:1px solid var(--line);background:var(--glass);color:var(--muted);font:500 15px var(--font-u);cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.tab{flex:0 0 auto;min-height:48px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:var(--glass);color:var(--muted);font:500 15px var(--font-u);cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .tab[aria-current="page"]{color:var(--on-solid);background:var(--teal);border-color:transparent;font-weight:600}
 main{padding-top:14px;display:flex;flex-direction:column;gap:16px}
 .glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:18px;box-shadow:inset 0 1px 0 var(--rim),var(--shadow);padding:20px;min-width:0}
 .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
-.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
-@media (max-width:900px){.c3,.c4{grid-column:span 6}.c6,.c8{grid-column:span 12}}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media (max-width:900px){.c3,.c4{grid-column:span 6}.c5,.c6,.c7,.c8{grid-column:span 12}}
 @media (max-width:560px){.c4{grid-column:span 12}.glass{padding:16px}.bento{gap:12px}}
-.kpi .v{font-family:var(--font-d);font-size:clamp(26px,5vw,36px);font-weight:600;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi .v{font-family:var(--font-d);font-size:clamp(24px,4.5vw,34px);font-weight:600;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .kpi .f{font-size:12.5px;color:var(--muted);margin-top:8px}
 .btn{min-height:48px;padding:0 20px;border-radius:14px;border:1px solid transparent;background:var(--teal);color:var(--on-solid);font:600 15px var(--font-u);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
 .btn.ghost{background:var(--glass-2);color:var(--fg);border-color:var(--line)}
 .btn.danger{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
 .btn.sm{min-height:44px;padding:0 14px;font-size:14px}
-.btn:focus-visible,.tab:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.btn:focus-visible,.tab:focus-visible,.seg button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
 label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted);font-weight:500;min-width:0}
 input,select,textarea{min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--field);color:var(--fg);font:400 16px var(--font-u);padding:10px 14px;width:100%;min-width:0}
 textarea{min-height:92px;resize:vertical}
@@ -86,8 +91,9 @@ input[type="checkbox"]{width:22px;height:22px;min-height:0;accent-color:var(--te
 .list{display:flex;flex-direction:column;gap:10px}
 .item{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--glass)}
 .item .grow{flex:1 1 200px;min-width:0}
+button.item{width:100%;text-align:left;cursor:pointer;color:inherit;font:inherit}
 .nm{font-weight:600;font-size:16px;overflow-wrap:anywhere}
-.meta{font-size:13.5px;color:var(--muted);margin-top:2px}
+.meta{font-size:13.5px;color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
 .acts{display:flex;gap:8px;flex-wrap:wrap}
 .pill{display:inline-flex;align-items:center;min-height:26px;padding:0 10px;border-radius:99px;font-size:12.5px;font-weight:600;white-space:nowrap}
 .pill.ok{color:var(--ok);background:var(--ok-soft)}.pill.warn{color:var(--warn);background:var(--warn-soft)}
@@ -97,25 +103,35 @@ input[type="checkbox"]{width:22px;height:22px;min-height:0;accent-color:var(--te
 .note{font-size:14px;color:var(--muted)}
 .banner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--amber);background:var(--warn-soft);border-radius:16px;padding:12px 16px;font-size:14.5px}
 .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.bars{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:6px;align-items:end}
+.bars{display:grid;gap:5px;align-items:end}
 .bcol{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;min-width:0}
 .bf{width:100%;max-width:28px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--teal),var(--pink));min-height:3px}
 .bf.z{background:var(--mute-soft)}
-.bv{font-size:12px;font-variant-numeric:tabular-nums;color:var(--fg)}
+.bv{font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--fg)}
 .bl{font-size:11px;color:var(--muted);text-align:center;line-height:1.15}
 .bl.t{color:var(--teal);font-weight:600}
-.hbar{display:grid;grid-template-columns:110px 1fr 36px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.hbar{display:grid;grid-template-columns:minmax(80px,130px) 1fr 44px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.hbar span{overflow-wrap:anywhere}
 .hbar .tr{height:10px;border-radius:99px;background:var(--mute-soft);overflow:hidden}
 .hbar .fl{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--pink))}
 .hbar b{font-variant-numeric:tabular-nums;text-align:right}
-.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .day{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--glass);display:flex;flex-direction:column;gap:10px;min-width:0}
 .day.today{border-color:var(--teal)}
 .slot{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px;background:var(--mute-soft)}
 .slot .tm{font-family:var(--font-d);font-size:20px;font-variant-numeric:tabular-nums}
+.meter{height:8px;border-radius:99px;background:var(--mute-soft);overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--pink))}
+.meter.full i{background:var(--bad)}
+.tblw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.tbl th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(2,6,22,.62);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;
   padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
-.sheet{width:100%;max-width:560px;background:var(--bg);border:1px solid var(--line);border-radius:20px;box-shadow:inset 0 1px 0 var(--rim),var(--shadow);padding:22px;margin:auto;display:flex;flex-direction:column;gap:16px}
+.sheet{width:100%;max-width:600px;background:var(--bg);border:1px solid var(--line);border-radius:20px;box-shadow:inset 0 1px 0 var(--rim),var(--shadow);padding:22px;margin:auto;display:flex;flex-direction:column;gap:16px}
 .club{border-radius:20px;padding:18px;background:linear-gradient(145deg,#0b1a52,#0a0f33 55%,#2a0f45);color:#eaeefb;border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.3);display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
 .club .cn{font-family:var(--font-d);font-size:22px;line-height:1.15;overflow-wrap:anywhere}
 .club .cm{font-size:13px;color:#b8c2e6;margin-top:4px}
@@ -127,14 +143,31 @@ input[type="checkbox"]{width:22px;height:22px;min-height:0;accent-color:var(--te
 .st{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4)}
 .st.on{background:linear-gradient(135deg,#3de0c5,#ff6aa9);border-color:transparent}
 @media (max-width:420px){.club{grid-template-columns:1fr}.qr{justify-self:center}}
-.gate{border-radius:22px;padding:28px 20px;text-align:center;color:var(--on-solid)}
-.gate.ok{background:var(--ok)}.gate.bad{background:var(--bad)}.gate.mute{background:var(--muted)}
+.gate{border-radius:22px;padding:26px 20px;text-align:center;color:var(--on-solid);display:flex;flex-direction:column;align-items:center;gap:6px}
+.gate.ok{background:var(--ok)}.gate.warn{background:var(--amber)}.gate.bad{background:var(--bad)}.gate.mute{background:var(--muted)}
 .gate .gt{font-size:13px;letter-spacing:.18em;font-weight:600}
-.gate .gn{font-family:var(--font-d);font-size:clamp(28px,6vw,40px);margin:8px 0 4px;overflow-wrap:anywhere}
-.gate .gm{font-size:15px}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:500;font-size:15px;z-index:80;max-width:calc(100vw - 32px);box-shadow:var(--shadow)}
+.gate .gn{font-family:var(--font-d);font-size:clamp(28px,6vw,44px);line-height:1.1;overflow-wrap:anywhere}
+.gate .gm{font-size:15px;max-width:42ch}
+.gate .av{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.28);font-family:var(--font-d);font-size:30px;font-weight:600}
+.gate ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:500}
+.idle{border-radius:22px;padding:34px 20px;text-align:center;border:2px dashed var(--line);color:var(--muted)}
+.idle b{display:block;font-family:var(--font-d);font-size:26px;color:var(--fg);margin-bottom:6px}
+.kiosk{position:fixed;inset:0;z-index:60;background:var(--bg);overflow-y:auto;display:flex;flex-direction:column;gap:18px;
+  padding:calc(18px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+.kiosk .clock{font-family:var(--font-d);font-size:clamp(34px,8vw,64px);font-variant-numeric:tabular-nums;line-height:1}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:500;font-size:15px;z-index:90;max-width:calc(100vw - 32px);box-shadow:var(--shadow)}
 .prog{white-space:pre-wrap;font-size:15px;margin:4px 0 0;overflow-wrap:anywhere}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.prod{min-height:92px;border-radius:14px;border:1px solid var(--line);background:var(--glass-2);color:var(--fg);text-align:left;padding:10px 12px;cursor:pointer;font:inherit;display:flex;flex-direction:column;justify-content:space-between;gap:6px;border-left:5px solid var(--teal)}
+.prod.c-Suplementos{border-left-color:var(--pink)}.prod.c-Alimentos{border-left-color:var(--amber)}.prod.c-Bebidas{border-left-color:var(--teal)}
+.prod .pn{font-weight:600;font-size:14.5px;line-height:1.2}
+.prod .pp{font-variant-numeric:tabular-nums;font-size:15px}
+.prod:disabled{opacity:.45;cursor:not-allowed}
+.cartrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--glass-2);color:var(--fg);font:600 18px var(--font-u);cursor:pointer}
+.total{font-family:var(--font-d);font-size:30px;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:no-preference){.tab,.btn{transition:background .15s,transform .1s}.btn:active{transform:scale(.98)}}
 </style>
 
@@ -145,10 +178,12 @@ input[type="checkbox"]{width:22px;height:22px;min-height:0;accent-color:var(--te
 <script>
 (function(){
 const LOGO='data:image/jpeg;base64,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';
-const KEY='mi-sistema-v1';
+const KEY='mi-gym-v2';
 const DAYS=['Lunes','Martes','Miércoles','Jueves','Viernes'];
+const DAYS7=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MODES={presencial:'Presencial',virtual:'Virtual',mixto:'Presencial + virtual'};
 const PAYM=['Efectivo','Transferencia','Tarjeta débito/crédito','Billetera virtual'];
+const METH={qr:'QR',nfc:'NFC',huella:'Huella',dni:'Documento',manual:'Manual'};
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const fmt=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
@@ -157,340 +192,804 @@ const todayStr=()=>fmt(new Date());
 const addDays=(s,n)=>{const d=parse(s);d.setDate(d.getDate()+n);return fmt(d)};
 const addMonths=(s,n)=>{const d=parse(s);const day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));return fmt(d)};
 const daysBetween=(a,b)=>Math.round((parse(b)-parse(a))/864e5);
-const dmy=s=>{const a=s.split('-');return a[2]+'/'+a[1]+'/'+a[0]};
+const dmy=s=>{if(!s)return '';const a=s.split('-');return a[2]+'/'+a[1]+'/'+a[0]};
 const weekStart=s=>{const d=parse(s);d.setDate(d.getDate()-((d.getDay()+6)%7));return fmt(d)};
+const hhmm=ts=>{const d=new Date(ts);return pad(d.getHours())+':'+pad(d.getMinutes())};
+const tsOf=(ds,h,mi)=>{const d=parse(ds);d.setHours(h,mi,0,0);return d.getTime()};
+const dateOfTs=ts=>fmt(new Date(ts));
 const uid=()=>Math.random().toString(36).slice(2,8);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>'$'+Math.round(n).toLocaleString('es-AR');
+const initials=n=>n.split(' ').filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+const pill=(k,t)=>'<span class="pill '+k+'">'+esc(t)+'</span>';
+const B=(a,label,attrs,cls)=>'<button class="btn '+(cls||'')+'" type="button" data-a="'+a+'" '+(attrs||'')+'>'+label+'</button>';
 
 let S;
-const ui={view:'panel',q:'',filter:'activos',modal:null,confirm:null,pid:'',paySid:'',accQ:'',accId:null};
+const ui={view:'panel',q:'',flt:'activos',plan:'',page:0,modal:null,confirm:null,payMid:'',accQ:'',accMethod:'auto',accRes:null,kiosk:false,
+  cart:[],cat:'Todos',posMid:'',posMethod:'Efectivo',pid:'',queue:null,clockRes:null,invFlt:'todos'};
 
-function seed(){
-  const t=todayStr();
-  const base=[
-    ['Lucía Ferreyra',2,'presencial',12,'Ganar fuerza y movilidad'],
-    ['Marcos Díaz',3,'mixto',3,'Preparación física para running'],
-    ['Ana Rojas',1,'virtual',-5,'Retomar la actividad física'],
-    ['Julián Paz',2,'virtual',20,'Mejorar la postura'],
-    ['Sofía Luna',3,'presencial',-1,'Ganar masa muscular']
-  ];
-  const students=base.map(b=>({id:uid(),name:b[0],phone:'',plan:b[1],mode:b[2],goal:b[4],health:'',decl:true,due:addDays(t,b[3]),active:true,canjes:0,created:addMonths(t,-3),ejemplo:true}));
-  const id=i=>students[i].id;
-  const sl=(i,day,time,mode)=>({id:uid(),sid:id(i),day:day,time:time,mode:mode});
-  const slots=[sl(0,1,'08:00','presencial'),sl(0,4,'08:00','presencial'),sl(1,2,'18:30','presencial'),sl(1,3,'18:30','virtual'),sl(1,5,'18:30','presencial'),
-    sl(2,3,'20:00','virtual'),sl(3,2,'07:30','virtual'),sl(3,5,'07:30','virtual'),sl(4,1,'19:30','presencial'),sl(4,3,'19:30','presencial'),sl(4,5,'19:30','presencial')];
-  const attendance=[];
-  for(let i=1;i<=14;i++){
-    const ds=addDays(t,-i);const dow=parse(ds).getDay();
-    slots.forEach((s,k)=>{if(s.day===dow&&(i+k)%5!==0)attendance.push({id:uid(),sid:s.sid,date:ds,mode:s.mode})});
+/* ---------- datos de demostración ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const FIRST=['Lucía','Marcos','Ana','Julián','Sofía','Mateo','Valentina','Tomás','Camila','Franco','Agustina','Nicolás','Martina','Lautaro','Florencia','Bruno','Julieta','Santiago','Carolina','Emiliano','Paula','Gonzalo','Micaela','Ezequiel','Rocío','Facundo','Brenda','Leandro','Candela','Maximiliano','Daniela','Joaquín','Milagros','Federico','Antonella','Ramiro','Belén','Gastón','Noelia','Ignacio','Yamila','Cristian','Victoria','Alan'];
+const LAST=['Ferreyra','Díaz','Rojas','Paz','Luna','Gómez','Torres','Ruiz','Acosta','Vega','Medina','Castro','Herrera','Silva','Ortiz','Flores','Molina','Benítez','Cabrera','Ríos','Mamaní','Cruz','Aguirre','Navarro'];
+function tpls(){return {
+  venc:'Hola {nombre}, te escribimos de {negocio}. Tu cuota vence el {fecha}. Podés abonar en recepción o por transferencia. ¡Gracias!',
+  vencida:'Hola {nombre}, tu cuota de {negocio} venció el {fecha}. ¿Coordinamos el pago para que sigas entrenando?',
+  cumple:'¡Feliz cumpleaños, {nombre}! Desde {negocio} te regalamos un batido en tu próxima visita.',
+  resena:'Hola {nombre}, gracias por entrenar en {negocio}. ¿Nos dejás una reseña? Nos ayuda muchísimo: {enlace}',
+  reactiva:'Hola {nombre}, hace unos días que no te vemos en {negocio}. ¿Te esperamos esta semana?'}}
+
+function seed(mode){
+  const t=todayStr(),gym=mode==='gym',R=rng(gym?7:3);
+  const pick=a=>a[Math.floor(R()*a.length)];
+  const settings={mode:mode,role:'a',biz:'Movimiento Inteligente',owner:'Nahuel Cornu',razon:'',cuit:'',pv:'0001',iva:'Monotributo',
+    alertDays:5,autoReg:true,blockDebt:false,creditLimit:15000,reviewUrl:'https://g.page/r/TU-ENLACE-DE-RESENAS',
+    rewards:[{id:uid(),name:'Batido de proteína gratis',sellos:10},{id:uid(),name:'Una sesión de regalo',sellos:20}],tpl:tpls()};
+  const P=(name,price,weekly,kind,desc)=>({id:uid(),name:name,price:price,weekly:weekly,kind:kind,desc:desc});
+  const plans=gym?[P('Pase libre',38000,0,'libre','Acceso a sala y a todas las clases'),P('Musculación',30000,0,'mus','Sala de musculación sin clases'),
+    P('Clases grupales',32000,0,'clases','Todas las clases grupales'),P('Pack 8 clases',24000,2,'pack','8 clases por mes'),
+    P('Personal 1 por semana',25000,1,'personal','Entrenamiento personalizado, 1 sesión semanal'),P('Personal 2 por semana',40000,2,'personal','2 sesiones semanales'),
+    P('Personal 3 por semana',52000,3,'personal','3 sesiones semanales')]:
+    [P('1 sesión por semana',25000,1,'personal','Patrones de movimiento, fuerza y HIIT'),P('2 sesiones por semana',40000,2,'personal','Patrones de movimiento, fuerza y HIIT'),P('3 sesiones por semana',52000,3,'personal','Patrones de movimiento, fuerza y HIIT')];
+  // personal
+  const staffDef=gym?[
+    ['Nahuel Cornu','Dueño y entrenador','1111',0,0,0],['Valeria Soto','Recepción','2222',4200,0,0],['Diego Arias','Entrenador','3333',3000,6000,40],
+    ['Camila Ibarra','Entrenadora de clases','4444',2500,7000,0],['Mariana Quiroga','Supervisora','5555',5200,0,0],['Rubén Cabana','Limpieza','6666',3500,0,0]]:
+    [['Nahuel Cornu','Dueño y entrenador','1111',0,0,0]];
+  const staff=staffDef.map((s,i)=>({id:uid(),name:s[0],role:s[1],pin:s[2],nfc:'NFC-S0'+(i+1),rate:s[3],commClass:s[4],commPT:s[5]}));
+  const trainers=staff.filter(s=>/entrenador/i.test(s.role));
+  // socios
+  const n=gym?44:5;const members=[];
+  const trainerBase=[['Lucía Ferreyra',2,'presencial',12,'Ganar fuerza y movilidad'],['Marcos Díaz',3,'mixto',3,'Preparación física para running'],['Ana Rojas',1,'virtual',-5,'Retomar la actividad física'],['Julián Paz',2,'virtual',20,'Mejorar la postura'],['Sofía Luna',3,'presencial',-1,'Ganar masa muscular']];
+  for(let i=0;i<n;i++){
+    let name,due,planIdx,active=true,mm='presencial',goal='';
+    if(gym){
+      name=FIRST[i]+' '+LAST[(i*5+3)%LAST.length];
+      const b=R();
+      if(i%11===9){active=false;due=addDays(t,-40)}
+      else if(b<.6)due=addDays(t,6+Math.floor(R()*22));
+      else if(b<.76)due=addDays(t,Math.floor(R()*6));
+      else due=addDays(t,-(1+Math.floor(R()*25)));
+      planIdx=Math.floor(R()*7);
+    }else{const b=trainerBase[i];name=b[0];due=addDays(t,b[3]);planIdx=b[1]-1;mm=b[2];goal=b[4]}
+    const bd=new Date(1978+Math.floor(R()*28),Math.floor(R()*12),1+Math.floor(R()*28));
+    let birth=fmt(bd);
+    if(gym&&i===2){const x=parse(t);birth=(x.getFullYear()-30)+'-'+pad(x.getMonth()+1)+'-'+pad(x.getDate())}
+    if(gym&&i===5){const x=parse(addDays(t,3));birth=(x.getFullYear()-27)+'-'+pad(x.getMonth()+1)+'-'+pad(x.getDate())}
+    const plan=plans[planIdx];
+    members.push({id:uid(),name:name,dni:String(30000000+Math.floor(R()*14000000)),phone:'549387555'+String(1000+i).slice(-4),email:'',birth:birth,
+      planId:plan.id,mode:mm,due:due,active:active,goal:goal,health:'',decl:R()<.9,consent:R()<.85,
+      nfcId:'NFC-'+(4096+i*37).toString(16).toUpperCase(),fingerId:'F'+(100+i),debt:(gym&&i%9===4)?3500+Math.floor(R()*3)*1200:0,
+      stampDates:[],spent:0,reviewAt:'',created:addMonths(t,-1-Math.floor(R()*10)),ejemplo:true,
+      trainerId:plan.kind==='personal'&&trainers.length?trainers[i%trainers.length].id:''});
   }
-  const price={1:25000,2:40000,3:52000};
-  const methods=['Transferencia','Efectivo','Transferencia','Billetera virtual','Efectivo'];
-  const payments=students.map((s,i)=>{const amt=price[s.plan];return {id:uid(),sid:s.id,date:addMonths(s.due,-1),lines:[{m:methods[i],a:amt}],total:amt,until:s.due}});
-  const programs=[{id:uid(),sid:id(0),title:'Bloque 1 · Base de fuerza',week:weekStart(t),
+  // clases
+  const classes=[];
+  if(gym){
+    const C=(name,days,time,cap,ti)=>days.forEach(d=>classes.push({id:uid(),name:name,day:d,time:time,cap:cap,trainerId:staff[ti].id}));
+    C('Spinning',[1,3,5],'08:00',16,3);C('Funcional',[2,4],'19:00',20,2);C('Yoga',[3],'18:30',15,3);C('Pilates',[4],'09:30',12,3);C('Crossfit',[1,3,5],'20:00',14,2);C('Stretching',[5],'17:00',18,3);
+  }
+  // asistencia y accesos
+  const attendance=[],access=[];
+  const HRS=[7,8,9,10,12,17,18,18,19,19,20,21];
+  const now=new Date();
+  members.forEach(m=>{
+    if(!m.active)return;
+    const w=planOfIn(plans,m).weekly,prob=w?w/6.5:.42;
+    for(let off=21;off>=0;off--){
+      const ds=addDays(t,-off),dow=parse(ds).getDay();
+      if(dow===0)continue;
+      if(R()<prob){
+        const h=pick(HRS),mi=Math.floor(R()*60);
+        if(off===0&&(h>now.getHours()||(h===now.getHours()&&mi>now.getMinutes())))continue;
+        if(m.due<ds)continue;
+        const ts=tsOf(ds,h,mi),meth=pick(['qr','qr','nfc','nfc','huella','dni']);
+        attendance.push({id:uid(),mid:m.id,date:ds,ts:ts,method:meth});
+        access.push({id:uid(),mid:m.id,ts:ts,method:meth,res:'ok',why:''});
+        if(m.stampDates.indexOf(ds)<0)m.stampDates.push(ds);
+      }
+    }
+    if(m.due<t){const ds=addDays(t,-Math.floor(R()*3));access.push({id:uid(),mid:m.id,ts:tsOf(ds,pick([8,18,19]),Math.floor(R()*60)),method:'qr',res:'denied',why:'Cuota vencida'})}
+    m.spent=Math.min(m.stampDates.length,m.stampDates.length>=10&&R()<.4?10:0);
+  });
+  // cobros y comprobantes
+  const payments=[],invoices=[];let seq=0;
+  members.forEach(m=>{
+    const plan=planOfIn(plans,m);
+    for(let c=0;c<3;c++){
+      const until=addMonths(m.due,-c),date=addMonths(m.due,-c-1);
+      if(date>t||(!m.active&&c===0&&false))continue;
+      const meth=pick(PAYM);
+      const pay={id:uid(),mid:m.id,date:date,kind:'cuota',lines:[{m:meth,a:plan.price}],total:plan.price,until:until,planName:plan.name};
+      payments.push(pay);
+      if(daysBetween(date,t)<=14){seq++;invoices.push({id:uid(),n:settings.pv+'-'+String(seq).padStart(8,'0'),date:date,mid:m.id,concept:'Cuota '+plan.name,total:plan.price,method:meth,arca:null})}
+    }
+  });
+  // buffet
+  const products=gym?[['Proteína whey 1 kg','Suplementos',38000,26000,8,3,170],['Creatina 300 g','Suplementos',22000,14000,2,3,260],['BCAA 200 g','Suplementos',18000,11000,5,3,120],['Pre-entreno','Suplementos',20000,12500,6,3,40],
+    ['Barra de proteína','Suplementos',2500,1500,40,10,300],['Agua 500 ml','Bebidas',1200,600,60,20,0],['Bebida isotónica','Bebidas',2200,1300,36,12,0],['Energizante','Bebidas',2800,1700,30,10,0],['Café','Bebidas',1500,500,100,0,0],
+    ['Ensalada de pollo','Alimentos',6500,3800,12,5,0],['Sándwich integral','Alimentos',5200,2900,14,5,0],['Yogur con granola','Alimentos',3800,2000,18,6,0],['Banana','Alimentos',800,400,30,10,0]].map(p=>({id:uid(),name:p[0],cat:p[1],price:p[2],cost:p[3],stock:p[4],min:p[5],exp:p[6]?addDays(t,p[6]):''})):[];
+  const sales=[];
+  if(gym){
+    for(let k=0;k<70;k++){
+      const ds=addDays(t,-Math.floor(R()*14)),items=[];const cnt=1+Math.floor(R()*3);
+      for(let j=0;j<cnt;j++){const p=pick(products);items.push({pid:p.id,name:p.name,qty:1+(R()<.2?1:0),price:p.price,cost:p.cost})}
+      const total=items.reduce((a,x)=>a+x.price*x.qty,0),m=R()<.5?pick(members):null;
+      const meth=pick(PAYM);
+      sales.push({id:uid(),date:ds,ts:tsOf(ds,pick(HRS),Math.floor(R()*60)),mid:m?m.id:'',items:items,total:total,method:meth});
+      if(daysBetween(ds,t)<=14){seq++;invoices.push({id:uid(),n:settings.pv+'-'+String(seq).padStart(8,'0'),date:ds,mid:m?m.id:'',concept:'Venta de buffet',total:total,method:meth,arca:null})}
+    }
+  }
+  // fichajes y turnos
+  const shifts=[],clock=[];
+  if(gym){
+    const SH=[[0,[1,2,3,4,5],'08:00','12:00'],[1,[1,2,3,4,5],'07:00','15:00'],[4,[1,2,3,4,5],'15:00','22:00'],[2,[1,2,3,4,5],'16:00','21:00'],[3,[2,4,5],'18:00','20:00'],[5,[1,2,3,4,5],'06:00','08:00']];
+    SH.forEach(s=>s[1].forEach(d=>shifts.push({id:uid(),sid:staff[s[0]].id,day:d,start:s[2],end:s[3]})));
+    for(let off=20;off>=0;off--){
+      const ds=addDays(t,-off),dow=parse(ds).getDay();
+      shifts.filter(x=>x.day===dow).forEach((x,k)=>{
+        if((off+k)%17===0&&off>0)return;
+        const sh=+x.start.slice(0,2),sm=+x.start.slice(3),eh=+x.end.slice(0,2),em=+x.end.slice(3);
+        const tin=tsOf(ds,sh,sm)+Math.floor((R()-.4)*14)*60000,tout=tsOf(ds,eh,em)+Math.floor((R()-.3)*14)*60000;
+        if(tin<=Date.now())clock.push({id:uid(),sid:x.sid,ts:tin,date:ds,type:'in',method:'nfc'});
+        if(tout<=Date.now())clock.push({id:uid(),sid:x.sid,ts:tout,date:ds,type:'out',method:'nfc'});
+      });
+    }
+  }
+  // clases: reservas y asistencias
+  const res=[],classAtt=[];
+  const ok=members.filter(m=>m.active&&m.due>=t);
+  classes.forEach(c=>{
+    for(let w=3;w>=1;w--){
+      const ds=addDays(nextDate(c.day,t),-7*w),k=4+Math.floor(R()*7);
+      for(let j=0;j<k;j++)classAtt.push({id:uid(),cid:c.id,date:ds,mid:ok[Math.floor(R()*ok.length)].id});
+    }
+    const nd=nextDate(c.day,t),k=Math.floor(c.cap*(.35+R()*.6)),seen={};
+    for(let j=0;j<k;j++){const m=ok[Math.floor(R()*ok.length)];if(seen[m.id])continue;seen[m.id]=1;res.push({id:uid(),cid:c.id,date:nd,mid:m.id})}
+  });
+  // sesiones personales
+  const slots=[];
+  members.filter(m=>planOfIn(plans,m).kind==='personal'&&m.active).forEach((m,i)=>{
+    const w=planOfIn(plans,m).weekly,days=[[1,4],[2,5],[1,3,5]][Math.min(w,3)-1];
+    days.slice(0,w).forEach((d,k)=>slots.push({id:uid(),mid:m.id,day:d,time:pick(['07:30','08:30','10:00','18:00','19:30']),mode:m.mode==='virtual'?'virtual':'presencial'}));
+  });
+  const expenses=gym?[['Alquiler del local','Alquiler',480000,-20],['Electricidad','Servicios',96000,-12],['Agua','Servicios',18000,-12],['Limpieza e insumos','Mantenimiento',34000,-9],['Mantenimiento de máquinas','Mantenimiento',52000,-6],['Publicidad en redes','Marketing',45000,-4]].map(e=>({id:uid(),date:addDays(t,e[3]),concept:e[0],cat:e[1],amount:e[2]})):
+    [['Alquiler de sala','Alquiler',90000,-18],['Equipamiento','Equipamiento',35000,-9]].map(e=>({id:uid(),date:addDays(t,e[3]),concept:e[0],cat:e[1],amount:e[2]}));
+  const programs=[{id:uid(),mid:members[0].id,title:'Bloque 1 · Base de fuerza',week:weekStart(t),
     blocks:{patrones:'Sentadilla goblet · 3×8 con pausa de 2 s abajo\nBisagra de cadera con kettlebell · 3×10\nEmpuje y tracción horizontal · 3×8 cada uno',
-    fuerza:'A1. Press con mancuernas · 4×6 (descanso 90 s)\nA2. Remo con apoyo · 4×8\nB. Peso muerto rumano · 3×8',
-    hiit:'40 s de trabajo / 20 s de pausa · 6 rondas\nSwing, burpee sin salto, remo con banda'},created:Date.now()}];
-  return {settings:{prices:price,meta:10,premio:'Una sesión de regalo'},students,slots,attendance,payments,programs};
+    fuerza:'A1. Press con mancuernas · 4×6 (descanso 90 s)\nA2. Remo con apoyo · 4×8\nB. Peso muerto rumano · 3×8',hiit:'40 s de trabajo / 20 s de pausa · 6 rondas\nSwing, burpee sin salto, remo con banda'},created:Date.now()}];
+  return {v:2,settings:settings,plans:plans,members:members,staff:staff,classes:classes,slots:slots,res:res,classAtt:classAtt,attendance:attendance,access:access,
+    payments:payments,invoices:invoices,invSeq:seq,products:products,sales:sales,shifts:shifts,clock:clock,expenses:expenses,cash:[],msgs:[],programs:programs};
 }
-function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.students){S=o;return}}}catch(e){}S=seed()}
+function planOfIn(plans,m){return plans.find(p=>p.id===m.planId)||{name:'Sin plan',weekly:0,price:0,kind:'libre'}}
+function nextDate(day,from){let d=from||todayStr();for(let i=0;i<7;i++){if(parse(d).getDay()===day)return d;d=addDays(d,1)}return d}
+function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.v===2&&o.members){S=o;return}}}catch(e){}S=seed('gym')}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
-const stud=id=>S.students.find(s=>s.id===id);
-const code=s=>'MI-'+s.id.toUpperCase();
-const price=p=>S.settings.prices[p]||0;
-const attCount=sid=>S.attendance.filter(a=>a.sid===sid).length;
-const attToday=sid=>S.attendance.some(a=>a.sid===sid&&a.date===todayStr());
-const weekCount=sid=>{const ws=weekStart(todayStr());return S.attendance.filter(a=>a.sid===sid&&a.date>=ws).length};
-const sellos=s=>Math.max(0,attCount(s.id)-(s.canjes||0)*S.settings.meta);
-function status(s){
-  if(!s.active)return {k:'mute',t:'Baja'};
+/* ---------- consultas ---------- */
+const mem=id=>S.members.find(m=>m.id===id);
+const staffOf=id=>S.staff.find(s=>s.id===id);
+const code=m=>'MI-'+m.id.toUpperCase();
+const planOf=m=>planOfIn(S.plans,m);
+const isGym=()=>S.settings.mode==='gym';
+const W=()=>isGym()?{s:'socio',ss:'socios',S:'Socio',SS:'Socios'}:{s:'alumno',ss:'alumnos',S:'Alumno',SS:'Alumnos'};
+const attToday=mid=>S.attendance.some(a=>a.mid===mid&&a.date===todayStr());
+const weekCount=mid=>{const ws=weekStart(todayStr());return S.attendance.filter(a=>a.mid===mid&&a.date>=ws).length};
+const attCount=mid=>S.attendance.filter(a=>a.mid===mid).length;
+function lastAtt(mid){let d='';S.attendance.forEach(a=>{if(a.mid===mid&&a.date>d)d=a.date});return d}
+const stamps=m=>Math.max(0,(m.stampDates||[]).length-(m.spent||0));
+function addStamp(m,ds){m.stampDates=m.stampDates||[];if(m.stampDates.indexOf(ds)<0)m.stampDates.push(ds)}
+function status(m){
+  if(!m.active)return {k:'mute',t:'Baja'};
   const t=todayStr();
-  if(s.due<t)return {k:'bad',t:'Vencido'};
-  const left=daysBetween(t,s.due);
+  if(m.due<t)return {k:'bad',t:'Vencido hace '+daysBetween(m.due,t)+' d'};
+  const left=daysBetween(t,m.due);
   if(left===0)return {k:'warn',t:'Vence hoy'};
-  if(left<=5)return {k:'warn',t:'Vence en '+left+' d'};
+  if(left<=S.settings.alertDays)return {k:'warn',t:'Vence en '+left+' d'};
   return {k:'ok',t:'Al día'};
 }
-const planTxt=s=>s.plan+(s.plan===1?' sesión':' sesiones')+' por semana';
+const planTxt=m=>{const p=planOf(m);return p.name};
+const isBirthday=(m,ds)=>m.birth&&m.birth.slice(5)===(ds||todayStr()).slice(5);
 
-function toast(msg){
-  const h=$('#toast-host');h.innerHTML='<div class="toast">'+esc(msg)+'</div>';
-  clearTimeout(toast.t);toast.t=setTimeout(()=>{h.innerHTML=''},2800);
-}
-async function copy(text,title){
-  try{await navigator.clipboard.writeText(text);toast('Copiado al portapapeles')}
-  catch(e){ui.modal={t:'text',title:title||'Copiar texto',text:text};render()}
-}
+/* ---------- acciones ---------- */
+function toast(msg){const h=$('#toast-host');h.innerHTML='<div class="toast">'+esc(msg)+'</div>';clearTimeout(toast.t);toast.t=setTimeout(()=>{h.innerHTML=''},3000)}
+async function copy(text,title){try{await navigator.clipboard.writeText(text);toast('Copiado al portapapeles')}catch(e){ui.modal={t:'text',title:title||'Copiar texto',text:text};render()}}
 function csvCell(v){let c=String(v==null?'':v);if(/^[=+\-@\t\r]/.test(c))c="'"+c;return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}
 const csv=rows=>rows.map(r=>r.map(csvCell).join(',')).join('\n');
+let AC;
+function beep(kind){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.frequency.value=kind==='bad'?200:(kind==='warn'?520:880);g.gain.value=.07;o.start();o.stop(AC.currentTime+(kind==='bad'?.4:.14))}catch(e){}}
 
-/* ---------- acciones de datos ---------- */
-function checkin(sid,mode){
-  const s=stud(sid);if(!s)return false;
-  if(!s.active){toast('El alumno está dado de baja');return false}
-  if(s.due<todayStr()){toast('Cuota vencida: cobrá antes de registrar la sesión');return false}
-  if(attToday(sid)){toast('Ya tiene asistencia registrada hoy');return false}
-  S.attendance.push({id:uid(),sid:sid,date:todayStr(),mode:mode||(s.mode==='virtual'?'virtual':'presencial')});
-  save();toast('Asistencia registrada: '+s.name);return true;
+function recordAttendance(m,method){
+  const t=todayStr();
+  if(!attToday(m.id)){S.attendance.push({id:uid(),mid:m.id,date:t,ts:Date.now(),method:method});addStamp(m,t)}
 }
-function registerPayment(sid,lines){
-  const s=stud(sid);const total=lines.reduce((a,l)=>a+l.a,0);
-  const t=todayStr();const base=s.due>t?s.due:t;const until=addMonths(base,1);
-  S.payments.push({id:uid(),sid:sid,date:t,lines:lines,total:total,until:until});
-  s.due=until;s.active=true;save();return until;
+function nextInvoiceNo(){S.invSeq=(S.invSeq||0)+1;return S.settings.pv+'-'+String(S.invSeq).padStart(8,'0')}
+function newInvoice(o){S.invoices.push({id:uid(),n:nextInvoiceNo(),date:todayStr(),mid:o.mid||'',concept:o.concept,total:o.total,method:o.method,arca:null})}
+function registerPayment(mid,lines){
+  const m=mem(mid),plan=planOf(m),t=todayStr(),total=lines.reduce((a,l)=>a+l.a,0);
+  const base=m.due>t?m.due:t,until=addMonths(base,1);
+  S.payments.push({id:uid(),mid:mid,date:t,kind:'cuota',lines:lines,total:total,until:until,planName:plan.name});
+  newInvoice({mid:mid,concept:'Cuota '+plan.name+' · hasta '+dmy(until),total:total,method:lines.map(l=>l.m).join(' + ')});
+  m.due=until;m.active=true;save();return until;
 }
+function fillTpl(key,m,extra){
+  const f=(m.name||'').split(' ')[0];
+  return (S.settings.tpl[key]||'').replace(/\{nombre\}/g,f).replace(/\{negocio\}/g,S.settings.biz).replace(/\{fecha\}/g,dmy(m.due)).replace(/\{enlace\}/g,S.settings.reviewUrl);
+}
+function waLink(m,msg){const d=(m.phone||'').replace(/\D/g,'');return d?'https://wa.me/'+d+'?text='+encodeURIComponent(msg):''}
+function segments(){
+  const t=todayStr(),act=S.members.filter(m=>m.active),sd=S.settings.alertDays;
+  return {
+    venc:act.filter(m=>m.due>=t&&m.due<=addDays(t,sd)),
+    vencida:act.filter(m=>m.due<t),
+    cumple:act.filter(m=>isBirthday(m)),
+    resena:act.filter(m=>m.due>=t&&attCount(m.id)>=6&&!(m.reviewAt&&daysBetween(m.reviewAt,t)<60)),
+    reactiva:act.filter(m=>{if(m.due<t)return false;const l=lastAtt(m.id);return !l||daysBetween(l,t)>=14})
+  };
+}
+const SEGINFO={venc:['Vencimientos próximos','Cuotas que vencen en los próximos días'],vencida:['Cuotas vencidas','Quienes ya no están al día'],cumple:['Cumpleaños de hoy','Saludo con beneficio'],resena:['Pedido de reseña','Con 6 o más asistencias y sin pedido en 60 días'],reactiva:['Reactivación','Sin asistir hace 14 días o más']};
 
-/* ---------- vistas ---------- */
+/* ---------- estructura general ---------- */
+// id, etiqueta, modos (t=entrenador, g=gimnasio), roles (a=administrador, s=supervisor, r=recepción)
+const VD=[['panel','Panel','tg','asr'],['acceso','Acceso','tg','asr'],['socios','','tg','asr'],['planes','','tg','as'],['agenda','Agenda','tg','asr'],
+  ['programas','Programas','tg','as'],['pos','Buffet','g','asr'],['cobros','Cobros y facturas','tg','asr'],['club','Club y WhatsApp','tg','as'],
+  ['rrhh','Personal','g','as'],['admin','Administración','tg','a'],['ajustes','Ajustes','tg','a']];
+function viewsVisible(){
+  const md=isGym()?'g':'t',rl=S.settings.role||'a';
+  return VD.filter(v=>v[2].indexOf(md)>=0&&v[3].indexOf(rl)>=0).map(v=>({id:v[0],l:v[0]==='socios'?W().SS:(v[0]==='planes'?(isGym()?'Membresías':'Planes'):v[1])}));
+}
+const ROLES={a:'Administrador',s:'Supervisor',r:'Recepción'};
+
 function header(){
-  return '<header class="top"><div class="brand"><img src="'+LOGO+'" width="46" height="49" alt="Astronauta con medusa, logo de Movimiento Inteligente"><div><div class="b1">MOVIMIENTO INTELIGENTE</div><div class="b2">NAHUEL CORNU</div></div></div><button class="btn ghost sm" data-a="theme" type="button">Tema</button></header>';
+  const roleSel='<label class="chk" style="gap:6px;color:var(--muted);font-size:13px" for="role-sel">Ver como<select id="role-sel">'+Object.keys(ROLES).map(k=>'<option value="'+k+'"'+(S.settings.role===k?' selected':'')+'>'+ROLES[k]+'</option>').join('')+'</select></label>';
+  return '<header class="top"><div class="brand"><img src="'+LOGO+'" width="46" height="49" alt="Astronauta con medusa, logo de Movimiento Inteligente"><div><div class="b1">'+esc(S.settings.biz.toUpperCase())+'</div><div class="b2">'+esc(S.settings.owner.toUpperCase())+'</div></div></div>'+
+  '<div class="ctrl"><div class="seg" role="group" aria-label="Tipo de negocio"><button type="button" data-a="mode" data-m="trainer" aria-pressed="'+(!isGym())+'">Entrenador personal</button><button type="button" data-a="mode" data-m="gym" aria-pressed="'+isGym()+'">Gimnasio</button></div>'+roleSel+'<button class="btn ghost sm" data-a="theme" type="button">Tema</button></div></header>';
 }
-function nav(){
-  const T=[['panel','Panel'],['alumnos','Alumnos'],['agenda','Agenda'],['programas','Programas'],['cobros','Cobros'],['acceso','Acceso'],['ajustes','Ajustes']];
-  return '<nav class="tabs" aria-label="Secciones"><div class="scroll">'+T.map(t=>'<button class="tab" type="button" data-a="nav" data-v="'+t[0]+'"'+(ui.view===t[0]?' aria-current="page"':'')+'>'+t[1]+'</button>').join('')+'</div></nav>';
-}
-function hasExamples(){return S.students.some(s=>s.ejemplo)}
-function exampleBanner(){
-  return hasExamples()?'<div class="banner"><span>Estás viendo datos de ejemplo y precios de prueba. Cargá tus alumnos reales y ajustá los precios en Ajustes.</span><button class="btn sm" type="button" data-a="rmExamples">Quitar ejemplos</button></div>':'';
-}
+function nav(){return '<nav class="tabs" aria-label="Secciones"><div class="scroll">'+viewsVisible().map(v=>'<button class="tab" type="button" data-a="nav" data-v="'+v.id+'"'+(ui.view===v.id?' aria-current="page"':'')+'>'+esc(v.l)+'</button>').join('')+'</div></nav>'}
+const hasExamples=()=>S.members.some(m=>m.ejemplo);
+function exampleBanner(){return hasExamples()?'<div class="banner"><span>Estás viendo datos de demostración (teléfonos, precios y movimientos de prueba). Quitá los ejemplos desde Ajustes para cargar tu negocio real.</span>'+(S.settings.role==='a'?B('go','Ir a Ajustes','data-v="ajustes"','sm'):'')+'</div>':''}
 
+/* ---------- cálculos ---------- */
+const inRange=(d,a,b)=>d>=a&&(!b||d<=b);
+function income(a,b){
+  const mm=S.payments.filter(p=>p.kind==='cuota'&&inRange(p.date,a,b)).reduce((x,p)=>x+p.total,0);
+  const bu=S.sales.filter(s=>s.method!=='Cuenta corriente'&&inRange(s.date,a,b)).reduce((x,s)=>x+s.total,0)+S.payments.filter(p=>p.kind==='deuda'&&inRange(p.date,a,b)).reduce((x,p)=>x+p.total,0);
+  return {mem:mm,buf:bu,tot:mm+bu};
+}
+function hb(arr){const m=Math.max(1,...arr.map(a=>a.n));return arr.map(a=>'<div class="hbar"><span>'+esc(a.l)+'</span><div class="tr"><div class="fl" style="width:'+Math.round(a.n/m*100)+'%"></div></div><b>'+(a.t||a.n)+'</b></div>').join('')}
+function barsHtml(vals,labels,cols,fmtv,hl){
+  const mx=Math.max(1,...vals);
+  return '<div class="bars" style="grid-template-columns:repeat('+cols+',minmax(0,1fr))">'+vals.map((v,i)=>'<div class="bcol"><span class="bv">'+(fmtv?fmtv(v):v)+'</span><div class="bf'+(v?'':' z')+'" style="height:'+(v?Math.max(6,Math.round(v/mx*100)):3)+'px"></div><span class="bl'+(hl===i?' t':'')+'">'+labels[i]+'</span></div>').join('')+'</div>';
+}
+const kfmt=v=>v>=1000?Math.round(v/1000)+'k':String(v);
+
+/* ---------- panel ---------- */
 function panel(){
-  const t=todayStr(),act=S.students.filter(x=>x.active);
-  const ms=t.slice(0,8)+'01';
-  const income=S.payments.filter(p=>p.date>=ms).reduce((a,p)=>a+p.total,0);
-  const ok=act.filter(x=>x.due>=t).length;
-  const ws=weekStart(t);
-  const actIds=new Set(act.map(x=>x.id));
-  const done=S.attendance.filter(a=>a.date>=ws&&actIds.has(a.sid)).length;
-  const contracted=act.reduce((a,x)=>a+x.plan,0);
-  const rate=contracted?Math.round(done/contracted*100):0;
+  const t=todayStr(),act=S.members.filter(m=>m.active),ms=t.slice(0,8)+'01',I=income(ms),W_=W(),sg=segments();
+  const okN=act.filter(m=>m.due>=t).length,newM=S.members.filter(m=>m.created>=ms).length;
+  const todayAcc=S.access.filter(a=>dateOfTs(a.ts)===t),granted=todayAcc.filter(a=>a.res!=='denied').length,den=todayAcc.length-granted;
   const month=new Date().toLocaleDateString('es-AR',{month:'long'});
-  const dow=new Date().getDay();
-  const today=S.slots.filter(x=>x.day===dow&&stud(x.sid)).sort((a,b)=>a.time.localeCompare(b.time));
-  const todayHtml=(dow<1||dow>5)?'<div class="empty">Hoy es fin de semana: no hay sesiones programadas.</div>':
-    today.length?'<div class="list">'+today.map(x=>{const s=stud(x.sid);const done=attToday(s.id);
-      return '<div class="item"><div class="grow"><div class="nm"><span style="font-variant-numeric:tabular-nums">'+esc(x.time)+'</span> · '+esc(s.name)+'</div><div class="meta">'+MODES[x.mode]+'</div></div>'+
-      (done?'<span class="pill ok">Asistió</span>':'<button class="btn sm" type="button" data-a="checkin" data-id="'+s.id+'" data-mode="'+x.mode+'">Registrar asistencia</button>')+'</div>'}).join('')+'</div>':
-    '<div class="empty">No hay sesiones agendadas para hoy.</div>';
-  const due=act.filter(x=>x.due<=addDays(t,5)).sort((a,b)=>a.due.localeCompare(b.due));
-  const dueHtml=due.length?'<div class="list">'+due.map(s=>{const st=status(s);
-    return '<div class="item"><div class="grow"><div class="nm">'+esc(s.name)+'</div><div class="meta">Paga hasta '+dmy(s.due)+'</div></div><span class="pill '+st.k+'">'+st.t+'</span><button class="btn sm ghost" type="button" data-a="payFor" data-id="'+s.id+'">Cobrar</button></div>'}).join('')+'</div>':'<div class="empty">Nadie vence en los próximos 5 días.</div>';
-  // asistencia 14 días
+  const debtors=S.members.filter(m=>m.debt>0),debtSum=debtors.reduce((a,m)=>a+m.debt,0);
+  const low=S.products.filter(p=>p.stock<=p.min),noDecl=act.filter(m=>!m.decl);
+  const alerts=[];
+  if(sg.vencida.length)alerts.push(['bad',sg.vencida.length+(sg.vencida.length===1?' cuota vencida':' cuotas vencidas'),'Cobranza pendiente · '+money(sg.vencida.reduce((a,m)=>a+planOf(m).price,0)),'goFlt','data-flt="vencidos"']);
+  if(sg.venc.length)alerts.push(['warn',sg.venc.length+' vencen en los próximos '+S.settings.alertDays+' días','Avisales antes de que pierdan el acceso','goFlt','data-flt="porvencer"']);
+  if(debtors.length&&isGym())alerts.push(['warn',debtors.length+' con deuda de buffet',money(debtSum)+' en cuentas corrientes','goFlt','data-flt="deuda"']);
+  if(low.length)alerts.push(['warn',low.length+(low.length===1?' producto con stock bajo':' productos con stock bajo'),low.slice(0,3).map(p=>p.name).join(', '),'nav','data-v="pos"']);
+  if(noDecl.length)alerts.push(['warn',noDecl.length+' sin declaración de salud','Es obligatoria para entrenar','goFlt','data-flt="sindecl"']);
+  if(sg.cumple.length)alerts.push(['ok','Cumple hoy: '+sg.cumple.map(m=>m.name.split(' ')[0]).join(', '),'Mandales el saludo con beneficio','nav','data-v="club"']);
+  const alertHtml=alerts.length?'<div class="list">'+alerts.map(a=>'<button class="item" type="button" data-a="'+a[3]+'" '+a[4]+'><div class="grow"><div class="nm">'+esc(a[1])+'</div><div class="meta">'+esc(a[2])+'</div></div>'+pill(a[0]==='bad'?'bad':a[0],a[0]==='bad'?'Urgente':a[0]==='warn'?'Atención':'Hoy')+'</button>').join('')+'</div>':'<div class="empty">Sin alertas por ahora.</div>';
+  const live=S.access.slice().sort((a,b)=>b.ts-a.ts).slice(0,7);
+  const liveHtml=live.length?'<div class="list">'+live.map(a=>{const m=mem(a.mid);return '<div class="item"><div class="grow"><div class="nm">'+esc(m?m.name:'—')+'</div><div class="meta">'+hhmm(a.ts)+' · '+METH[a.method]+(a.why?' · '+esc(a.why):'')+'</div></div>'+pill(a.res==='ok'?'ok':a.res==='warn'?'warn':'bad',a.res==='ok'?'Autorizado':a.res==='warn'?'Con aviso':'Denegado')+'</div>'}).join('')+'</div>':'<div class="empty">Todavía no hay ingresos registrados.</div>';
   const days=[];for(let i=13;i>=0;i--)days.push(addDays(t,-i));
-  const counts=days.map(d=>S.attendance.filter(a=>a.date===d).length);
-  const mx=Math.max(1,...counts);
   const ini=['D','L','M','M','J','V','S'];
-  const bars=days.map((d,i)=>{const h=Math.round(counts[i]/mx*100);const isT=d===t;
-    return '<div class="bcol"><span class="bv">'+counts[i]+'</span><div class="bf'+(counts[i]?'':' z')+'" style="height:'+(counts[i]?Math.max(h,6):3)+'px"></div><span class="bl'+(isT?' t':'')+'">'+ini[parse(d).getDay()]+'<br>'+parse(d).getDate()+'</span></div>'}).join('');
-  // distribución
-  const byPlan=[1,2,3].map(p=>({l:p+(p===1?' sesión':' sesiones'),n:act.filter(x=>x.plan===p).length}));
-  const byMode=Object.keys(MODES).map(m=>({l:MODES[m],n:act.filter(x=>x.mode===m).length}));
-  const hb=arr=>{const m=Math.max(1,...arr.map(a=>a.n));return arr.map(a=>'<div class="hbar"><span>'+a.l+'</span><div class="tr"><div class="fl" style="width:'+Math.round(a.n/m*100)+'%"></div></div><b>'+a.n+'</b></div>').join('')};
+  const cnt=days.map(d=>S.attendance.filter(a=>a.date===d).length);
+  const weeks=[];for(let i=5;i>=0;i--){const a=addDays(weekStart(t),-7*i),b=addDays(a,6);weeks.push({a:a,v:income(a,b).tot})}
+  const hrs=[];for(let h=6;h<=22;h++)hrs.push(h);
+  const since=addDays(t,-14);const hv=hrs.map(h=>S.access.filter(a=>a.res!=='denied'&&dateOfTs(a.ts)>=since&&new Date(a.ts).getHours()===h).length);
+  const byPlan=S.plans.map(p=>({l:p.name,n:act.filter(m=>m.planId===p.id).length}));
+  const dow=new Date().getDay();
+  const todayCls=S.classes.filter(c=>c.day===dow).sort((a,b)=>a.time.localeCompare(b.time));
+  const clsHtml=isGym()?'<section class="glass c12"><div class="hd"><h2>Clases de hoy</h2><span class="chip">'+todayCls.length+' programadas</span></div>'+(todayCls.length?'<div class="days">'+todayCls.map(c=>{const n=S.res.filter(r=>r.cid===c.id&&r.date===t).length,full=n>=c.cap,tr=staffOf(c.trainerId);return '<div class="day"><div class="slot"><div class="tm">'+c.time+'</div><div class="nm">'+esc(c.name)+'</div><div class="meta">'+esc(tr?tr.name:'')+'</div></div><div class="meter'+(full?' full':'')+'"><i style="width:'+Math.min(100,Math.round(n/c.cap*100))+'%"></i></div><div class="meta">'+n+' de '+c.cap+' cupos'+(full?' · completa':'')+'</div></div>'}).join('')+'</div>':'<div class="empty">Hoy no hay clases grupales.</div>')+'</section>':'';
   return exampleBanner()+
   '<div><div class="eyebrow">'+new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'})+'</div><h1>Panel del día</h1></div>'+
   '<div class="bento">'+
-  '<section class="glass kpi c3"><div class="eyebrow">Alumnos activos</div><div class="v">'+act.length+'</div><div class="f">Total de alumnos con alta vigente</div></section>'+
-  '<section class="glass kpi c3"><div class="eyebrow">Ingresos de '+month+'</div><div class="v">'+money(income)+'</div><div class="f">Suma de cobros desde el '+dmy(ms)+' hasta hoy</div></section>'+
-  '<section class="glass kpi c3"><div class="eyebrow">Cuotas al día</div><div class="v">'+ok+' de '+act.length+'</div><div class="f">Alumnos activos con cuota paga ÷ alumnos activos</div></section>'+
-  '<section class="glass kpi c3"><div class="eyebrow">Asistencia semanal</div><div class="v">'+rate+'%</div><div class="f">'+done+' sesiones hechas ÷ '+contracted+' contratadas por semana</div></section>'+
-  '<section class="glass c8"><div class="hd"><h2>Sesiones de hoy</h2><span class="chip">'+today.length+' agendadas</span></div>'+todayHtml+'</section>'+
-  '<section class="glass c4"><div class="hd"><h2>Vencimientos</h2></div>'+dueHtml+'</section>'+
-  '<section class="glass c8"><div class="hd"><h2>Asistencia, últimos 14 días</h2><span class="chip">Sesiones por día</span></div><div class="bars">'+bars+'</div></section>'+
-  '<section class="glass c4"><h2 style="margin-bottom:6px">Planes</h2>'+hb(byPlan)+'<h3 style="margin:18px 0 4px">Modalidad</h3>'+hb(byMode)+'</section>'+
-  '</div>';
+  '<section class="glass kpi c3"><div class="eyebrow">'+W_.SS+' activos</div><div class="v">'+act.length+'</div><div class="f">'+newM+' alta'+(newM===1?'':'s')+' este mes</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Ingresos de '+month+'</div><div class="v">'+money(I.tot)+'</div><div class="f">Membresías '+money(I.mem)+(isGym()?' + buffet '+money(I.buf):'')+'</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Cuotas al día</div><div class="v">'+okN+' de '+act.length+'</div><div class="f">'+(act.length-okN)+' con cuota vencida ÷ '+act.length+' activos = '+(act.length?Math.round((act.length-okN)/act.length*100):0)+'% de mora</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Ingresos de hoy</div><div class="v">'+granted+'</div><div class="f">'+den+' rechazo'+(den===1?'':'s')+' por cuota o baja</div></section>'+
+  '<section class="glass c5"><div class="hd"><h2>Alertas</h2></div>'+alertHtml+'</section>'+
+  '<section class="glass c7"><div class="hd"><h2>Accesos en vivo</h2>'+B('nav','Abrir control de acceso','data-v="acceso"','sm ghost')+'</div>'+liveHtml+'</section>'+
+  '<section class="glass c7"><div class="hd"><h2>Asistencia, últimos 14 días</h2><span class="chip">Un ingreso por persona y día</span></div>'+barsHtml(cnt,days.map(d=>ini[parse(d).getDay()]+'<br>'+parse(d).getDate()),14,null,13)+'</section>'+
+  '<section class="glass c5"><h2 style="margin-bottom:6px">Planes</h2>'+hb(byPlan)+'</section>'+
+  '<section class="glass c6"><div class="hd"><h2>Ingresos por semana</h2><span class="chip">En miles</span></div>'+barsHtml(weeks.map(w=>w.v),weeks.map(w=>dmy(w.a).slice(0,5)),6,kfmt,5)+'</section>'+
+  '<section class="glass c6"><div class="hd"><h2>Horarios de más asistencia</h2><span class="chip">Últimos 14 días</span></div>'+barsHtml(hv,hrs.map(h=>h),17,null,-1)+'</section>'+clsHtml+'</div>';
 }
 
-function studentList(){
-  const q=ui.q.trim().toLowerCase();
-  let L=S.students.filter(s=>!q||s.name.toLowerCase().includes(q)||code(s).toLowerCase().includes(q));
-  const t=todayStr();
-  if(ui.filter==='activos')L=L.filter(s=>s.active);
-  else if(ui.filter==='vencidos')L=L.filter(s=>s.active&&s.due<t);
-  else if(ui.filter==='virtual')L=L.filter(s=>s.active&&s.mode!=='presencial');
-  else if(ui.filter==='baja')L=L.filter(s=>!s.active);
-  L.sort((a,b)=>a.name.localeCompare(b.name,'es'));
-  if(!L.length)return '<div class="empty">No hay alumnos para mostrar con este filtro.</div>';
-  return '<div class="list">'+L.map(s=>{const st=status(s);
-    return '<article class="item"><div class="grow"><div class="nm">'+esc(s.name)+(s.ejemplo?' <span class="chip">Ejemplo</span>':'')+'</div><div class="meta">'+planTxt(s)+' · '+MODES[s.mode]+' · paga hasta '+dmy(s.due)+'</div></div><span class="pill '+st.k+'">'+st.t+'</span><div class="acts"><button class="btn sm ghost" type="button" data-a="ficha" data-id="'+s.id+'">Ficha y tarjeta</button><button class="btn sm" type="button" data-a="payFor" data-id="'+s.id+'">Cobrar</button></div></article>'}).join('')+'</div>';
+/* ---------- acceso ---------- */
+function resolve(method,val){
+  const v=String(val||'').trim();if(!v)return null;
+  const u=v.toUpperCase(),dg=v.replace(/\D/g,'');
+  const F={qr:m=>code(m)===u||code(m)==='MI-'+u,nfc:m=>(m.nfcId||'').toUpperCase()===u,huella:m=>(m.fingerId||'').toUpperCase()===u,dni:m=>!!dg&&m.dni===dg};
+  const order=method==='auto'?['qr','nfc','huella','dni']:[method];
+  for(let i=0;i<order.length;i++){const k=order[i],m=S.members.find(F[k]);if(m)return {m:m,method:k}}
+  return null;
 }
-function alumnos(){
-  const F=[['activos','Activos'],['vencidos','Con cuota vencida'],['virtual','Con modalidad virtual'],['baja','Dados de baja'],['todos','Todos']];
-  return exampleBanner()+'<div class="hd"><h1>Alumnos</h1><button class="btn" type="button" data-a="newStudent">Nuevo alumno</button></div>'+
-  '<div class="glass"><div class="toolbar" style="margin-bottom:14px"><label class="grow" for="q">Buscar por nombre o código<input id="q" type="search" value="'+esc(ui.q)+'" placeholder="Ej: Lucía o MI-"></label><label for="flt">Mostrar<select id="flt">'+F.map(f=>'<option value="'+f[0]+'"'+(ui.filter===f[0]?' selected':'')+'>'+f[1]+'</option>').join('')+'</select></label></div><div id="list">'+studentList()+'</div></div>';
+function processAccess(m,method){
+  const t=todayStr(),st=status(m),pl=planOf(m);
+  const last=S.access.filter(a=>a.mid===m.id).sort((a,b)=>b.ts-a.ts)[0];
+  if(last&&Date.now()-last.ts<6000&&ui.accRes&&ui.accRes.mid===m.id)return ui.accRes;
+  const warns=[],notes=[];let res='ok',why='';
+  if(!m.active){res='denied';why='Dado de baja'}
+  else if(m.due<t){res='denied';why='Cuota vencida desde el '+dmy(m.due)}
+  else if(S.settings.blockDebt&&m.debt>S.settings.creditLimit){res='denied';why='Deuda de buffet sobre el límite'}
+  if(res!=='denied'){
+    if(st.k==='warn')warns.push(m.due===t?'Su cuota vence hoy':'Su cuota vence el '+dmy(m.due));
+    if(pl.weekly&&!attToday(m.id)&&weekCount(m.id)>=pl.weekly)warns.push('Ya completó sus '+pl.weekly+' sesiones de la semana');
+    if(!m.decl)warns.push('Falta la declaración de salud');
+    if(m.debt>0)warns.push('Deuda de buffet: '+money(m.debt));
+    if(warns.length)res='warn';
+  }
+  if(isBirthday(m))notes.push('Hoy es su cumpleaños');
+  if(res!=='denied'&&attToday(m.id))notes.push('Ya había ingresado hoy');
+  if(res!=='denied'&&S.settings.autoReg)recordAttendance(m,method);
+  S.access.push({id:uid(),mid:m.id,ts:Date.now(),method:method,res:res,why:why||warns.join(' · ')});
+  save();beep(res==='ok'?'ok':res==='warn'?'warn':'bad');
+  return {mid:m.id,res:res,why:why,warns:warns,notes:notes,method:method,at:Date.now()};
+}
+function gateHtml(r,full){
+  if(!r)return '<div class="idle"><b>Esperando lectura</b>Acercá la tarjeta NFC, mostrá el QR, apoyá el dedo en el lector o ingresá el documento.</div>';
+  if(r.nf){
+    const q=r.q.toLowerCase(),sug=S.members.filter(m=>q.length>=3&&m.name.toLowerCase().includes(q)).slice(0,4);
+    return '<div class="gate mute"><div class="gt">NO RECONOCIDO</div><div class="gn">Sin coincidencias</div><div class="gm">No hay ningún '+W().s+' con “'+esc(r.q)+'”. Probá con otro método.</div></div>'+
+    (sug.length?'<div class="list" style="margin-top:12px">'+sug.map(m=>'<button class="item" type="button" data-a="accManual" data-id="'+m.id+'"><div class="grow"><div class="nm">'+esc(m.name)+'</div><div class="meta">Ingreso manual · DNI '+esc(m.dni)+'</div></div>'+pill(status(m).k,status(m).t)+'</button>').join('')+'</div>':'');
+  }
+  const m=mem(r.mid);if(!m)return '';
+  const cls=r.res==='denied'?'bad':r.res,pl=planOf(m);
+  const title=r.res==='ok'?'ACCESO AUTORIZADO':r.res==='warn'?'ACCESO CON AVISO':'ACCESO DENEGADO';
+  const lines=(r.res==='denied'?[r.why]:r.warns).concat(r.notes);
+  return '<div class="gate '+cls+'"><div class="av" aria-hidden="true">'+esc(initials(m.name))+'</div><div class="gt">'+title+'</div><div class="gn">'+esc(m.name)+'</div>'+
+    '<div class="gm">'+esc(pl.name)+' · '+METH[r.method]+' · '+hhmm(r.at)+'</div>'+
+    (pl.weekly?'<div class="gm">Esta semana: '+weekCount(m.id)+' de '+pl.weekly+' sesiones</div>':'')+
+    (lines.length?'<ul>'+lines.map(l=>'<li>'+esc(l)+'</li>').join('')+'</ul>':'')+'</div>'+
+    (full?'<div class="toolbar" style="margin-top:12px">'+(r.res==='denied'?B('payFor','Cobrar cuota','data-id="'+m.id+'"'):'')+B('ficha','Ver ficha','data-id="'+m.id+'"','ghost')+'</div>':'');
+}
+function feedHtml(n){
+  const L=S.access.slice().sort((a,b)=>b.ts-a.ts).slice(0,n);
+  if(!L.length)return '<div class="empty">Sin movimientos.</div>';
+  return '<div class="list">'+L.map(a=>{const m=mem(a.mid);return '<div class="item"><div class="grow"><div class="nm">'+esc(m?m.name:'—')+'</div><div class="meta">'+hhmm(a.ts)+' · '+METH[a.method]+(a.why?' · '+esc(a.why):'')+'</div></div>'+pill(a.res==='ok'?'ok':a.res==='warn'?'warn':'bad',a.res==='ok'?'Autorizado':a.res==='warn'?'Con aviso':'Denegado')+'</div>'}).join('')+'</div>';
+}
+function accKpi(){
+  const t=todayStr(),L=S.access.filter(a=>dateOfTs(a.ts)===t);
+  return '<span class="chip">'+L.filter(a=>a.res!=='denied').length+' ingresos hoy</span> <span class="chip">'+L.filter(a=>a.res==='denied').length+' rechazos</span> <span class="chip">'+L.filter(a=>a.res==='warn').length+' con aviso</span>';
+}
+function refreshAcc(){
+  const set=(s,h)=>{const e=$(s);if(e)e.innerHTML=h};
+  set('#acc-res',gateHtml(ui.accRes,true));set('#k-res',gateHtml(ui.accRes,false));set('#acc-feed',feedHtml(10));set('#k-feed',feedHtml(5));set('#acc-kpi',accKpi());
+  const i=$('#acc-q');if(i){i.value='';i.focus()}
+}
+function showAccess(r){
+  ui.accRes=r;refreshAcc();clearTimeout(showAccess.t);
+  showAccess.t=setTimeout(()=>{ui.accRes=null;refreshAcc()},7000);
+}
+function simulate(kind,methodPick){
+  const t=todayStr(),sd=S.settings.alertDays;
+  let pool=S.members.filter(m=>m.active&&m.due>addDays(t,sd));
+  if(kind==='warn')pool=S.members.filter(m=>m.active&&m.due>=t&&m.due<=addDays(t,sd));
+  if(kind==='bad')pool=S.members.filter(m=>m.active&&m.due<t);
+  if(!pool.length){toast('No hay '+W().ss+' en esa situación');return}
+  const m=pool[Math.floor(Math.random()*pool.length)];
+  const meth=ui.accMethod==='auto'?['qr','nfc','huella','dni'][Math.floor(Math.random()*4)]:ui.accMethod;
+  showAccess(processAccess(m,meth));
+}
+const HINT={auto:'Acepta QR, NFC, huella o documento. Un lector USB escribe el código y confirma con Enter.',qr:'Pasá el QR de la tarjeta del Club por el lector.',nfc:'Acercá la tarjeta o el llavero NFC.',huella:'Apoyá el dedo en el lector biométrico.',dni:'Ingresá el número de documento, sin puntos.'};
+function acceso(){
+  const M=[['auto','Todos'],['qr','QR'],['nfc','NFC'],['huella','Huella'],['dni','Documento']];
+  return '<div class="hd" style="margin:0"><h1>Control de acceso</h1>'+B('kiosk','Modo tótem','','')+'</div>'+
+  '<div class="bento"><section class="glass c5"><h2 style="margin-bottom:12px">Lector</h2><div class="seg" style="margin-bottom:14px" role="group" aria-label="Método de lectura">'+M.map(x=>'<button type="button" data-a="accMeth" data-m="'+x[0]+'" aria-pressed="'+(ui.accMethod===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+
+  '<form data-form="acc" class="toolbar"><label class="grow" for="acc-q">'+(ui.accMethod==='dni'?'Número de documento':'Código leído o búsqueda')+'<input id="acc-q" name="q" type="search" autocomplete="off" inputmode="'+(ui.accMethod==='dni'?'numeric':'text')+'" placeholder="'+(ui.accMethod==='dni'?'Ej: 33123456':'MI-AB12CD · NFC-0FA1 · F101')+'"></label><button class="btn" type="submit" style="align-self:flex-end">Validar</button></form>'+
+  '<p class="note" style="margin:10px 0 0">'+HINT[ui.accMethod]+'</p>'+
+  '<h3 style="margin:20px 0 8px">Simular una lectura</h3><p class="note" style="margin:0 0 10px">Para mostrar la demo sin hardware. Usa el método elegido arriba.</p><div class="toolbar">'+B('sim','Cuota al día','data-k="ok"','sm')+B('sim','Por vencer','data-k="warn"','sm ghost')+B('sim','Cuota vencida','data-k="bad"','sm danger')+'</div>'+
+  '<p class="note" style="margin:14px 0 0">La huella y el NFC se leen con un lector conectado a la computadora de recepción; esta demo los simula.</p></section>'+
+  '<section class="glass c7"><div class="hd"><h2>Resultado</h2><div id="acc-kpi">'+accKpi()+'</div></div><div id="acc-res">'+gateHtml(ui.accRes,true)+'</div></section>'+
+  '<section class="glass c12"><div class="hd"><h2>Últimos movimientos</h2></div><div id="acc-feed">'+feedHtml(10)+'</div></section></div>';
+}
+function kioskHtml(){
+  return '<div class="kiosk"><div class="top"><div class="brand"><img src="'+LOGO+'" width="46" height="49" alt=""><div><div class="b1">'+esc(S.settings.biz.toUpperCase())+'</div><div class="b2">BIENVENIDO</div></div></div><div class="clock" id="k-clock">'+hhmm(Date.now())+'</div></div>'+
+  '<form data-form="acc" class="toolbar"><label class="grow" for="acc-q">Pasá tu tarjeta, QR o ingresá tu documento<input id="acc-q" name="q" type="search" autocomplete="off" style="min-height:64px;font-size:22px"></label><button class="btn" type="submit" style="align-self:flex-end;min-height:64px">Entrar</button></form>'+
+  '<div id="k-res">'+gateHtml(ui.accRes,false)+'</div><div class="toolbar">'+B('sim','Simular al día','data-k="ok"','sm')+B('sim','Simular vencida','data-k="bad"','sm danger')+B('kioskExit','Salir del modo tótem','','sm ghost')+'</div><div class="glass"><h3 style="margin-bottom:10px">Últimos ingresos</h3><div id="k-feed">'+feedHtml(5)+'</div></div></div>';
 }
 
+/* ---------- socios ---------- */
+function filterMembers(){
+  const t=todayStr(),q=ui.q.trim().toLowerCase(),dq=q.replace(/\D/g,'')||'§',sd=S.settings.alertDays,mo=t.slice(5,7);
+  let L=S.members.filter(m=>!q||m.name.toLowerCase().includes(q)||m.dni.includes(dq)||code(m).toLowerCase().includes(q)||(m.nfcId||'').toLowerCase().includes(q));
+  if(ui.plan)L=L.filter(m=>m.planId===ui.plan);
+  const f=ui.flt;
+  if(f==='activos')L=L.filter(m=>m.active);
+  else if(f==='aldia')L=L.filter(m=>m.active&&m.due>addDays(t,sd));
+  else if(f==='porvencer')L=L.filter(m=>m.active&&m.due>=t&&m.due<=addDays(t,sd));
+  else if(f==='vencidos')L=L.filter(m=>m.active&&m.due<t);
+  else if(f==='baja')L=L.filter(m=>!m.active);
+  else if(f==='cumple')L=L.filter(m=>m.active&&m.birth&&m.birth.slice(5,7)===mo);
+  else if(f==='deuda')L=L.filter(m=>m.debt>0);
+  else if(f==='sindecl')L=L.filter(m=>m.active&&!m.decl);
+  return L.sort((a,b)=>a.name.localeCompare(b.name,'es'));
+}
+const PAGE=20;
+function memberList(){
+  const L=filterMembers(),pages=Math.max(1,Math.ceil(L.length/PAGE));ui.page=Math.min(ui.page,pages-1);
+  const sl=L.slice(ui.page*PAGE,ui.page*PAGE+PAGE);
+  if(!L.length)return '<div class="empty">No hay '+W().ss+' para mostrar con este filtro.</div>';
+  return '<div class="meta" style="margin-bottom:10px">'+L.length+' resultado'+(L.length===1?'':'s')+'</div><div class="list">'+sl.map(m=>{
+    const st=status(m),over=m.active&&m.due<todayStr(),soon=st.k==='warn';
+    const wa=(over||soon)?waLink(m,fillTpl(over?'vencida':'venc',m)):'';
+    return '<article class="item"><div class="grow"><div class="nm">'+esc(m.name)+(m.ejemplo?' <span class="chip">Demo</span>':'')+'</div><div class="meta">'+esc(planTxt(m))+(isGym()?'':' · '+MODES[m.mode])+' · DNI '+esc(m.dni)+' · paga hasta '+dmy(m.due)+'</div></div>'+
+    pill(st.k,st.t)+(m.debt>0?pill('warn','Deuda '+money(m.debt)):'')+(!m.decl&&m.active?pill('mute','Sin declaración'):'')+
+    '<div class="acts">'+B('ficha','Ficha','data-id="'+m.id+'"','sm ghost')+B('payFor','Cobrar','data-id="'+m.id+'"','sm')+(wa?'<a class="btn sm ghost" target="_blank" rel="noopener" href="'+wa+'" data-a="waSent" data-id="'+m.id+'">WhatsApp</a>':'')+'</div></article>'}).join('')+'</div>'+
+    (pages>1?'<div class="toolbar" style="margin-top:14px;justify-content:space-between">'+B('page','Anterior','data-d="-1"','sm ghost')+'<span class="meta">Página '+(ui.page+1)+' de '+pages+'</span>'+B('page','Siguiente','data-d="1"','sm ghost')+'</div>':'');
+}
+function socios(){
+  const F=[['activos','Activos'],['aldia','Al día'],['porvencer','Por vencer'],['vencidos','Con cuota vencida'],['deuda','Con deuda de buffet'],['sindecl','Sin declaración de salud'],['cumple','Cumplen este mes'],['baja','Dados de baja'],['todos','Todos']];
+  return exampleBanner()+'<div class="hd" style="margin:0"><h1>'+W().SS+'</h1>'+B('newMember','Nuevo '+W().s)+'</div>'+
+  '<div class="glass"><div class="toolbar" style="margin-bottom:14px"><label class="grow" for="q">Buscar por nombre, documento o código<input id="q" type="search" value="'+esc(ui.q)+'" placeholder="Ej: Lucía, 33123456 o MI-"></label>'+
+  '<label for="flt">Mostrar<select id="flt">'+F.map(f=>'<option value="'+f[0]+'"'+(ui.flt===f[0]?' selected':'')+'>'+f[1]+'</option>').join('')+'</select></label>'+
+  '<label for="pln">Plan<select id="pln"><option value="">Todos</option>'+S.plans.map(p=>'<option value="'+p.id+'"'+(ui.plan===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</select></label></div><div id="list">'+memberList()+'</div></div>';
+}
+
+/* ---------- planes ---------- */
+function planes(){
+  const act=S.members.filter(m=>m.active);
+  const KIND={libre:'Pase libre',mus:'Musculación',clases:'Clases',pack:'Pack de clases',personal:'Personalizado'};
+  const row=p=>'<form class="glass" data-form="plan"><input type="hidden" name="id" value="'+(p?p.id:'')+'"><div class="form">'+
+    '<label for="pl-n-'+(p?p.id:'new')+'">Nombre<input id="pl-n-'+(p?p.id:'new')+'" name="name" required value="'+esc(p?p.name:'')+'"></label>'+
+    '<label for="pl-p-'+(p?p.id:'new')+'">Precio mensual<input id="pl-p-'+(p?p.id:'new')+'" name="price" type="number" min="0" step="100" required value="'+(p?p.price:'')+'"></label>'+
+    '<label for="pl-w-'+(p?p.id:'new')+'">Sesiones por semana (0 = libre)<input id="pl-w-'+(p?p.id:'new')+'" name="weekly" type="number" min="0" max="7" value="'+(p?p.weekly:0)+'"></label>'+
+    '<label for="pl-k-'+(p?p.id:'new')+'">Tipo<select id="pl-k-'+(p?p.id:'new')+'" name="kind">'+Object.keys(KIND).map(k=>'<option value="'+k+'"'+(p&&p.kind===k?' selected':'')+'>'+KIND[k]+'</option>').join('')+'</select></label>'+
+    '<label class="full" for="pl-d-'+(p?p.id:'new')+'">Descripción<input id="pl-d-'+(p?p.id:'new')+'" name="desc" value="'+esc(p?p.desc:'')+'"></label></div>'+
+    '<div class="toolbar" style="margin-top:14px"><button class="btn sm" type="submit">'+(p?'Guardar cambios':'Agregar plan')+'</button>'+
+    (p?'<span class="chip">'+act.filter(m=>m.planId===p.id).length+' activos</span><span class="chip">'+money(act.filter(m=>m.planId===p.id).length*p.price)+' por mes</span>'+B('delPlan','Eliminar','data-id="'+p.id+'"','sm danger'):'')+'</div></form>';
+  const mrr=act.reduce((a,m)=>a+planOf(m).price,0);
+  return '<div><h1>'+(isGym()?'Membresías':'Planes')+'</h1><p class="note" style="margin:6px 0 0">Ingreso mensual esperado con los '+act.length+' '+W().ss+' activos: <b>'+money(mrr)+'</b> (suma del precio del plan de cada activo).</p></div>'+
+  '<div class="list">'+S.plans.map(p=>row(p)).join('')+'</div><h2>Nuevo plan</h2>'+row(null);
+}
+
+/* ---------- agenda ---------- */
 function agenda(){
-  const act=S.students.filter(s=>s.active);
-  const dow=new Date().getDay();
-  const cols=DAYS.map((n,i)=>{
-    const d=i+1;const sl=S.slots.filter(x=>x.day===d&&stud(x.sid)).sort((a,b)=>a.time.localeCompare(b.time));
-    return '<div class="day'+(d===dow?' today':'')+'"><div class="hd" style="margin:0"><h3>'+n+'</h3>'+(d===dow?'<span class="pill ok">Hoy</span>':'')+'</div>'+
-    (sl.length?sl.map(x=>{const s=stud(x.sid);
-      return '<div class="slot"><div class="tm">'+esc(x.time)+'</div><div class="nm">'+esc(s.name)+'</div><div><span class="chip">'+MODES[x.mode]+'</span></div><div class="acts">'+
-      (d===dow?(attToday(s.id)?'<span class="pill ok">Asistió</span>':'<button class="btn sm" type="button" data-a="checkin" data-id="'+s.id+'" data-mode="'+x.mode+'">Asistió</button>'):'')+
-      '<button class="btn sm ghost" type="button" data-a="rmSlot" data-id="'+x.id+'">'+(ui.confirm==='slot'+x.id?'¿Confirmar?':'Quitar')+'</button></div></div>'}).join(''):'<div class="note">Sin sesiones</div>')+'</div>'}).join('');
-  const pend=act.map(s=>({s:s,f:s.plan-S.slots.filter(x=>x.sid===s.id).length})).filter(x=>x.f>0);
-  const pendHtml=pend.length?'<div class="list">'+pend.map(x=>'<div class="item"><div class="grow"><div class="nm">'+esc(x.s.name)+'</div><div class="meta">Plan de '+planTxt(x.s)+'</div></div><span class="pill warn">Faltan '+x.f+(x.f===1?' horario':' horarios')+' a coordinar</span></div>').join('')+'</div>':'<div class="empty">Todos los alumnos tienen sus horarios coordinados.</div>';
-  return '<h1>Agenda semanal</h1><p class="note" style="margin:-8px 0 0">De lunes a viernes. Los horarios se coordinan con cada alumno.</p>'+
-  '<section class="glass"><h2 style="margin-bottom:14px">Agregar sesión fija</h2><form class="form" data-form="slot">'+
-  '<label for="a-sid">Alumno<select id="a-sid" name="sid">'+act.map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join('')+'</select></label>'+
+  const t=todayStr(),dow=new Date().getDay(),act=S.members.filter(m=>m.active);
+  let cls='';
+  if(isGym()){
+    cls='<section class="glass"><div class="hd"><h2>Clases grupales</h2><span class="chip">Cupos para la próxima fecha de cada clase</span></div><div class="days">'+DAYS.map((n,i)=>{
+      const d=i+1,L=S.classes.filter(c=>c.day===d).sort((a,b)=>a.time.localeCompare(b.time));
+      return '<div class="day'+(d===dow?' today':'')+'"><div class="hd" style="margin:0"><h3>'+n+'</h3>'+(d===dow?pill('ok','Hoy'):'')+'</div>'+(L.length?L.map(c=>{
+        const nd=nextDate(d),n_=S.res.filter(r=>r.cid===c.id&&r.date===nd).length,full=n_>=c.cap,tr=staffOf(c.trainerId);
+        return '<div class="slot"><div class="tm">'+c.time+'</div><div class="nm">'+esc(c.name)+'</div><div class="meta">'+esc(tr?tr.name:'')+'</div><div class="meter'+(full?' full':'')+'"><i style="width:'+Math.min(100,Math.round(n_/c.cap*100))+'%"></i></div><div class="meta">'+n_+' de '+c.cap+' cupos'+(full?' · completa':'')+'</div>'+B('classOpen','Lista y reservas','data-id="'+c.id+'"','sm ghost')+'</div>'}).join(''):'<div class="note">Sin clases</div>')+'</div>'}).join('')+'</div></section>';
+  }
+  const slotsDays=DAYS.map((n,i)=>{
+    const d=i+1,sl=S.slots.filter(x=>x.day===d&&mem(x.mid)).sort((a,b)=>a.time.localeCompare(b.time));
+    return '<div class="day'+(d===dow?' today':'')+'"><div class="hd" style="margin:0"><h3>'+n+'</h3>'+(d===dow?pill('ok','Hoy'):'')+'</div>'+
+    (sl.length?sl.map(x=>{const m=mem(x.mid);
+      return '<div class="slot"><div class="tm">'+esc(x.time)+'</div><div class="nm">'+esc(m.name)+'</div><div><span class="chip">'+MODES[x.mode]+'</span></div><div class="acts">'+
+      (d===dow?(attToday(m.id)?pill('ok','Asistió'):B('slotCheck','Asistió','data-id="'+m.id+'" data-mode="'+x.mode+'"','sm')):'')+
+      B('rmSlot','Quitar'.replace('Quitar',ui.confirm==='slot'+x.id?'¿Confirmar?':'Quitar'),'data-id="'+x.id+'"','sm ghost')+'</div></div>'}).join(''):'<div class="note">Sin sesiones</div>')+'</div>'}).join('');
+  const pend=act.filter(m=>planOf(m).kind==='personal').map(m=>({m:m,f:planOf(m).weekly-S.slots.filter(x=>x.mid===m.id).length})).filter(x=>x.f>0);
+  const pendHtml=pend.length?'<div class="list">'+pend.map(x=>'<div class="item"><div class="grow"><div class="nm">'+esc(x.m.name)+'</div><div class="meta">'+esc(planOf(x.m).name)+'</div></div>'+pill('warn','Faltan '+x.f+(x.f===1?' horario':' horarios')+' a coordinar')+'</div>').join('')+'</div>':'<div class="empty">Todos los horarios personalizados están coordinados.</div>';
+  const pm=act.filter(m=>planOf(m).kind==='personal');
+  return '<h1>Agenda</h1><p class="note" style="margin:-8px 0 0">Los horarios se coordinan con cada '+W().s+'. Lunes a viernes.</p>'+cls+
+  '<section class="glass"><h2 style="margin-bottom:14px">Sesiones personalizadas</h2>'+(pm.length?'<form class="form" data-form="slot">'+
+  '<label for="a-mid">'+W().S+'<select id="a-mid" name="mid">'+pm.map(m=>'<option value="'+m.id+'">'+esc(m.name)+'</option>').join('')+'</select></label>'+
   '<label for="a-day">Día<select id="a-day" name="day">'+DAYS.map((n,i)=>'<option value="'+(i+1)+'">'+n+'</option>').join('')+'</select></label>'+
   '<label for="a-time">Hora<input id="a-time" name="time" type="time" value="09:00" required></label>'+
   '<label for="a-mode">Modalidad<select id="a-mode" name="mode"><option value="presencial">Presencial</option><option value="virtual">Virtual</option></select></label>'+
-  '<div class="full"><button class="btn" type="submit">Agregar a la agenda</button></div></form></section>'+
-  '<section class="days">'+cols+'</section>'+
-  '<section class="glass"><h2 style="margin-bottom:14px">Horarios por coordinar</h2>'+pendHtml+'</section>';
+  '<div class="full"><button class="btn" type="submit">Agregar a la agenda</button></div></form>':'<div class="empty">No hay '+W().ss+' con plan personalizado.</div>')+'</section>'+
+  '<section class="days">'+slotsDays+'</section><section class="glass"><h2 style="margin-bottom:14px">Horarios por coordinar</h2>'+pendHtml+'</section>';
 }
 
+/* ---------- programas ---------- */
 function progBlocks(p){
-  const B=[['patrones','Patrones de movimiento'],['fuerza','Entrenamiento de fuerza'],['hiit','Formato HIIT']];
-  return B.filter(b=>p.blocks[b[0]]&&p.blocks[b[0]].trim()).map(b=>'<div style="margin-top:12px"><div class="eyebrow">'+b[1]+'</div><p class="prog">'+esc(p.blocks[b[0]])+'</p></div>').join('');
+  const BL=[['patrones','Patrones de movimiento'],['fuerza','Entrenamiento de fuerza'],['hiit','Formato HIIT']];
+  return BL.filter(b=>p.blocks[b[0]]&&p.blocks[b[0]].trim()).map(b=>'<div style="margin-top:12px"><div class="eyebrow">'+b[1]+'</div><p class="prog">'+esc(p.blocks[b[0]])+'</p></div>').join('');
 }
 function progText(p){
-  const s=stud(p.sid);
-  const B=[['patrones','Patrones de movimiento'],['fuerza','Entrenamiento de fuerza'],['hiit','Formato HIIT']];
-  return '*Movimiento Inteligente* · '+(s?s.name:'')+'\n'+p.title+' · semana del '+dmy(p.week)+'\n\n'+B.filter(b=>p.blocks[b[0]]&&p.blocks[b[0]].trim()).map(b=>'*'+b[1]+'*\n'+p.blocks[b[0]].trim()).join('\n\n');
+  const m=mem(p.mid),BL=[['patrones','Patrones de movimiento'],['fuerza','Entrenamiento de fuerza'],['hiit','Formato HIIT']];
+  return '*'+S.settings.biz+'* · '+(m?m.name:'')+'\n'+p.title+' · semana del '+dmy(p.week)+'\n\n'+BL.filter(b=>p.blocks[b[0]]&&p.blocks[b[0]].trim()).map(b=>'*'+b[1]+'*\n'+p.blocks[b[0]].trim()).join('\n\n');
 }
 function programas(){
-  const act=S.students.filter(s=>s.active);
-  const list=S.programs.filter(p=>!ui.pid||p.sid===ui.pid).sort((a,b)=>b.created-a.created);
-  return '<h1>Programas de entrenamiento</h1><p class="note" style="margin:-8px 0 0">Programación para enviar por WhatsApp a quienes entrenan de forma virtual, o para llevar en papel en las sesiones presenciales.</p>'+
+  const act=S.members.filter(m=>m.active),list=S.programs.filter(p=>!ui.pid||p.mid===ui.pid).sort((a,b)=>b.created-a.created);
+  return '<h1>Programas de entrenamiento</h1><p class="note" style="margin:-8px 0 0">Programación para enviar por WhatsApp a quienes entrenan de forma virtual, o para imprimir en las sesiones presenciales.</p>'+
   '<section class="glass"><h2 style="margin-bottom:14px">Nuevo programa</h2><form class="form" data-form="program">'+
-  '<label for="g-sid">Alumno<select id="g-sid" name="sid">'+act.map(s=>'<option value="'+s.id+'"'+(ui.pid===s.id?' selected':'')+'>'+esc(s.name)+' · '+MODES[s.mode]+'</option>').join('')+'</select></label>'+
+  '<label for="g-mid">'+W().S+'<select id="g-mid" name="mid">'+act.map(m=>'<option value="'+m.id+'"'+(ui.pid===m.id?' selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label>'+
   '<label for="g-title">Título<input id="g-title" name="title" required placeholder="Ej: Bloque 2 · Fuerza base"></label>'+
   '<label for="g-week">Semana del<input id="g-week" name="week" type="date" value="'+weekStart(todayStr())+'" required></label>'+
   '<label class="full" for="g-pat">Patrones de movimiento<textarea id="g-pat" name="patrones" placeholder="Sentadilla, bisagra de cadera, empuje, tracción, rotación, acarreo"></textarea></label>'+
   '<label class="full" for="g-fue">Entrenamiento de fuerza<textarea id="g-fue" name="fuerza" placeholder="Ejercicio · series × repeticiones · descanso"></textarea></label>'+
   '<label class="full" for="g-hit">Formato HIIT<textarea id="g-hit" name="hiit" placeholder="Trabajo / pausa · rondas · ejercicios"></textarea></label>'+
-  '<div class="full toolbar"><button class="btn" type="submit">Guardar programa</button><button class="btn ghost" type="button" data-a="tplProgram">Cargar ejemplo de estructura</button></div></form></section>'+
-  '<div class="toolbar"><label class="grow" for="p-flt">Ver programas de<select id="p-flt"><option value="">Todos los alumnos</option>'+S.students.map(s=>'<option value="'+s.id+'"'+(ui.pid===s.id?' selected':'')+'>'+esc(s.name)+'</option>').join('')+'</select></label></div>'+
-  (list.length?'<div class="list">'+list.map(p=>{const s=stud(p.sid);
-    return '<article class="glass"><div class="hd" style="margin-bottom:0"><div><h3>'+esc(p.title)+'</h3><div class="meta">'+esc(s?s.name:'Alumno eliminado')+' · semana del '+dmy(p.week)+'</div></div><div class="acts"><button class="btn sm" type="button" data-a="copyProgram" data-id="'+p.id+'">Copiar para WhatsApp</button><button class="btn sm ghost" type="button" data-a="rmProgram" data-id="'+p.id+'">'+(ui.confirm==='prog'+p.id?'¿Confirmar?':'Eliminar')+'</button></div></div>'+progBlocks(p)+'</article>'}).join('')+'</div>':'<div class="empty">Todavía no hay programas cargados.</div>');
+  '<div class="full toolbar"><button class="btn" type="submit">Guardar programa</button>'+B('tplProgram','Cargar ejemplo de estructura','','ghost')+'</div></form></section>'+
+  '<div class="toolbar"><label class="grow" for="p-flt">Ver programas de<select id="p-flt"><option value="">Todos</option>'+S.members.map(m=>'<option value="'+m.id+'"'+(ui.pid===m.id?' selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label></div>'+
+  (list.length?'<div class="list">'+list.map(p=>{const m=mem(p.mid);
+    return '<article class="glass"><div class="hd" style="margin-bottom:0"><div><h3>'+esc(p.title)+'</h3><div class="meta">'+esc(m?m.name:'Eliminado')+' · semana del '+dmy(p.week)+'</div></div><div class="acts">'+B('copyProgram','Copiar para WhatsApp','data-id="'+p.id+'"','sm')+B('rmProgram',ui.confirm==='prog'+p.id?'¿Confirmar?':'Eliminar','data-id="'+p.id+'"','sm ghost')+'</div></div>'+progBlocks(p)+'</article>'}).join('')+'</div>':'<div class="empty">Todavía no hay programas cargados.</div>');
 }
 
-function cobros(){
-  const act=S.students.filter(s=>s.active);
-  const sel=ui.paySid&&stud(ui.paySid)?ui.paySid:(act[0]?act[0].id:'');
-  const s0=stud(sel);const t=todayStr();
-  const ms=t.slice(0,8)+'01';
-  const month=S.payments.filter(p=>p.date>=ms);
-  const byM={};month.forEach(p=>p.lines.forEach(l=>{byM[l.m]=(byM[l.m]||0)+l.a}));
-  const mHtml=Object.keys(byM).length?Object.keys(byM).map(m=>'<div class="hbar" style="grid-template-columns:150px 1fr"><span>'+esc(m)+'</span><b style="text-align:left">'+money(byM[m])+'</b></div>').join(''):'<div class="note">Sin cobros este mes.</div>';
-  const over=act.filter(s=>s.due<t).sort((a,b)=>a.due.localeCompare(b.due));
-  const wa=s=>{const d=(s.phone||'').replace(/\D/g,'');if(!d)return '<span class="chip">Sin teléfono</span>';
-    const msg='Hola '+s.name.split(' ')[0]+', te escribo de Movimiento Inteligente. Tu cuota venció el '+dmy(s.due)+'. ¿Coordinamos el pago para seguir entrenando?';
-    return '<a class="btn sm ghost" target="_blank" rel="noopener" href="https://wa.me/'+d+'?text='+encodeURIComponent(msg)+'">Avisar por WhatsApp</a>'};
-  const recent=S.payments.slice().sort((a,b)=>b.date.localeCompare(a.date)||0).slice(0,12);
-  return '<h1>Cobros</h1>'+
-  '<section class="glass"><h2 style="margin-bottom:14px">Registrar cobro</h2><form class="form" data-form="pay">'+
-  '<label class="full" for="p-sid">Alumno<select id="p-sid" name="sid">'+act.map(s=>'<option value="'+s.id+'"'+(s.id===sel?' selected':'')+'>'+esc(s.name)+' · '+planTxt(s)+'</option>').join('')+'</select></label>'+
-  '<label for="p-a1">Monto 1<input id="p-a1" name="a1" type="number" min="0" step="1" value="'+(s0?price(s0.plan):0)+'" required></label>'+
-  '<label for="p-m1">Medio 1<select id="p-m1" name="m1">'+PAYM.map(m=>'<option>'+m+'</option>').join('')+'</select></label>'+
-  '<label for="p-a2">Monto 2 (pago mixto, opcional)<input id="p-a2" name="a2" type="number" min="0" step="1" value="0"></label>'+
-  '<label for="p-m2">Medio 2<select id="p-m2" name="m2">'+PAYM.map((m,i)=>'<option'+(i===1?' selected':'')+'>'+m+'</option>').join('')+'</select></label>'+
-  '<div class="full"><p class="note" style="margin:0 0 10px">La cuota se extiende un mes desde el vencimiento actual, o desde hoy si ya venció.</p><button class="btn" type="submit">Registrar cobro</button></div></form></section>'+
-  '<div class="bento"><section class="glass c6"><h2 style="margin-bottom:12px">Cuotas vencidas</h2>'+(over.length?'<div class="list">'+over.map(s=>'<div class="item"><div class="grow"><div class="nm">'+esc(s.name)+'</div><div class="meta">Venció el '+dmy(s.due)+' · cuota '+money(price(s.plan))+'</div></div>'+wa(s)+'</div>').join('')+'</div>':'<div class="empty">No hay cuotas vencidas.</div>')+'</section>'+
-  '<section class="glass c6"><h2 style="margin-bottom:12px">Cobrado este mes por medio</h2>'+mHtml+'</section></div>'+
-  '<section class="glass"><h2 style="margin-bottom:12px">Últimos cobros</h2>'+(recent.length?'<div class="list">'+recent.map(p=>{const s=stud(p.sid);return '<div class="item"><div class="grow"><div class="nm">'+esc(s?s.name:'Alumno eliminado')+'</div><div class="meta">'+dmy(p.date)+' · '+p.lines.filter(l=>l.a>0).map(l=>esc(l.m)+' '+money(l.a)).join(' + ')+' · paga hasta '+dmy(p.until)+'</div></div><b style="font-variant-numeric:tabular-nums">'+money(p.total)+'</b></div>'}).join('')+'</div>':'<div class="empty">Todavía no hay cobros registrados.</div>')+'</section>';
+/* ---------- buffet / POS ---------- */
+const cartTotal=()=>ui.cart.reduce((a,c)=>{const p=S.products.find(x=>x.id===c.pid);return a+(p?p.price*c.qty:0)},0);
+function pos(){
+  const CATS=['Todos','Suplementos','Bebidas','Alimentos'],t=todayStr();
+  const inCart=id=>{const c=ui.cart.find(x=>x.pid===id);return c?c.qty:0};
+  const L=S.products.filter(p=>ui.cat==='Todos'||p.cat===ui.cat);
+  const prods=L.map(p=>'<button class="prod c-'+p.cat+'" type="button" data-a="addCart" data-id="'+p.id+'"'+(p.stock-inCart(p.id)<=0?' disabled':'')+'><span class="pn">'+esc(p.name)+'</span><span class="pp">'+money(p.price)+'</span><span class="meta">Stock '+p.stock+(p.stock<=p.min?' · bajo':'')+'</span></button>').join('');
+  const cart=ui.cart.map(c=>{const p=S.products.find(x=>x.id===c.pid);if(!p)return '';return '<div class="cartrow"><div><div class="nm" style="font-size:15px">'+esc(p.name)+'</div><div class="meta">'+money(p.price)+' c/u</div></div><div class="qty">'+B('cartQty','−','data-id="'+p.id+'" data-d="-1" aria-label="Quitar uno"','')+'<b>'+c.qty+'</b>'+B('cartQty','+','data-id="'+p.id+'" data-d="1" aria-label="Agregar uno"','')+'</div><b style="font-variant-numeric:tabular-nums">'+money(p.price*c.qty)+'</b></div>'}).join('');
+  const buyer=ui.posMid?mem(ui.posMid):null;
+  const methods=PAYM.concat(buyer?['Cuenta corriente']:[]);
+  if(methods.indexOf(ui.posMethod)<0)ui.posMethod='Efectivo';
+  const exp=S.products.filter(p=>p.exp&&p.exp<=addDays(t,45));
+  return '<h1>Buffet y suplementos</h1><div class="bento"><section class="glass c7"><div class="seg" style="margin-bottom:14px" role="group" aria-label="Rubro">'+CATS.map(c=>'<button type="button" data-a="cat" data-c="'+c+'" aria-pressed="'+(ui.cat===c)+'">'+c+'</button>').join('')+'</div><div class="prods">'+prods+'</div></section>'+
+  '<section class="glass c5"><h2 style="margin-bottom:10px">Venta actual</h2>'+(cart||'<div class="empty">Tocá un producto para agregarlo.</div>')+
+  '<div class="hd" style="margin:14px 0"><span class="eyebrow">Total</span><span class="total">'+money(cartTotal())+'</span></div>'+
+  '<div class="form" style="grid-template-columns:1fr"><label for="pos-m">Cliente (opcional)<select id="pos-m"><option value="">Venta de mostrador</option>'+S.members.filter(m=>m.active).map(m=>'<option value="'+m.id+'"'+(ui.posMid===m.id?' selected':'')+'>'+esc(m.name)+(m.debt>0?' · debe '+money(m.debt):'')+'</option>').join('')+'</select></label>'+
+  '<label for="pos-pay">Medio de pago<select id="pos-pay">'+methods.map(m=>'<option'+(ui.posMethod===m?' selected':'')+'>'+m+'</option>').join('')+'</select></label></div>'+
+  (buyer&&ui.posMethod==='Cuenta corriente'?'<p class="note" style="margin:8px 0 0">Deuda actual '+money(buyer.debt)+' · límite '+money(S.settings.creditLimit)+'. Se bloquea si la cuota está vencida.</p>':'')+
+  '<div class="toolbar" style="margin-top:14px">'+B('sell','Cobrar venta','',ui.cart.length?'':'ghost')+B('clearCart','Vaciar','','ghost')+'</div></section>'+
+  '<section class="glass c12"><div class="hd"><h2>Inventario</h2><span class="chip">Margen = precio − costo</span></div><div class="tblw"><table class="tbl"><thead><tr><th>Producto</th><th>Rubro</th><th class="r">Stock</th><th class="r">Mínimo</th><th class="r">Margen</th><th>Vence</th><th></th></tr></thead><tbody>'+
+  S.products.map(p=>'<tr><td>'+esc(p.name)+'</td><td>'+p.cat+'</td><td class="r">'+p.stock+(p.stock<=p.min?' '+pill('warn','Bajo'):'')+'</td><td class="r">'+p.min+'</td><td class="r">'+money(p.price-p.cost)+' ('+Math.round((p.price-p.cost)/p.price*100)+'%)</td><td>'+(p.exp?dmy(p.exp)+(p.exp<=addDays(t,45)?' '+pill('warn','Pronto'):''):'—')+'</td><td class="r">'+B('restock','Reponer +10','data-id="'+p.id+'"','sm ghost')+'</td></tr>').join('')+'</tbody></table></div>'+(exp.length?'<p class="note" style="margin:10px 0 0">Productos próximos a vencer: '+exp.map(p=>esc(p.name)).join(', ')+'.</p>':'')+'</section></div>';
 }
-
-function accessResult(){
-  const q=ui.accQ.trim();
-  if(ui.accId&&stud(ui.accId)){
-    const s=stud(ui.accId);const st=status(s);
-    const wk=weekCount(s.id);
-    let cls='ok',title='ACCESO AUTORIZADO';
-    if(!s.active){cls='mute';title='ALUMNO DADO DE BAJA'}else if(s.due<todayStr()){cls='bad';title='CUOTA VENCIDA'}
-    const extra=(cls==='ok'&&wk>=s.plan)?'<p class="note" style="margin:12px 0 0">Ya completó las '+s.plan+' sesiones de esta semana. Esta sería una sesión extra.</p>':'';
-    return '<div class="gate '+cls+'"><div class="gt">'+title+'</div><div class="gn">'+esc(s.name)+'</div><div class="gm">'+planTxt(s)+' · '+MODES[s.mode]+' · paga hasta '+dmy(s.due)+'</div><div class="gm" style="margin-top:6px">Esta semana: '+wk+' de '+s.plan+' sesiones</div></div>'+extra+
-    '<div class="toolbar" style="margin-top:14px">'+(cls==='ok'?(attToday(s.id)?'<span class="pill ok">Ya registrado hoy</span>':'<button class="btn" type="button" data-a="checkin" data-id="'+s.id+'" data-acc="1">Registrar ingreso</button>'):(cls==='bad'?'<button class="btn" type="button" data-a="payFor" data-id="'+s.id+'">Cobrar cuota</button>':''))+'<button class="btn ghost" type="button" data-a="accReset">Buscar otro alumno</button></div>';
+function sellCart(){
+  if(!ui.cart.length){toast('Agregá productos a la venta');return}
+  const total=cartTotal(),buyer=ui.posMid?mem(ui.posMid):null,t=todayStr();
+  if(ui.posMethod==='Cuenta corriente'){
+    if(!buyer){toast('Elegí un cliente para cargar a cuenta corriente');return}
+    if(buyer.due<t){toast('Cuota vencida: no se puede cargar a cuenta corriente');return}
+    if(buyer.debt+total>S.settings.creditLimit){toast('Supera el límite de crédito de '+money(S.settings.creditLimit));return}
   }
-  if(!q)return '<div class="empty">Escribí un nombre o pasá el código QR del alumno por el lector. El resultado aparece acá en verde o en rojo.</div>';
-  const m=S.students.filter(s=>code(s).toLowerCase()===q.toLowerCase()||s.name.toLowerCase().includes(q.toLowerCase())).slice(0,6);
-  if(!m.length)return '<div class="empty">No se encontró ningún alumno con “'+esc(q)+'”.</div>';
-  return '<div class="list">'+m.map(s=>{const st=status(s);return '<button class="item" type="button" data-a="accPick" data-id="'+s.id+'" style="text-align:left;cursor:pointer;color:inherit;font:inherit"><div class="grow"><div class="nm">'+esc(s.name)+'</div><div class="meta">'+code(s)+'</div></div><span class="pill '+st.k+'">'+st.t+'</span></button>'}).join('')+'</div>';
-}
-function acceso(){
-  return '<h1>Control de acceso</h1><section class="glass"><form data-form="acc" class="toolbar" style="margin-bottom:16px"><label class="grow" for="acc-q">Nombre o código del alumno<input id="acc-q" name="q" type="search" autocomplete="off" value="'+esc(ui.accQ)+'" placeholder="Ej: MI-AB12CD o Lucía"></label><button class="btn" type="submit" style="align-self:flex-end">Validar</button></form><div id="acc-res">'+accessResult()+'</div></section>'+
-  '<p class="note">Un lector de códigos QR conectado por USB escribe el código en el campo y confirma con Enter. Desde el celular, usá el buscador por nombre.</p>';
+  const items=ui.cart.map(c=>{const p=S.products.find(x=>x.id===c.pid);p.stock-=c.qty;return {pid:p.id,name:p.name,qty:c.qty,price:p.price,cost:p.cost}});
+  S.sales.push({id:uid(),date:t,ts:Date.now(),mid:buyer?buyer.id:'',items:items,total:total,method:ui.posMethod});
+  if(ui.posMethod==='Cuenta corriente')buyer.debt+=total;
+  if(buyer)addStamp(buyer,t);
+  newInvoice({mid:buyer?buyer.id:'',concept:'Venta de buffet',total:total,method:ui.posMethod});
+  save();ui.cart=[];ui.posMid='';ui.posMethod='Efectivo';render();toast('Venta registrada por '+money(total));
 }
 
+/* ---------- cobros y facturas ---------- */
+function ivaSplit(total){return S.settings.iva==='Responsable Inscripto'?{neto:total/1.21,iva:total-total/1.21}:{neto:total,iva:0}}
+function cobros(){
+  const act=S.members.filter(m=>m.active),t=todayStr();
+  const sel=ui.payMid&&mem(ui.payMid)?ui.payMid:(act[0]?act[0].id:''),m0=mem(sel);
+  const todayPay=S.payments.filter(p=>p.date===t),byM={};
+  todayPay.forEach(p=>p.lines.forEach(l=>{byM[l.m]=(byM[l.m]||0)+l.a}));
+  S.sales.filter(s=>s.date===t&&s.method!=='Cuenta corriente').forEach(s=>{byM[s.method]=(byM[s.method]||0)+s.total});
+  const mHtml=Object.keys(byM).length?Object.keys(byM).map(k=>'<div class="hbar" style="grid-template-columns:minmax(120px,170px) 1fr"><span>'+esc(k)+'</span><b style="text-align:left">'+money(byM[k])+'</b></div>').join(''):'<div class="note">Todavía no hay cobros hoy.</div>';
+  const over=act.filter(m=>m.due<t).sort((a,b)=>a.due.localeCompare(b.due));
+  let inv=S.invoices.slice().sort((a,b)=>b.n.localeCompare(a.n));
+  if(ui.invFlt==='pend')inv=inv.filter(i=>!i.arca);else if(ui.invFlt==='emit')inv=inv.filter(i=>i.arca);
+  const pend=S.invoices.filter(i=>!i.arca).length;
+  return '<h1>Cobros y facturas</h1>'+
+  '<section class="glass"><h2 style="margin-bottom:14px">Registrar cobro de cuota</h2><form class="form" data-form="pay">'+
+  '<label class="full" for="p-mid">'+W().S+'<select id="p-mid" name="mid">'+act.map(m=>'<option value="'+m.id+'"'+(m.id===sel?' selected':'')+'>'+esc(m.name)+' · '+esc(planOf(m).name)+'</option>').join('')+'</select></label>'+
+  '<label for="p-a1">Monto 1<input id="p-a1" name="a1" type="number" min="0" step="1" value="'+(m0?planOf(m0).price:0)+'" required></label>'+
+  '<label for="p-m1">Medio 1<select id="p-m1" name="m1">'+PAYM.map(x=>'<option>'+x+'</option>').join('')+'</select></label>'+
+  '<label for="p-a2">Monto 2 (pago mixto, opcional)<input id="p-a2" name="a2" type="number" min="0" step="1" value="0"></label>'+
+  '<label for="p-m2">Medio 2<select id="p-m2" name="m2">'+PAYM.map((x,i)=>'<option'+(i===1?' selected':'')+'>'+x+'</option>').join('')+'</select></label>'+
+  '<div class="full"><p class="note" style="margin:0 0 10px">La cuota se extiende un mes desde el vencimiento actual, o desde hoy si ya venció. Se genera un comprobante interno.</p><div class="toolbar"><button class="btn" type="submit">Registrar cobro</button>'+(m0&&m0.debt>0?B('payDebt','Cobrar deuda de buffet ('+money(m0.debt)+')','data-id="'+m0.id+'"','ghost'):'')+'</div></div></form></section>'+
+  '<div class="bento"><section class="glass c6"><h2 style="margin-bottom:12px">Cuotas vencidas</h2>'+(over.length?'<div class="list">'+over.slice(0,12).map(m=>{const wa=waLink(m,fillTpl('vencida',m));return '<div class="item"><div class="grow"><div class="nm">'+esc(m.name)+'</div><div class="meta">Venció el '+dmy(m.due)+' · '+money(planOf(m).price)+'</div></div>'+B('payFor','Cobrar','data-id="'+m.id+'"','sm')+(wa?'<a class="btn sm ghost" target="_blank" rel="noopener" href="'+wa+'" data-a="waSent" data-id="'+m.id+'">WhatsApp</a>':'')+'</div>'}).join('')+'</div>'+(over.length>12?'<p class="note">Y '+(over.length-12)+' más. Mirá la lista completa en '+W().SS+'.</p>':''):'<div class="empty">No hay cuotas vencidas.</div>')+'</section>'+
+  '<section class="glass c6"><h2 style="margin-bottom:12px">Cobrado hoy por medio</h2>'+mHtml+'</section></div>'+
+  '<section class="glass"><div class="hd"><h2>Comprobantes</h2><div class="seg" role="group" aria-label="Filtro">'+[['todos','Todos'],['pend','Sin emitir en ARCA ('+pend+')'],['emit','Emitidos']].map(f=>'<button type="button" data-a="invFlt" data-f="'+f[0]+'" aria-pressed="'+(ui.invFlt===f[0])+'">'+f[1]+'</button>').join('')+'</div></div>'+
+  '<div class="banner" style="margin-bottom:14px"><span>Estos comprobantes son internos y no tienen validez fiscal. La factura electrónica se emite en ARCA; cargá acá el número y el CAE para llevar el control. Copiá el libro de ventas para pasarlo a tu facturador.</span>'+B('copyCsv','Copiar libro de ventas','data-k="ventas"','sm')+'</div>'+
+  (inv.length?'<div class="tblw"><table class="tbl"><thead><tr><th>N° interno</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th class="r">Total</th><th>ARCA</th><th></th></tr></thead><tbody>'+inv.slice(0,40).map(i=>{const m=mem(i.mid);return '<tr><td>'+i.n+'</td><td>'+dmy(i.date)+'</td><td>'+esc(m?m.name:'Consumidor final')+'</td><td>'+esc(i.concept)+'</td><td class="r">'+money(i.total)+'</td><td>'+(i.arca?pill('ok','Emitida '+esc(i.arca.num)):pill('warn','Sin emitir'))+'</td><td class="r">'+B('arcaOpen',i.arca?'Editar':'Cargar N° ARCA','data-id="'+i.id+'"','sm ghost')+'</td></tr>'}).join('')+'</tbody></table></div>'+(inv.length>40?'<p class="note" style="margin:10px 0 0">Se muestran los 40 más recientes. El libro de ventas incluye todos.</p>':''):'<div class="empty">No hay comprobantes con este filtro.</div>')+'</section>';
+}
+
+/* ---------- club y WhatsApp ---------- */
+function club(){
+  const sg=segments(),t=todayStr(),rw=S.settings.rewards.slice().sort((a,b)=>a.sellos-b.sellos);
+  const top=S.members.filter(m=>m.active).sort((a,b)=>stamps(b)-stamps(a)).slice(0,8);
+  const reviewAsked=S.members.filter(m=>m.reviewAt).length;
+  const cards=Object.keys(SEGINFO).map(k=>{const L=sg[k],ok=L.filter(m=>m.consent&&m.phone);
+    return '<div class="item"><div class="grow"><div class="nm">'+SEGINFO[k][0]+'</div><div class="meta">'+SEGINFO[k][1]+'</div><div class="meta">'+L.length+' en total · '+ok.length+' con consentimiento y teléfono</div></div>'+B('queue','Abrir cola de envíos','data-k="'+k+'"','sm'+(ok.length?'':' ghost'))+'</div>'}).join('');
+  return '<h1>Club y WhatsApp</h1><div class="bento">'+
+  '<section class="glass c7"><div class="hd"><h2>Campañas por WhatsApp</h2></div><p class="note" style="margin:-6px 0 14px">Cada cola abre un mensaje por persona, con el texto ya armado. Solo aparecen quienes aceptaron recibir mensajes.</p><div class="list">'+cards+'</div></section>'+
+  '<section class="glass c5"><div class="hd"><h2>Reseñas</h2></div><div class="kpi"><div class="v">'+reviewAsked+'</div><div class="f">'+W().ss+' a quienes ya se les pidió una reseña de Google</div></div><p class="note">Elegibles hoy: '+sg.resena.length+'. Se les pide después de 6 asistencias y no se repite antes de 60 días.</p></section>'+
+  '<section class="glass c6"><div class="hd"><h2>Premios del Club</h2><span class="chip">1 sello por día de asistencia o compra</span></div><div class="list">'+rw.map(r=>'<div class="item"><div class="grow"><div class="nm">'+esc(r.name)+'</div></div>'+pill('mute',r.sellos+' sellos')+'</div>').join('')+'</div><h3 style="margin:18px 0 10px">Más sellos acumulados</h3><div class="list">'+top.map(m=>{const s=stamps(m),av=rw.filter(r=>r.sellos<=s);return '<div class="item"><div class="grow"><div class="nm">'+esc(m.name)+'</div><div class="meta">'+s+' sellos</div></div>'+av.map(r=>B('canje','Canjear: '+esc(r.name),'data-id="'+m.id+'" data-rid="'+r.id+'"','sm')).join('')+'</div>'}).join('')+'</div></section>'+
+  '<section class="glass c6"><h2 style="margin-bottom:14px">Textos de los mensajes</h2><form class="form" data-form="tpl" style="grid-template-columns:1fr">'+
+  Object.keys(SEGINFO).map(k=>'<label for="tp-'+k+'">'+SEGINFO[k][0]+'<textarea id="tp-'+k+'" name="'+k+'" style="min-height:80px">'+esc(S.settings.tpl[k])+'</textarea></label>').join('')+
+  '<label for="tp-url">Enlace de reseñas de Google<input id="tp-url" name="url" value="'+esc(S.settings.reviewUrl)+'"></label><p class="note" style="margin:0">Podés usar {nombre}, {negocio}, {fecha} y {enlace}.</p><div><button class="btn" type="submit">Guardar textos</button></div></form></section></div>';
+}
+function queueModal(k){
+  const L=segments()[k],t=todayStr(),ok=L.filter(m=>m.consent&&m.phone),skip=L.length-ok.length;
+  const sentToday=m=>S.msgs.some(x=>x.mid===m.id&&x.key===k&&x.date===t);
+  return '<h2>'+SEGINFO[k][0]+'</h2><p class="note" style="margin:0">'+ok.length+' mensajes listos'+(skip?' · '+skip+' sin consentimiento o sin teléfono, no se incluyen':'')+'. Tocá WhatsApp para abrir el mensaje de cada persona.</p>'+
+  (ok.length?'<div class="list">'+ok.slice(0,30).map(m=>{const msg=fillTpl(k,m);return '<div class="item"><div class="grow"><div class="nm">'+esc(m.name)+'</div><div class="meta">'+esc(msg)+'</div></div>'+(sentToday(m)?pill('ok','Enviado'):'<a class="btn sm" target="_blank" rel="noopener" href="'+waLink(m,msg)+'" data-a="waSent" data-id="'+m.id+'" data-k="'+k+'">WhatsApp</a>')+'</div>'}).join('')+'</div>':'<div class="empty">No hay mensajes para enviar en este momento.</div>')+B('closeModal','Cerrar','','ghost');
+}
+
+/* ---------- personal (RRHH) ---------- */
+function hoursOf(sid,from,to){
+  const L=S.clock.filter(c=>c.sid===sid&&c.date>=from&&(!to||c.date<=to)).sort((a,b)=>a.ts-b.ts);let h=0,open=null;
+  L.forEach(c=>{if(c.type==='in')open=c;else if(open&&open.date===c.date){h+=(c.ts-open.ts)/36e5;open=null}});return h;
+}
+function payroll(ms){
+  return S.staff.map(s=>{
+    const h=hoursOf(s.id,ms),runs={};
+    S.classAtt.forEach(a=>{const c=S.classes.find(x=>x.id===a.cid);if(c&&c.trainerId===s.id&&a.date>=ms)runs[a.cid+'|'+a.date]=1});
+    const nc=Object.keys(runs).length,pt=S.payments.filter(p=>p.kind==='cuota'&&p.date>=ms&&mem(p.mid)&&mem(p.mid).trainerId===s.id).reduce((a,p)=>a+p.total,0);
+    const base=h*s.rate,cc=nc*s.commClass,cp=pt*s.commPT/100;
+    return {s:s,h:h,nc:nc,pt:pt,base:base,cc:cc,cp:cp,total:base+cc+cp};
+  });
+}
+function rrhh(){
+  const t=todayStr(),ms=t.slice(0,8)+'01',adm=S.settings.role==='a';
+  const inside=s=>{const l=S.clock.filter(c=>c.sid===s.id).sort((a,b)=>b.ts-a.ts)[0];return l&&l.date===t&&l.type==='in'};
+  const cr=ui.clockRes;
+  const crHtml=cr?'<div class="gate '+(cr.ok?(cr.type==='in'?'ok':'warn'):'bad')+'" style="margin-top:14px"><div class="gt">'+(cr.ok?(cr.type==='in'?'ENTRADA REGISTRADA':'SALIDA REGISTRADA'):'FICHAJE RECHAZADO')+'</div><div class="gn" style="font-size:28px">'+esc(cr.name||'')+'</div><div class="gm">'+esc(cr.msg)+'</div></div>':'';
+  const tbl=S.staff.map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.role)+'</td><td>'+(inside(s)?pill('ok','Adentro'):pill('mute','Fuera'))+'</td><td class="r">'+hoursOf(s.id,ms).toFixed(1)+' h</td><td class="r">'+B('clockSim','Simular NFC','data-id="'+s.id+'"','sm ghost')+(adm&&S.staff.length>1?B('delStaff',ui.confirm==='st'+s.id?'¿Confirmar?':'Quitar','data-id="'+s.id+'"','sm danger'):'')+'</td></tr>').join('');
+  const shiftTbl=S.staff.map(s=>'<tr><td>'+esc(s.name)+'</td>'+[1,2,3,4,5].map(d=>{const x=S.shifts.find(y=>y.sid===s.id&&y.day===d);return '<td>'+(x?x.start+' a '+x.end:'<span class="meta">Franco</span>')+'</td>'}).join('')+'</tr>').join('');
+  const P=payroll(ms),tot=P.reduce((a,x)=>a+x.total,0);
+  return '<h1>Personal</h1><div class="bento"><section class="glass c5"><h2 style="margin-bottom:12px">Terminal de fichaje</h2><form data-form="clock" class="toolbar"><label class="grow" for="ck-q">PIN o tarjeta NFC<input id="ck-q" name="q" type="password" autocomplete="off" inputmode="numeric" placeholder="PIN de 4 dígitos"></label><button class="btn" type="submit" style="align-self:flex-end">Fichar</button></form>'+
+  '<p class="note" style="margin:10px 0 0">Alterna entrada y salida. Se rechaza un fichaje repetido en menos de 60 segundos. En la demo los PIN son 1111, 2222, 3333…</p>'+crHtml+'</section>'+
+  '<section class="glass c7"><h2 style="margin-bottom:12px">Equipo</h2><div class="tblw"><table class="tbl"><thead><tr><th>Nombre</th><th>Puesto</th><th>Ahora</th><th class="r">Horas del mes</th><th></th></tr></thead><tbody>'+tbl+'</tbody></table></div></section>'+
+  '<section class="glass c12"><h2 style="margin-bottom:12px">Turnos de la semana</h2><div class="tblw"><table class="tbl"><thead><tr><th>Persona</th>'+DAYS.map(d=>'<th>'+d+'</th>').join('')+'</tr></thead><tbody>'+shiftTbl+'</tbody></table></div></section>'+
+  (adm?'<section class="glass c12"><div class="hd"><h2>Liquidación estimada del mes</h2><span class="chip">Total '+money(tot)+'</span></div><div class="tblw"><table class="tbl"><thead><tr><th>Persona</th><th class="r">Horas</th><th class="r">Por hora</th><th class="r">Clases dictadas</th><th class="r">Por clases</th><th class="r">Comisión personal</th><th class="r">Total</th></tr></thead><tbody>'+P.map(x=>'<tr><td>'+esc(x.s.name)+'</td><td class="r">'+x.h.toFixed(1)+'</td><td class="r">'+money(x.base)+'</td><td class="r">'+x.nc+'</td><td class="r">'+money(x.cc)+'</td><td class="r">'+money(x.cp)+'</td><td class="r"><b>'+money(x.total)+'</b></td></tr>').join('')+'</tbody></table></div><p class="note" style="margin:10px 0 0">Horas fichadas × valor hora + clases dictadas × valor por clase + porcentaje sobre las cuotas de sus alumnos personalizados. Es una estimación para preparar la liquidación.</p></section>'+
+  '<section class="glass c12"><h2 style="margin-bottom:14px">Agregar persona</h2><form class="form" data-form="staff"><label for="sf-n">Nombre<input id="sf-n" name="name" required></label><label for="sf-r">Puesto<input id="sf-r" name="role" required placeholder="Ej: Entrenador"></label><label for="sf-p">PIN<input id="sf-p" name="pin" required inputmode="numeric" maxlength="6"></label><label for="sf-h">Valor por hora<input id="sf-h" name="rate" type="number" min="0" value="0"></label><label for="sf-c">Valor por clase dictada<input id="sf-c" name="commClass" type="number" min="0" value="0"></label><label for="sf-pt">% sobre personalizados<input id="sf-pt" name="commPT" type="number" min="0" max="100" value="0"></label><div class="full"><button class="btn" type="submit">Agregar</button></div></form></section>':'')+'</div>';
+}
+function punch(s,method){
+  const now=Date.now(),last=S.clock.filter(c=>c.sid===s.id).sort((a,b)=>b.ts-a.ts)[0];
+  if(last&&now-last.ts<60000)return {ok:false,name:s.name,msg:'Pasaron menos de 60 segundos desde el último fichaje.'};
+  const type=(last&&last.type==='in'&&last.date===todayStr())?'out':'in';
+  S.clock.push({id:uid(),sid:s.id,ts:now,date:todayStr(),type:type,method:method});save();
+  return {ok:true,type:type,name:s.name,msg:hhmm(now)+' · '+(method==='nfc'?'NFC':'PIN')};
+}
+
+/* ---------- administración e informes ---------- */
+function admin(){
+  const t=todayStr(),ms=t.slice(0,8)+'01',I=income(ms),P=payroll(ms),sueldos=P.reduce((a,x)=>a+x.total,0);
+  const gastos=S.expenses.filter(e=>e.date>=ms).reduce((a,e)=>a+e.amount,0),res=I.tot-gastos-sueldos;
+  let cashExp=0;S.payments.filter(p=>p.date===t).forEach(p=>p.lines.forEach(l=>{if(l.m==='Efectivo')cashExp+=l.a}));S.sales.filter(s=>s.date===t&&s.method==='Efectivo').forEach(s=>{cashExp+=s.total});
+  const closed=S.cash.find(c=>c.date===t);
+  const new_=S.members.filter(m=>m.created>=ms).length,bajas=S.members.filter(m=>!m.active&&m.bajaAt&&m.bajaAt>=ms).length,activos=S.members.filter(m=>m.active).length;
+  const since=addDays(t,-30),soldItems={};let margen=0,ventas=0,nv=0;
+  S.sales.filter(s=>s.date>=since).forEach(s=>{nv++;ventas+=s.total;s.items.forEach(i=>{soldItems[i.name]=(soldItems[i.name]||0)+i.qty;margen+=(i.price-i.cost)*i.qty})});
+  const top=Object.keys(soldItems).map(k=>({l:k,n:soldItems[k]})).sort((a,b)=>b.n-a.n).slice(0,6);
+  const dowC=[1,2,3,4,5,6].map(d=>S.attendance.filter(a=>a.date>=since&&parse(a.date).getDay()===d).length);
+  const exp=S.expenses.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
+  return '<h1>Administración e informes</h1><div class="bento">'+
+  '<section class="glass kpi c3"><div class="eyebrow">Ingresos del mes</div><div class="v">'+money(I.tot)+'</div><div class="f">Cuotas + buffet cobrados</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Gastos del mes</div><div class="v">'+money(gastos)+'</div><div class="f">Alquiler, servicios y otros</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Sueldos estimados</div><div class="v">'+money(sueldos)+'</div><div class="f">Horas y comisiones, ver Personal</div></section>'+
+  '<section class="glass kpi c3"><div class="eyebrow">Resultado estimado</div><div class="v" style="color:var(--'+(res>=0?'ok':'bad')+')">'+money(res)+'</div><div class="f">Ingresos − gastos − sueldos</div></section>'+
+  '<section class="glass c6"><h2 style="margin-bottom:12px">Caja del día</h2><div class="hd"><span class="meta">Efectivo esperado en caja</span><b class="total">'+money(cashExp)+'</b></div>'+
+  (closed?'<div class="banner" style="border-color:var(--ok);background:var(--ok-soft)"><span>Caja cerrada: contado '+money(closed.counted)+' · diferencia '+money(closed.counted-closed.expected)+'</span></div>':'<form class="toolbar" data-form="cash"><label class="grow" for="cs-c">Efectivo contado<input id="cs-c" name="counted" type="number" min="0" required></label><button class="btn" type="submit" style="align-self:flex-end">Cerrar caja</button></form>')+
+  (S.cash.length?'<h3 style="margin:16px 0 8px">Últimos cierres</h3><div class="list">'+S.cash.slice(-4).reverse().map(c=>'<div class="item"><div class="grow"><div class="nm">'+dmy(c.date)+'</div><div class="meta">Esperado '+money(c.expected)+' · contado '+money(c.counted)+'</div></div>'+pill(c.counted===c.expected?'ok':'warn',c.counted===c.expected?'Sin diferencia':'Diferencia '+money(c.counted-c.expected))+'</div>').join('')+'</div>':'')+'</section>'+
+  '<section class="glass c6"><h2 style="margin-bottom:12px">Gastos</h2><form class="form" data-form="expense"><label for="ex-c">Concepto<input id="ex-c" name="concept" required></label><label for="ex-k">Categoría<select id="ex-k" name="cat">'+['Alquiler','Servicios','Mantenimiento','Equipamiento','Marketing','Otros'].map(c=>'<option>'+c+'</option>').join('')+'</select></label><label for="ex-a">Monto<input id="ex-a" name="amount" type="number" min="1" required></label><label for="ex-d">Fecha<input id="ex-d" name="date" type="date" value="'+t+'" required></label><div class="full"><button class="btn sm" type="submit">Agregar gasto</button></div></form>'+
+  '<div class="list" style="margin-top:14px">'+exp.map(e=>'<div class="item"><div class="grow"><div class="nm">'+esc(e.concept)+'</div><div class="meta">'+dmy(e.date)+' · '+e.cat+'</div></div><b style="font-variant-numeric:tabular-nums">'+money(e.amount)+'</b>'+B('rmExpense','Quitar','data-id="'+e.id+'"','sm ghost')+'</div>').join('')+'</div></section>'+
+  '<section class="glass c4"><h2 style="margin-bottom:6px">'+W().SS+'</h2>'+hb([{l:'Altas del mes',n:new_},{l:'Bajas del mes',n:bajas},{l:'Activos',n:activos}])+'<p class="note" style="margin:10px 0 0">Retención: '+(activos+bajas?Math.round(activos/(activos+bajas)*100):100)+'% (activos ÷ activos + bajas del mes)</p></section>'+
+  '<section class="glass c4"><h2 style="margin-bottom:6px">Asistencia por día</h2>'+barsHtml(dowC,['L','M','M','J','V','S'],6,null,-1)+'<p class="note" style="margin:10px 0 0">Últimos 30 días</p></section>'+
+  (isGym()?'<section class="glass c4"><h2 style="margin-bottom:6px">Buffet, últimos 30 días</h2><div class="kpi"><div class="v">'+money(ventas)+'</div><div class="f">'+nv+' ventas · ticket promedio '+money(nv?ventas/nv:0)+' · margen '+money(margen)+'</div></div><h3 style="margin:14px 0 4px">Más vendidos</h3>'+hb(top)+'</section>':'')+
+  '<section class="glass c12"><h2 style="margin-bottom:12px">Exportar</h2><p class="note" style="margin:0 0 12px">Se copian como CSV, con las fórmulas neutralizadas para abrirlos sin riesgo en una planilla.</p><div class="toolbar">'+B('copyCsv','Copiar '+W().ss,'data-k="socios"','sm ghost')+B('copyCsv','Copiar cobros','data-k="cobros"','sm ghost')+B('copyCsv','Copiar libro de ventas','data-k="ventas"','sm ghost')+B('copyCsv','Copiar gastos','data-k="gastos"','sm ghost')+(isGym()?B('copyCsv','Copiar fichajes','data-k="fichajes"','sm ghost'):'')+'</div></section></div>';
+}
+
+/* ---------- ajustes ---------- */
 function ajustes(){
-  const P=S.settings.prices;
+  const s=S.settings;
   return '<h1>Ajustes</h1>'+
-  '<section class="glass"><h2 style="margin-bottom:14px">Cuotas mensuales y Club</h2><form class="form" data-form="settings">'+
-  [1,2,3].map(p=>'<label for="s-p'+p+'">'+p+(p===1?' sesión':' sesiones')+' por semana<input id="s-p'+p+'" name="p'+p+'" type="number" min="0" step="1" value="'+P[p]+'"></label>').join('')+
-  '<label for="s-meta">Sellos para canjear premio<input id="s-meta" name="meta" type="number" min="1" max="30" value="'+S.settings.meta+'"></label>'+
-  '<label for="s-premio">Premio del Club<input id="s-premio" name="premio" value="'+esc(S.settings.premio)+'"></label>'+
+  '<section class="glass"><h2 style="margin-bottom:14px">Negocio y facturación</h2><form class="form" data-form="settings">'+
+  '<label for="s-biz">Nombre del negocio<input id="s-biz" name="biz" value="'+esc(s.biz)+'" required></label><label for="s-own">Responsable<input id="s-own" name="owner" value="'+esc(s.owner)+'"></label>'+
+  '<label for="s-rz">Razón social<input id="s-rz" name="razon" value="'+esc(s.razon)+'"></label><label for="s-cuit">CUIT<input id="s-cuit" name="cuit" value="'+esc(s.cuit)+'" inputmode="numeric"></label>'+
+  '<label for="s-pv">Punto de venta<input id="s-pv" name="pv" value="'+esc(s.pv)+'" maxlength="4" inputmode="numeric"></label>'+
+  '<label for="s-iva">Condición frente al IVA<select id="s-iva" name="iva">'+['Monotributo','Responsable Inscripto','Exento'].map(x=>'<option'+(s.iva===x?' selected':'')+'>'+x+'</option>').join('')+'</select></label>'+
+  '<label for="s-al">Avisar vencimientos con (días)<input id="s-al" name="alertDays" type="number" min="1" max="30" value="'+s.alertDays+'"></label>'+
+  '<label for="s-cl">Límite de cuenta corriente<input id="s-cl" name="creditLimit" type="number" min="0" value="'+s.creditLimit+'"></label>'+
+  '<label class="chk" for="s-auto"><input id="s-auto" name="autoReg" type="checkbox"'+(s.autoReg?' checked':'')+'> Registrar la asistencia al validar el acceso</label>'+
+  '<label class="chk" for="s-bd"><input id="s-bd" name="blockDebt" type="checkbox"'+(s.blockDebt?' checked':'')+'> Bloquear el acceso si la deuda supera el límite</label>'+
+  '<label class="full" for="s-rw">Premios del Club (una línea por premio: sellos | premio)<textarea id="s-rw" name="rewards">'+esc(s.rewards.map(r=>r.sellos+' | '+r.name).join('\n'))+'</textarea></label>'+
   '<div class="full"><button class="btn" type="submit">Guardar ajustes</button></div></form></section>'+
-  '<section class="glass"><h2 style="margin-bottom:6px">Datos y respaldo</h2><p class="note" style="margin:0 0 14px">Los datos quedan guardados en este navegador. Copiá un respaldo de vez en cuando y guardalo en un lugar seguro. Las exportaciones neutralizan fórmulas para abrirlas sin riesgo en una planilla.</p>'+
-  '<div class="toolbar"><button class="btn ghost" type="button" data-a="copyCsvS">Copiar alumnos (CSV)</button><button class="btn ghost" type="button" data-a="copyCsvP">Copiar cobros (CSV)</button><button class="btn ghost" type="button" data-a="copyBackup">Copiar respaldo completo</button></div>'+
-  '<form class="form" data-form="restore" style="margin-top:18px"><label class="full" for="r-json">Restaurar desde un respaldo<textarea id="r-json" name="json" placeholder="Pegá acá el respaldo copiado antes"></textarea></label><div class="full"><button class="btn ghost" type="submit">Restaurar respaldo</button></div></form></section>'+
-  '<section class="glass"><h2 style="margin-bottom:12px">Zona de borrado</h2><div class="toolbar"><button class="btn danger" type="button" data-a="rmExamples">'+(ui.confirm==='ex'?'¿Confirmar? Quita los ejemplos':'Quitar datos de ejemplo')+'</button><button class="btn danger" type="button" data-a="wipe">'+(ui.confirm==='wipe'?'¿Confirmar? Borra todo':'Borrar todos los datos')+'</button></div></section>';
+  '<section class="glass"><h2 style="margin-bottom:6px">Demostración</h2><p class="note" style="margin:0 0 14px">Cargá datos de ejemplo para presentar el sistema. Reemplaza lo que haya cargado.</p><div class="toolbar">'+B('loadDemo',ui.confirm==='demo-gym'?'¿Confirmar? Reemplaza los datos':'Cargar demo de gimnasio','data-m="gym"','ghost')+B('loadDemo',ui.confirm==='demo-trainer'?'¿Confirmar? Reemplaza los datos':'Cargar demo de entrenador personal','data-m="trainer"','ghost')+B('rmExamples',ui.confirm==='ex'?'¿Confirmar? Quita los ejemplos':'Quitar solo los datos de ejemplo','','ghost')+'</div></section>'+
+  '<section class="glass"><h2 style="margin-bottom:6px">Respaldo</h2><p class="note" style="margin:0 0 14px">Los datos quedan en este navegador. Copiá un respaldo de vez en cuando.</p><div class="toolbar">'+B('copyBackup','Copiar respaldo completo','','ghost')+'</div>'+
+  '<form class="form" data-form="restore" style="margin-top:16px"><label class="full" for="r-json">Restaurar desde un respaldo<textarea id="r-json" name="json" placeholder="Pegá acá el respaldo copiado antes"></textarea></label><div class="full"><button class="btn ghost" type="submit">Restaurar respaldo</button></div></form></section>'+
+  '<section class="glass"><h2 style="margin-bottom:12px">Zona de borrado</h2>'+B('wipe',ui.confirm==='wipe'?'¿Confirmar? Borra todo':'Borrar todos los datos','','danger')+'</section>';
 }
 
 /* ---------- modales ---------- */
-function studentForm(s){
-  s=s||{id:'',name:'',phone:'',plan:2,mode:'presencial',goal:'',health:'',decl:false,due:todayStr()};
-  return '<form class="form" data-form="student"><input type="hidden" name="id" value="'+s.id+'">'+
-  '<label class="full" for="f-name">Nombre y apellido<input id="f-name" name="name" required value="'+esc(s.name)+'"></label>'+
-  '<label for="f-phone">WhatsApp<input id="f-phone" name="phone" type="tel" inputmode="tel" value="'+esc(s.phone)+'" placeholder="Con código de país"></label>'+
-  '<label for="f-plan">Plan semanal<select id="f-plan" name="plan">'+[1,2,3].map(p=>'<option value="'+p+'"'+(s.plan===p?' selected':'')+'>'+p+(p===1?' sesión':' sesiones')+' · '+money(price(p))+'</option>').join('')+'</select></label>'+
-  '<label for="f-mode">Modalidad<select id="f-mode" name="mode">'+Object.keys(MODES).map(m=>'<option value="'+m+'"'+(s.mode===m?' selected':'')+'>'+MODES[m]+'</option>').join('')+'</select></label>'+
-  '<label for="f-due">Cuota paga hasta<input id="f-due" name="due" type="date" value="'+s.due+'" required></label>'+
-  '<label class="full" for="f-goal">Objetivo<input id="f-goal" name="goal" value="'+esc(s.goal)+'" placeholder="Qué quiere lograr con el entrenamiento"></label>'+
-  '<label class="full" for="f-health">Salud y lesiones a tener en cuenta<textarea id="f-health" name="health">'+esc(s.health)+'</textarea></label>'+
-  '<label class="chk full" for="f-decl"><input id="f-decl" name="decl" type="checkbox"'+(s.decl?' checked':'')+'> Entregó la declaración de salud</label>'+
-  '<div class="full toolbar"><button class="btn" type="submit">Guardar alumno</button><button class="btn ghost" type="button" data-a="closeModal">Cancelar</button></div></form>';
+function memberForm(m){
+  m=m||{id:'',name:'',dni:'',phone:'',email:'',birth:'',planId:S.plans[0]?S.plans[0].id:'',mode:'presencial',due:todayStr(),nfcId:'',fingerId:'',goal:'',health:'',decl:false,consent:true};
+  return '<form class="form" data-form="member"><input type="hidden" name="id" value="'+m.id+'">'+
+  '<label class="full" for="f-name">Nombre y apellido<input id="f-name" name="name" required value="'+esc(m.name)+'"></label>'+
+  '<label for="f-dni">Documento<input id="f-dni" name="dni" inputmode="numeric" value="'+esc(m.dni)+'" placeholder="Sin puntos"></label>'+
+  '<label for="f-phone">WhatsApp<input id="f-phone" name="phone" type="tel" inputmode="tel" value="'+esc(m.phone)+'" placeholder="Con código de país"></label>'+
+  '<label for="f-birth">Fecha de nacimiento<input id="f-birth" name="birth" type="date" value="'+esc(m.birth)+'"></label>'+
+  '<label for="f-plan">Plan<select id="f-plan" name="planId">'+S.plans.map(p=>'<option value="'+p.id+'"'+(m.planId===p.id?' selected':'')+'>'+esc(p.name)+' · '+money(p.price)+'</option>').join('')+'</select></label>'+
+  (isGym()?'':'<label for="f-mode">Modalidad<select id="f-mode" name="mode">'+Object.keys(MODES).map(k=>'<option value="'+k+'"'+(m.mode===k?' selected':'')+'>'+MODES[k]+'</option>').join('')+'</select></label>')+
+  '<label for="f-due">Cuota paga hasta<input id="f-due" name="due" type="date" value="'+m.due+'" required></label>'+
+  '<label for="f-nfc">Código de tarjeta NFC<input id="f-nfc" name="nfcId" value="'+esc(m.nfcId)+'" placeholder="Opcional"></label>'+
+  '<label for="f-fin">Código de huella<input id="f-fin" name="fingerId" value="'+esc(m.fingerId)+'" placeholder="Opcional"></label>'+
+  '<label class="full" for="f-goal">Objetivo<input id="f-goal" name="goal" value="'+esc(m.goal)+'"></label>'+
+  '<label class="full" for="f-health">Salud y lesiones a tener en cuenta<textarea id="f-health" name="health">'+esc(m.health)+'</textarea></label>'+
+  '<label class="chk full" for="f-decl"><input id="f-decl" name="decl" type="checkbox"'+(m.decl?' checked':'')+'> Entregó la declaración de salud</label>'+
+  '<label class="chk full" for="f-cons"><input id="f-cons" name="consent" type="checkbox"'+(m.consent?' checked':'')+'> Aceptó recibir mensajes por WhatsApp</label>'+
+  '<div class="full toolbar"><button class="btn" type="submit">Guardar</button>'+B('closeModal','Cancelar','','ghost')+'</div></form>';
 }
-function ficha(s){
-  const st=status(s);const sel=sellos(s);const meta=S.settings.meta;
-  const dots=Array.from({length:meta},(_,i)=>'<span class="st'+(i<sel?' on':'')+'"></span>').join('');
-  const hist=S.attendance.filter(a=>a.sid===s.id).length;
-  return '<div class="hd" style="margin:0"><h2>'+esc(s.name)+'</h2><span class="pill '+st.k+'">'+st.t+'</span></div>'+
-  '<div class="club"><div><div class="ck">CLUB MOVIMIENTO INTELIGENTE</div><div class="cn" style="margin-top:8px">'+esc(s.name)+'</div><div class="cm">'+planTxt(s)+' · '+MODES[s.mode]+'</div><div class="code">'+code(s)+'</div></div><div class="qr" id="qr"></div><div class="stamps" aria-label="Sellos: '+sel+' de '+meta+'">'+dots+'</div></div>'+
-  '<p class="note" style="margin:0">Sellos: '+sel+' de '+meta+' para: '+esc(S.settings.premio)+'. Cada asistencia suma un sello. Para compartir la tarjeta, sacá una captura de pantalla.</p>'+
-  (sel>=meta?'<button class="btn" type="button" data-a="canje" data-id="'+s.id+'">Canjear premio</button>':'')+
-  '<div class="meta">Paga hasta '+dmy(s.due)+' · '+hist+' asistencias registradas · '+(s.decl?'Declaración de salud entregada':'Falta la declaración de salud')+'</div>'+
-  (s.goal?'<div><div class="eyebrow">Objetivo</div><div>'+esc(s.goal)+'</div></div>':'')+
-  (s.health?'<div><div class="eyebrow">Salud y lesiones</div><div style="overflow-wrap:anywhere">'+esc(s.health)+'</div></div>':'')+
-  '<div class="toolbar"><button class="btn sm" type="button" data-a="payFor" data-id="'+s.id+'">Cobrar</button><button class="btn sm ghost" type="button" data-a="editStudent" data-id="'+s.id+'">Editar</button><button class="btn sm ghost" type="button" data-a="toggleActive" data-id="'+s.id+'">'+(s.active?'Dar de baja':'Reactivar')+'</button><button class="btn sm danger" type="button" data-a="delStudent" data-id="'+s.id+'">'+(ui.confirm==='del'+s.id?'¿Confirmar eliminación?':'Eliminar')+'</button><button class="btn sm ghost" type="button" data-a="closeModal">Cerrar</button></div>';
+function ficha(m){
+  const st=status(m),sel=stamps(m),rw=S.settings.rewards.slice().sort((a,b)=>a.sellos-b.sellos),meta=rw.length?rw[0].sellos:10;
+  const dots=Array.from({length:Math.min(meta,24)},(_,i)=>'<span class="st'+(i<sel?' on':'')+'"></span>').join('');
+  const acc=S.access.filter(a=>a.mid===m.id).sort((a,b)=>b.ts-a.ts).slice(0,4);
+  const av=rw.filter(r=>r.sellos<=sel);
+  const wa=waLink(m,fillTpl(m.due<todayStr()?'vencida':'venc',m));
+  return '<div class="hd" style="margin:0"><h2>'+esc(m.name)+'</h2>'+pill(st.k,st.t)+'</div>'+
+  '<div class="club"><div><div class="ck">CLUB '+esc(S.settings.biz.toUpperCase())+'</div><div class="cn" style="margin-top:8px">'+esc(m.name)+'</div><div class="cm">'+esc(planOf(m).name)+'</div><div class="code">'+code(m)+'</div></div><div class="qr" id="qr"></div><div class="stamps" aria-label="Sellos: '+sel+'">'+dots+'</div></div>'+
+  '<p class="note" style="margin:0">'+sel+' sellos acumulados. Para compartir la tarjeta, sacá una captura de pantalla.</p>'+
+  (av.length?'<div class="toolbar">'+av.map(r=>B('canje','Canjear: '+esc(r.name),'data-id="'+m.id+'" data-rid="'+r.id+'"','sm')).join('')+'</div>':'')+
+  '<div class="two"><div><div class="eyebrow">Documento</div><div>'+esc(m.dni||'—')+'</div></div><div><div class="eyebrow">WhatsApp</div><div>'+esc(m.phone||'—')+'</div></div><div><div class="eyebrow">Tarjeta NFC</div><div>'+esc(m.nfcId||'—')+'</div></div><div><div class="eyebrow">Huella</div><div>'+esc(m.fingerId||'—')+'</div></div></div>'+
+  '<div class="meta">Paga hasta '+dmy(m.due)+' · '+attCount(m.id)+' asistencias · '+(m.decl?'Declaración de salud entregada':'Falta la declaración de salud')+(m.debt>0?' · Deuda de buffet '+money(m.debt):'')+'</div>'+
+  (m.goal?'<div><div class="eyebrow">Objetivo</div><div>'+esc(m.goal)+'</div></div>':'')+(m.health?'<div><div class="eyebrow">Salud y lesiones</div><div style="overflow-wrap:anywhere">'+esc(m.health)+'</div></div>':'')+
+  (acc.length?'<div><div class="eyebrow" style="margin-bottom:6px">Últimos accesos</div>'+acc.map(a=>'<div class="meta">'+dmy(dateOfTs(a.ts))+' '+hhmm(a.ts)+' · '+METH[a.method]+' · '+(a.res==='ok'?'Autorizado':a.res==='warn'?'Con aviso':'Denegado')+'</div>').join('')+'</div>':'')+
+  '<div class="toolbar">'+B('payFor','Cobrar','data-id="'+m.id+'"','sm')+B('editMember','Editar','data-id="'+m.id+'"','sm ghost')+(wa?'<a class="btn sm ghost" target="_blank" rel="noopener" href="'+wa+'" data-a="waSent" data-id="'+m.id+'">WhatsApp</a>':'')+B('toggleActive',m.active?'Dar de baja':'Reactivar','data-id="'+m.id+'"','sm ghost')+B('delMember',ui.confirm==='del'+m.id?'¿Confirmar eliminación?':'Eliminar','data-id="'+m.id+'"','sm danger')+B('closeModal','Cerrar','','sm ghost')+'</div>';
+}
+function classModal(c){
+  const t=todayStr(),nd=nextDate(c.day),isT=nd===t,R=S.res.filter(r=>r.cid===c.id&&r.date===nd),tr=staffOf(c.trainerId);
+  const att=S.classAtt.filter(a=>a.cid===c.id&&a.date===nd).map(a=>a.mid);
+  const taken=R.map(r=>r.mid),free=S.members.filter(m=>m.active&&m.due>=t&&taken.indexOf(m.id)<0).slice(0,80),full=R.length>=c.cap;
+  return '<h2>'+esc(c.name)+'</h2><div class="meta">'+DAYS7[c.day]+' '+dmy(nd)+' · '+c.time+(tr?' · '+esc(tr.name):'')+'</div><div class="meter'+(full?' full':'')+'"><i style="width:'+Math.min(100,Math.round(R.length/c.cap*100))+'%"></i></div><div class="meta">'+R.length+' de '+c.cap+' cupos'+(full?' · clase completa':'')+'</div>'+
+  (R.length?'<div class="list">'+R.map(r=>{const m=mem(r.mid);if(!m)return '';const here=att.indexOf(m.id)>=0;return '<div class="item"><div class="grow"><div class="nm">'+esc(m.name)+'</div></div>'+(isT?(here?pill('ok','Asistió')+B('classCheck','Deshacer','data-cid="'+c.id+'" data-mid="'+m.id+'"','sm ghost'):B('classCheck','Asistió','data-cid="'+c.id+'" data-mid="'+m.id+'"','sm')):'')+B('classRm','Quitar','data-id="'+r.id+'"','sm ghost')+'</div>'}).join('')+'</div>':'<div class="empty">Todavía no hay reservas.</div>')+
+  '<form class="toolbar" data-form="reserve"><input type="hidden" name="cid" value="'+c.id+'"><label class="grow" for="rs-m">Reservar un lugar<select id="rs-m" name="mid">'+free.map(m=>'<option value="'+m.id+'">'+esc(m.name)+'</option>').join('')+'</select></label><button class="btn" type="submit" style="align-self:flex-end"'+(full?' disabled':'')+'>Reservar</button></form>'+B('closeModal','Cerrar','','ghost');
+}
+function arcaModal(i){
+  return '<h2>Factura electrónica en ARCA</h2><div class="meta">Comprobante interno '+i.n+' · '+esc(i.concept)+' · '+money(i.total)+'</div><form class="form" data-form="arca"><input type="hidden" name="id" value="'+i.id+'">'+
+  '<label for="ar-n">N° de factura emitida<input id="ar-n" name="num" required value="'+esc(i.arca?i.arca.num:'')+'" placeholder="Ej: 0001-00000123"></label><label for="ar-c">CAE<input id="ar-c" name="cae" value="'+esc(i.arca?i.arca.cae:'')+'" inputmode="numeric"></label>'+
+  '<div class="full toolbar"><button class="btn" type="submit">Guardar</button>'+(i.arca?B('arcaClear','Marcar como sin emitir','data-id="'+i.id+'"','ghost'):'')+B('closeModal','Cancelar','','ghost')+'</div></form>';
 }
 function modalHtml(){
   const m=ui.modal;let inner='';
-  if(m.t==='student')inner='<h2>'+(m.id?'Editar alumno':'Nuevo alumno')+'</h2>'+studentForm(m.id?stud(m.id):null);
-  else if(m.t==='ficha'){const s=stud(m.id);inner=s?ficha(s):''}
-  else if(m.t==='text')inner='<h2>'+esc(m.title)+'</h2><p class="note" style="margin:0">Tu navegador no permite copiar con un botón. Seleccioná el texto y copialo.</p><textarea id="cp-text" style="min-height:220px" readonly>'+esc(m.text)+'</textarea><button class="btn ghost" type="button" data-a="closeModal">Cerrar</button>';
+  if(m.t==='member')inner='<h2>'+(m.id?'Editar '+W().s:'Nuevo '+W().s)+'</h2>'+memberForm(m.id?mem(m.id):null);
+  else if(m.t==='ficha'){const x=mem(m.id);inner=x?ficha(x):''}
+  else if(m.t==='class'){const c=S.classes.find(z=>z.id===m.id);inner=c?classModal(c):''}
+  else if(m.t==='queue')inner=queueModal(m.k);
+  else if(m.t==='arca'){const i=S.invoices.find(z=>z.id===m.id);inner=i?arcaModal(i):''}
+  else if(m.t==='text')inner='<h2>'+esc(m.title)+'</h2><p class="note" style="margin:0">Tu navegador no permite copiar con un botón. Seleccioná el texto y copialo.</p><textarea id="cp-text" style="min-height:220px" readonly>'+esc(m.text)+'</textarea>'+B('closeModal','Cerrar','','ghost');
   return '<div class="overlay" data-a="overlay"><div class="sheet" role="dialog" aria-modal="true">'+inner+'</div></div>';
 }
 
 /* ---------- render ---------- */
-const VIEWS={panel,alumnos,agenda,programas,cobros,acceso,ajustes};
+const VIEWS={panel:panel,acceso:acceso,socios:socios,planes:planes,agenda:agenda,programas:programas,pos:pos,cobros:cobros,club:club,rrhh:rrhh,admin:admin,ajustes:ajustes};
 function render(){
+  if(ui.kiosk){$('#app').innerHTML=kioskHtml();const i=$('#acc-q');if(i)i.focus();return}
+  if(viewsVisible().map(v=>v.id).indexOf(ui.view)<0)ui.view='panel';
   $('#app').innerHTML=header()+nav()+'<main>'+VIEWS[ui.view]()+'</main>'+(ui.modal?modalHtml():'');
   if(ui.modal&&ui.modal.t==='ficha'){
-    const s=stud(ui.modal.id),el=$('#qr');
-    if(s&&el){try{new QRCode(el,{text:code(s),width:132,height:132,colorDark:'#04122a',colorLight:'#ffffff'})}catch(e){el.textContent=code(s)}}
+    const m=mem(ui.modal.id),el=$('#qr');
+    if(m&&el){try{new QRCode(el,{text:code(m),width:132,height:132,colorDark:'#04122a',colorLight:'#ffffff'})}catch(e){el.textContent=code(m)}}
   }
   if(ui.modal&&ui.modal.t==='text'){const t=$('#cp-text');if(t){t.focus();t.select()}}
+  if(!ui.modal&&ui.view==='acceso'){const i=$('#acc-q');if(i&&window.innerWidth>700)i.focus()}
 }
 function go(v){ui.view=v;ui.modal=null;ui.confirm=null;render();window.scrollTo(0,0)}
 function askConfirm(key,fn){if(ui.confirm===key){ui.confirm=null;fn()}else{ui.confirm=key;render();setTimeout(()=>{if(ui.confirm===key){ui.confirm=null;render()}},4000)}}
+function csvOf(k){
+  if(k==='socios')return csv([['Código','Nombre','Documento','WhatsApp','Plan','Paga hasta','Estado','Deuda buffet','Sellos']].concat(S.members.map(m=>[code(m),m.name,m.dni,m.phone,planOf(m).name,m.due,status(m).t,m.debt,stamps(m)])));
+  if(k==='cobros')return csv([['Fecha','Cliente','Concepto','Medios','Total','Paga hasta']].concat(S.payments.map(p=>{const m=mem(p.mid);return [p.date,m?m.name:'',p.kind==='deuda'?'Deuda de buffet':p.planName,p.lines.filter(l=>l.a>0).map(l=>l.m+' '+l.a).join(' + '),p.total,p.until||'']})));
+  if(k==='ventas')return csv([['Fecha','N° interno','Tipo de documento','Documento','Cliente','Concepto','Neto','IVA','Total','Medio de pago','N° ARCA','CAE']].concat(S.invoices.map(i=>{const m=mem(i.mid),sp=ivaSplit(i.total);return [i.date,i.n,m&&m.dni?'DNI':'Consumidor final',m?m.dni:'',m?m.name:'Consumidor final',i.concept,sp.neto.toFixed(2),sp.iva.toFixed(2),i.total,i.method,i.arca?i.arca.num:'',i.arca?i.arca.cae:'']})));
+  if(k==='gastos')return csv([['Fecha','Concepto','Categoría','Monto']].concat(S.expenses.map(e=>[e.date,e.concept,e.cat,e.amount])));
+  if(k==='fichajes')return csv([['Fecha','Hora','Persona','Tipo','Método']].concat(S.clock.slice().sort((a,b)=>a.ts-b.ts).map(c=>{const s=staffOf(c.sid);return [c.date,hhmm(c.ts),s?s.name:'',c.type==='in'?'Entrada':'Salida',c.method]})));
+  return '';
+}
 
 /* ---------- eventos ---------- */
 const A={
-  nav(d){go(d.v)},
+  nav(d){go(d.v)},go(d){go(d.v)},
+  goFlt(d){ui.flt=d.flt;ui.q='';ui.plan='';ui.page=0;go('socios')},
   theme(){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':!(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches);r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('mi-theme',r.dataset.theme)}catch(e){}},
+  mode(d){
+    const m=d.m,role=S.settings.role;if(S.settings.mode===m)return;
+    if(S.members.length&&S.members.every(x=>x.ejemplo)){S=seed(m);S.settings.role=role}else S.settings.mode=m;
+    save();ui.cart=[];ui.modal=null;render();toast(m==='gym'?'Modo gimnasio':'Modo entrenador personal');
+  },
   overlay(d,e){if(e.target.classList.contains('overlay')){ui.modal=null;ui.confirm=null;render()}},
   closeModal(){ui.modal=null;ui.confirm=null;render()},
-  newStudent(){ui.modal={t:'student'};render()},
-  editStudent(d){ui.modal={t:'student',id:d.id};render()},
+  newMember(){ui.modal={t:'member'};render()},
+  editMember(d){ui.modal={t:'member',id:d.id};render()},
   ficha(d){ui.modal={t:'ficha',id:d.id};render()},
-  payFor(d){ui.paySid=d.id;go('cobros')},
-  checkin(d){if(checkin(d.id,d.mode)){if(d.acc){ui.accQ='';ui.accId=null}render()}},
-  accPick(d){ui.accId=d.id;$('#acc-res').innerHTML=accessResult()},
-  accReset(){ui.accId=null;ui.accQ='';render();const i=$('#acc-q');if(i)i.focus()},
+  payFor(d){ui.payMid=d.id;go('cobros')},
+  page(d){ui.page=Math.max(0,ui.page+(+d.d));$('#list').innerHTML=memberList()},
+  kiosk(){ui.kiosk=true;ui.accRes=null;try{const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen().catch(()=>{})}catch(e){}render()},
+  kioskExit(){ui.kiosk=false;try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}render()},
+  accMeth(d){ui.accMethod=d.m;render()},
+  accManual(d){showAccess(processAccess(mem(d.id),'manual'))},
+  sim(d){simulate(d.k)},
+  slotCheck(d){const m=mem(d.id);if(!m)return;if(!m.active||m.due<todayStr()){toast('Cuota vencida: cobrá antes de registrar la sesión');return}if(attToday(m.id)){toast('Ya tiene asistencia hoy');return}recordAttendance(m,'manual');save();render();toast('Asistencia registrada: '+m.name)},
   rmSlot(d){askConfirm('slot'+d.id,()=>{S.slots=S.slots.filter(x=>x.id!==d.id);save();render()})},
   rmProgram(d){askConfirm('prog'+d.id,()=>{S.programs=S.programs.filter(x=>x.id!==d.id);save();render()})},
   copyProgram(d){const p=S.programs.find(x=>x.id===d.id);if(p)copy(progText(p),'Programa para WhatsApp')},
@@ -499,75 +998,137 @@ const A={
     $('#g-fue').value='A1. Press con mancuernas · 4×6\nA2. Remo con apoyo · 4×8\nB. Peso muerto rumano · 3×8';
     $('#g-hit').value='40 s de trabajo / 20 s de pausa · 6 rondas\nSwing, burpee sin salto, remo con banda';
   },
-  toggleActive(d){const s=stud(d.id);s.active=!s.active;save();render();toast(s.active?'Alumno reactivado':'Alumno dado de baja')},
-  delStudent(d){askConfirm('del'+d.id,()=>{S.students=S.students.filter(x=>x.id!==d.id);S.slots=S.slots.filter(x=>x.sid!==d.id);S.attendance=S.attendance.filter(x=>x.sid!==d.id);S.programs=S.programs.filter(x=>x.sid!==d.id);save();ui.modal=null;render();toast('Alumno eliminado')})},
-  canje(d){const s=stud(d.id);s.canjes=(s.canjes||0)+1;save();render();toast('Premio canjeado')},
-  copyCsvS(){copy(csv([['Código','Nombre','WhatsApp','Plan semanal','Modalidad','Paga hasta','Estado','Objetivo']].concat(S.students.map(s=>[code(s),s.name,s.phone,s.plan,MODES[s.mode],s.due,status(s).t,s.goal]))),'Alumnos en CSV')},
-  copyCsvP(){copy(csv([['Fecha','Alumno','Medios de pago','Total','Paga hasta']].concat(S.payments.map(p=>{const s=stud(p.sid);return [p.date,s?s.name:'',p.lines.filter(l=>l.a>0).map(l=>l.m+' '+l.a).join(' + '),p.total,p.until]}))),'Cobros en CSV')},
+  toggleActive(d){const m=mem(d.id);m.active=!m.active;m.bajaAt=m.active?'':todayStr();save();render();toast(m.active?'Reactivado':'Dado de baja')},
+  delMember(d){askConfirm('del'+d.id,()=>{const id=d.id;S.members=S.members.filter(x=>x.id!==id);['slots','attendance','payments','programs','access','res','classAtt','sales','invoices'].forEach(k=>{S[k]=S[k].filter(x=>(x.mid||'')!==id||k==='sales'||k==='invoices')});save();ui.modal=null;render();toast('Eliminado')})},
+  canje(d){const m=mem(d.id),r=S.settings.rewards.find(x=>x.id===d.rid);if(!m||!r)return;if(stamps(m)<r.sellos){toast('No alcanzan los sellos');return}m.spent=(m.spent||0)+r.sellos;save();render();toast('Canje registrado: '+r.name)},
+  waSent(d){const m=mem(d.id);if(!m)return;const k=d.k||'manual';S.msgs.push({id:uid(),mid:m.id,key:k,date:todayStr(),ts:Date.now()});if(k==='resena')m.reviewAt=todayStr();save();setTimeout(render,80)},
+  queue(d){ui.modal={t:'queue',k:d.k};render()},
+  classOpen(d){ui.modal={t:'class',id:d.id};render()},
+  classRm(d){S.res=S.res.filter(r=>r.id!==d.id);save();render()},
+  classCheck(d){
+    const m=mem(d.mid),c=S.classes.find(x=>x.id===d.cid);if(!m||!c)return;const ds=nextDate(c.day);
+    const ex=S.classAtt.find(a=>a.cid===c.id&&a.date===ds&&a.mid===m.id);
+    if(ex){S.classAtt=S.classAtt.filter(a=>a.id!==ex.id)}
+    else{if(m.due<todayStr()){toast('Cuota vencida: cobrá antes de registrar la asistencia');return}S.classAtt.push({id:uid(),cid:c.id,date:ds,mid:m.id});recordAttendance(m,'manual')}
+    save();render();
+  },
+  cat(d){ui.cat=d.c;render()},
+  addCart(d){const p=S.products.find(x=>x.id===d.id),c=ui.cart.find(x=>x.pid===d.id);if(!p)return;if(c){if(c.qty<p.stock)c.qty++}else if(p.stock>0)ui.cart.push({pid:d.id,qty:1});render()},
+  cartQty(d){const c=ui.cart.find(x=>x.pid===d.id),p=S.products.find(x=>x.id===d.id);if(!c)return;c.qty+=+d.d;if(c.qty>p.stock)c.qty=p.stock;if(c.qty<=0)ui.cart=ui.cart.filter(x=>x!==c);render()},
+  clearCart(){ui.cart=[];render()},
+  sell(){sellCart()},
+  restock(d){const p=S.products.find(x=>x.id===d.id);p.stock+=10;save();render();toast('Stock actualizado: '+p.name)},
+  payDebt(d){
+    const m=mem(d.id);if(!m||m.debt<=0)return;const amt=m.debt;
+    S.payments.push({id:uid(),mid:m.id,date:todayStr(),kind:'deuda',lines:[{m:'Efectivo',a:amt}],total:amt,until:'',planName:'Deuda de buffet'});
+    newInvoice({mid:m.id,concept:'Cobro de deuda de buffet',total:amt,method:'Efectivo'});m.debt=0;save();render();toast('Deuda cobrada: '+money(amt));
+  },
+  invFlt(d){ui.invFlt=d.f;render()},
+  arcaOpen(d){ui.modal={t:'arca',id:d.id};render()},
+  arcaClear(d){const i=S.invoices.find(x=>x.id===d.id);if(i)i.arca=null;save();ui.modal=null;render()},
+  copyCsv(d){copy(csvOf(d.k),'Exportación CSV')},
   copyBackup(){copy(JSON.stringify(S),'Respaldo completo')},
-  rmExamples(){askConfirm('ex',()=>{const ids=new Set(S.students.filter(s=>s.ejemplo).map(s=>s.id));S.students=S.students.filter(s=>!ids.has(s.id));['slots','attendance','payments','programs'].forEach(k=>{S[k]=S[k].filter(x=>!ids.has(x.sid))});save();render();toast('Ejemplos quitados')})},
-  wipe(){askConfirm('wipe',()=>{S={settings:S.settings,students:[],slots:[],attendance:[],payments:[],programs:[]};save();render();toast('Datos borrados')})}
+  rmExamples(){askConfirm('ex',()=>{const ids=new Set(S.members.filter(m=>m.ejemplo).map(m=>m.id));S.members=S.members.filter(m=>!ids.has(m.id));
+    ['slots','attendance','payments','programs','access','res','classAtt','sales','invoices','msgs'].forEach(k=>{S[k]=S[k].filter(x=>!ids.has(x.mid))});
+    S.clock=[];S.shifts=[];S.expenses=[];S.products=[];S.classes=S.classes.filter(c=>false);S.res=[];S.classAtt=[];save();render();toast('Ejemplos quitados')})},
+  loadDemo(d){askConfirm('demo-'+d.m,()=>{const role=S.settings.role;S=seed(d.m);S.settings.role=role;ui.cart=[];save();render();toast('Demo cargada')})},
+  wipe(){askConfirm('wipe',()=>{const st=S.settings;S=seed(st.mode);const keep=S.plans;S={v:2,settings:st,plans:keep,members:[],staff:S.staff.slice(0,1),classes:[],slots:[],res:[],classAtt:[],attendance:[],access:[],payments:[],invoices:[],invSeq:0,products:[],sales:[],shifts:[],clock:[],expenses:[],cash:[],msgs:[],programs:[]};save();render();toast('Datos borrados')})},
+  rmExpense(d){S.expenses=S.expenses.filter(e=>e.id!==d.id);save();render()},
+  delStaff(d){askConfirm('st'+d.id,()=>{S.staff=S.staff.filter(s=>s.id!==d.id);S.shifts=S.shifts.filter(x=>x.sid!==d.id);S.clock=S.clock.filter(x=>x.sid!==d.id);save();render()})},
+  clockSim(d){const s=staffOf(d.id);if(s){ui.clockRes=punch(s,'nfc');render()}},
+  delPlan(d){if(S.members.some(m=>m.planId===d.id)){toast('Hay '+W().ss+' con este plan: pasalos a otro antes de eliminarlo');return}S.plans=S.plans.filter(p=>p.id!==d.id);save();render()}
 };
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-a]');if(!b)return;
-  const f=A[b.dataset.a];if(f){if(b.dataset.a!=='overlay'||e.target===b)f(b.dataset,e)}
+  const f=A[b.dataset.a];if(!f)return;
+  if(b.dataset.a==='overlay'&&e.target!==b)return;
+  f(b.dataset,e);
 });
 const FORMS={
-  student(fd){
-    const id=fd.get('id');const o={name:fd.get('name').trim(),phone:fd.get('phone').trim(),plan:+fd.get('plan'),mode:fd.get('mode'),goal:fd.get('goal').trim(),health:fd.get('health').trim(),decl:fd.get('decl')==='on',due:fd.get('due')};
-    if(!o.name){toast('Escribí el nombre del alumno');return}
-    if(id)Object.assign(stud(id),o);else S.students.push(Object.assign({id:uid(),active:true,canjes:0,created:todayStr()},o));
-    save();ui.modal=null;render();toast(id?'Alumno actualizado':'Alumno agregado');
+  member(fd){
+    const id=fd.get('id'),o={name:fd.get('name').trim(),dni:fd.get('dni').replace(/\D/g,''),phone:fd.get('phone').trim(),birth:fd.get('birth')||'',planId:fd.get('planId'),mode:fd.get('mode')||'presencial',due:fd.get('due'),
+      nfcId:fd.get('nfcId').trim().toUpperCase(),fingerId:fd.get('fingerId').trim().toUpperCase(),goal:fd.get('goal').trim(),health:fd.get('health').trim(),decl:fd.get('decl')==='on',consent:fd.get('consent')==='on'};
+    if(!o.name){toast('Escribí el nombre');return}
+    if(id)Object.assign(mem(id),o);else S.members.push(Object.assign({id:uid(),active:true,debt:0,stampDates:[],spent:0,reviewAt:'',created:todayStr(),trainerId:''},o));
+    save();ui.modal=null;render();toast(id?'Datos actualizados':W().S+' agregado');
+  },
+  plan(fd){
+    const id=fd.get('id'),o={name:fd.get('name').trim(),price:+fd.get('price')||0,weekly:Math.max(0,+fd.get('weekly')||0),kind:fd.get('kind'),desc:fd.get('desc').trim()};
+    if(!o.name)return;
+    if(id)Object.assign(S.plans.find(p=>p.id===id),o);else S.plans.push(Object.assign({id:uid()},o));
+    save();render();toast(id?'Plan actualizado':'Plan agregado');
   },
   slot(fd){
-    const sid=fd.get('sid');if(!sid){toast('Primero cargá un alumno');return}
-    S.slots.push({id:uid(),sid:sid,day:+fd.get('day'),time:fd.get('time'),mode:fd.get('mode')});save();render();
-    const s=stud(sid);const n=S.slots.filter(x=>x.sid===sid).length;
-    toast(n>s.plan?'Agregado. Ojo: supera las '+s.plan+' sesiones de su plan':'Sesión agregada a la agenda');
+    const mid=fd.get('mid');if(!mid){toast('Primero cargá un '+W().s);return}
+    S.slots.push({id:uid(),mid:mid,day:+fd.get('day'),time:fd.get('time'),mode:fd.get('mode')});save();render();
+    const m=mem(mid),n=S.slots.filter(x=>x.mid===mid).length,w=planOf(m).weekly;
+    toast(w&&n>w?'Agregado. Ojo: supera las '+w+' sesiones de su plan':'Sesión agregada a la agenda');
   },
   program(fd){
-    if(!fd.get('sid')){toast('Primero cargá un alumno');return}
-    S.programs.push({id:uid(),sid:fd.get('sid'),title:fd.get('title').trim(),week:fd.get('week'),blocks:{patrones:fd.get('patrones'),fuerza:fd.get('fuerza'),hiit:fd.get('hiit')},created:Date.now()});
-    ui.pid=fd.get('sid');save();render();toast('Programa guardado');
+    if(!fd.get('mid')){toast('Primero cargá un '+W().s);return}
+    S.programs.push({id:uid(),mid:fd.get('mid'),title:fd.get('title').trim(),week:fd.get('week'),blocks:{patrones:fd.get('patrones'),fuerza:fd.get('fuerza'),hiit:fd.get('hiit')},created:Date.now()});
+    ui.pid=fd.get('mid');save();render();toast('Programa guardado');
   },
   pay(fd){
-    const sid=fd.get('sid');if(!sid){toast('Primero cargá un alumno');return}
+    const mid=fd.get('mid');if(!mid){toast('Primero cargá un '+W().s);return}
     const a1=Math.max(0,+fd.get('a1')||0),a2=Math.max(0,+fd.get('a2')||0);
     if(a1+a2<=0){toast('Ingresá un monto mayor a cero');return}
-    const until=registerPayment(sid,[{m:fd.get('m1'),a:a1}].concat(a2>0?[{m:fd.get('m2'),a:a2}]:[]));
-    ui.paySid='';render();toast('Cobro registrado. Cuota paga hasta '+dmy(until));
-  },
-  settings(fd){
-    S.settings.prices={1:+fd.get('p1')||0,2:+fd.get('p2')||0,3:+fd.get('p3')||0};
-    S.settings.meta=Math.min(30,Math.max(1,+fd.get('meta')||10));S.settings.premio=fd.get('premio').trim()||'Premio del Club';
-    save();render();toast('Ajustes guardados');
-  },
-  restore(fd){
-    try{const o=JSON.parse(fd.get('json'));if(!o||!Array.isArray(o.students)||!o.settings)throw 0;S=o;save();render();toast('Respaldo restaurado')}
-    catch(e){toast('El texto no es un respaldo válido')}
+    const until=registerPayment(mid,[{m:fd.get('m1'),a:a1}].concat(a2>0?[{m:fd.get('m2'),a:a2}]:[]));
+    ui.payMid='';render();toast('Cobro registrado. Cuota paga hasta '+dmy(until));
   },
   acc(fd){
-    const q=String(fd.get('q')||'').trim();ui.accQ=q;
-    const m=S.students.filter(s=>code(s).toLowerCase()===q.toLowerCase()||s.name.toLowerCase().includes(q.toLowerCase()));
-    ui.accId=(m.length===1)?m[0].id:null;
-    $('#acc-res').innerHTML=accessResult();
-  }
+    const q=String(fd.get('q')||'').trim();if(!q)return;
+    const r=resolve(ui.accMethod,q);
+    if(r)showAccess(processAccess(r.m,r.method));else showAccess({nf:true,q:q});
+  },
+  reserve(fd){
+    const c=S.classes.find(x=>x.id===fd.get('cid')),mid=fd.get('mid');if(!c||!mid)return;
+    const nd=nextDate(c.day);
+    if(S.res.filter(r=>r.cid===c.id&&r.date===nd).length>=c.cap){toast('La clase está completa');return}
+    S.res.push({id:uid(),cid:c.id,date:nd,mid:mid});save();render();toast('Reserva confirmada');
+  },
+  tpl(fd){Object.keys(SEGINFO).forEach(k=>{S.settings.tpl[k]=fd.get(k)});S.settings.reviewUrl=fd.get('url').trim();save();render();toast('Textos guardados')},
+  settings(fd){
+    const s=S.settings;
+    s.biz=fd.get('biz').trim()||s.biz;s.owner=fd.get('owner').trim();s.razon=fd.get('razon').trim();s.cuit=fd.get('cuit').trim();s.pv=(fd.get('pv').replace(/\D/g,'')||'1').padStart(4,'0').slice(-4);s.iva=fd.get('iva');
+    s.alertDays=Math.min(30,Math.max(1,+fd.get('alertDays')||5));s.creditLimit=Math.max(0,+fd.get('creditLimit')||0);s.autoReg=fd.get('autoReg')==='on';s.blockDebt=fd.get('blockDebt')==='on';
+    const rw=String(fd.get('rewards')||'').split('\n').map(l=>l.split('|')).filter(a=>a.length>=2&&+a[0]>0&&a[1].trim()).map(a=>{const old=s.rewards.find(r=>r.name===a[1].trim());return {id:old?old.id:uid(),sellos:+a[0],name:a[1].trim()}});
+    if(rw.length)s.rewards=rw;
+    save();render();toast('Ajustes guardados');
+  },
+  restore(fd){try{const o=JSON.parse(fd.get('json'));if(!o||o.v!==2||!Array.isArray(o.members))throw 0;S=o;save();render();toast('Respaldo restaurado')}catch(e){toast('El texto no es un respaldo válido')}},
+  clock(fd){
+    const q=String(fd.get('q')||'').trim();if(!q)return;
+    const s=S.staff.find(x=>x.pin===q||x.nfc.toUpperCase()===q.toUpperCase());
+    ui.clockRes=s?punch(s,/^\d+$/.test(q)?'pin':'nfc'):{ok:false,name:'',msg:'No se reconoce el PIN o la tarjeta.'};render();
+  },
+  staff(fd){S.staff.push({id:uid(),name:fd.get('name').trim(),role:fd.get('role').trim(),pin:fd.get('pin').trim(),nfc:'NFC-S'+(S.staff.length+1).toString().padStart(2,'0'),rate:+fd.get('rate')||0,commClass:+fd.get('commClass')||0,commPT:+fd.get('commPT')||0});save();render();toast('Persona agregada')},
+  expense(fd){S.expenses.push({id:uid(),date:fd.get('date'),concept:fd.get('concept').trim(),cat:fd.get('cat'),amount:+fd.get('amount')||0});save();render();toast('Gasto agregado')},
+  cash(fd){
+    const t=todayStr();let exp=0;S.payments.filter(p=>p.date===t).forEach(p=>p.lines.forEach(l=>{if(l.m==='Efectivo')exp+=l.a}));S.sales.filter(s=>s.date===t&&s.method==='Efectivo').forEach(s=>{exp+=s.total});
+    S.cash.push({date:t,expected:exp,counted:+fd.get('counted')||0});save();render();toast('Caja cerrada');
+  },
+  arca(fd){const i=S.invoices.find(x=>x.id===fd.get('id'));if(i){i.arca={num:fd.get('num').trim(),cae:fd.get('cae').trim()};save();ui.modal=null;render();toast('Número de ARCA guardado')}}
 };
 document.addEventListener('submit',e=>{
   const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();
   const h=FORMS[f.dataset.form];if(h)h(new FormData(f));
 });
 document.addEventListener('input',e=>{
-  if(e.target.id==='q'){ui.q=e.target.value;$('#list').innerHTML=studentList()}
-  else if(e.target.id==='acc-q'){ui.accQ=e.target.value;ui.accId=null;$('#acc-res').innerHTML=accessResult()}
+  if(e.target.id==='q'){ui.q=e.target.value;ui.page=0;$('#list').innerHTML=memberList()}
 });
 document.addEventListener('change',e=>{
-  const id=e.target.id;
-  if(id==='flt'){ui.filter=e.target.value;$('#list').innerHTML=studentList()}
-  else if(id==='p-flt'){ui.pid=e.target.value;render()}
-  else if(id==='p-sid'){const s=stud(e.target.value);if(s)$('#p-a1').value=price(s.plan)}
+  const id=e.target.id,v=e.target.value;
+  if(id==='flt'){ui.flt=v;ui.page=0;$('#list').innerHTML=memberList()}
+  else if(id==='pln'){ui.plan=v;ui.page=0;$('#list').innerHTML=memberList()}
+  else if(id==='p-flt'){ui.pid=v;render()}
+  else if(id==='p-mid'){const m=mem(v);ui.payMid=v;if(m){render()}}
+  else if(id==='role-sel'){S.settings.role=v;save();render()}
+  else if(id==='pos-m'){ui.posMid=v;render()}
+  else if(id==='pos-pay'){ui.posMethod=v;render()}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.modal){ui.modal=null;render()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(ui.modal){ui.modal=null;render()}else if(ui.kiosk){A.kioskExit()}}});
+setInterval(()=>{const c=$('#k-clock');if(c)c.textContent=hhmm(Date.now())},20000);
 
 try{const th=localStorage.getItem('mi-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
 load();render();
