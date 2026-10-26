@@ -1,7 +1,7 @@
 # Movimiento Inteligente · Nahuel Cornu
 
-Demo de un sistema de gestión para gimnasios y entrenadores personales. Es un único archivo, `index.html`,
-que se abre directo en el navegador, sin instalar nada. Los datos quedan en el navegador (localStorage).
+Demo de un sistema de gestión para gimnasios y entrenadores personales. Son dos páginas: `index.html` (el sistema) y `menu.html` (menú público para nuevos socios),
+que se abren directo en el navegador, sin instalar nada. Los datos quedan en el navegador (localStorage).
 
 ## Qué incluye
 
@@ -15,6 +15,18 @@ que se abre directo en el navegador, sin instalar nada. Los datos quedan en el n
 - **Personal:** fichaje con PIN o NFC (rechaza repetidos en menos de 60 s), turnos, horas y liquidación estimada.
 - **Administración:** caja del día, gastos, resultado del mes e informes, con exportación a CSV.
 - **Roles:** administrador, supervisor y recepción ven distintas secciones.
+
+## Menú público para nuevos socios
+
+`menu.html` es la página que ve quien todavía no es socio: presentación, planes, horarios con reserva por WhatsApp, pasos para empezar y formulario de alta.
+
+1. La persona completa el formulario y se le arma un mensaje de WhatsApp con un código de alta.
+2. En el sistema, Club > Solicitudes > **Importar solicitud**: pegás el mensaje y queda en la lista.
+3. **Aprobar y cobrar** la crea como socio con estado "Pendiente de primer pago"; no entra hasta el primer pago.
+4. Al aprobar se puede enviar su tarjeta del Club (enlace y QR) por WhatsApp.
+
+En Ajustes se cargan el WhatsApp del negocio, la dirección, la presentación y los horarios. Desde Club se copia el enlace del menú o se muestra su QR. Para publicarlo con GitHub Pages, la dirección es `https://raveholding.github.io/MovimientoInteligente/menu.html` y se configura en Ajustes.
+Los datos de cada navegador son locales: no hay sincronización en vivo entre dispositivos sin un servidor.
 
 ## Importante
 

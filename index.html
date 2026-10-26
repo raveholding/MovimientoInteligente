@@ -1,5 +1,14 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#060b21">
 <title>Movimiento Inteligente</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Jost:wght@300;400;500;600&display=swap">
@@ -175,6 +184,8 @@ button.item{width:100%;text-align:left;cursor:pointer;color:inherit;font:inherit
 .devfoot .mail{font-variant-numeric:tabular-nums;user-select:all;overflow-wrap:anywhere;font-weight:500}
 @media (prefers-reduced-motion:no-preference){.tab,.btn{transition:background .15s,transform .1s}.btn:active{transform:scale(.98)}}
 </style>
+<style>html,body{margin:0}</style>
+</head><body>
 
 <div class="aurora" aria-hidden="true"></div>
 <div class="wrap" id="app"></div>
@@ -231,7 +242,9 @@ function seed(mode){
   const t=todayStr(),gym=mode==='gym',R=rng(gym?7:3);
   const pick=a=>a[Math.floor(R()*a.length)];
   const settings={mode:mode,role:'a',biz:'Movimiento Inteligente',owner:'Nahuel Cornu',razon:'',cuit:'',pv:'0001',iva:'Monotributo',
-    alertDays:5,autoReg:true,blockDebt:false,creditLimit:15000,reviewUrl:'https://g.page/r/TU-ENLACE-DE-RESENAS',
+    alertDays:5,autoReg:true,blockDebt:false,creditLimit:15000,reviewUrl:'https://g.page/r/TU-ENLACE-DE-RESENAS',wa:'5493874484132',publicUrl:'https://raveholding.github.io/MovimientoInteligente/menu.html',address:'',
+    about:gym?'Gimnasio y centro de fitness: musculación, clases grupales, entrenamiento personalizado y buffet saludable.':'Programa de entrenamiento para la salud. Entrenamiento personalizado para cualquier persona que quiera mejorar su estilo de vida a través del movimiento.',
+    hours:gym?'Lunes a sábado. Consultá el horario de cada clase.':'Lunes a viernes, horarios a coordinar. Presencial y programación virtual.',
     rewards:[{id:uid(),name:'Batido de proteína gratis',sellos:10},{id:uid(),name:'Una sesión de regalo',sellos:20}],tpl:tpls()};
   const P=(name,price,weekly,kind,desc)=>({id:uid(),name:name,price:price,weekly:weekly,kind:kind,desc:desc});
   const plans=gym?[P('Pase libre',38000,0,'libre','Acceso a sala y a todas las clases'),P('Musculación',30000,0,'mus','Sala de musculación sin clases'),
@@ -363,15 +376,16 @@ function seed(mode){
   });
   const expenses=gym?[['Alquiler del local','Alquiler',480000,-20],['Electricidad','Servicios',96000,-12],['Agua','Servicios',18000,-12],['Limpieza e insumos','Mantenimiento',34000,-9],['Mantenimiento de máquinas','Mantenimiento',52000,-6],['Publicidad en redes','Marketing',45000,-4]].map(e=>({id:uid(),date:addDays(t,e[3]),concept:e[0],cat:e[1],amount:e[2]})):
     [['Alquiler de sala','Alquiler',90000,-18],['Equipamiento','Equipamiento',35000,-9]].map(e=>({id:uid(),date:addDays(t,e[3]),concept:e[0],cat:e[1],amount:e[2]}));
+  const leads=[{id:uid(),n:'Carla Méndez',d:'38211456',w:'5493875551234',p:plans[gym?0:1].name,g:'Ganar fuerza',h:'',s:1,c:1,f:t},{id:uid(),n:'Rodrigo Pereyra',d:'35877210',w:'5493875554321',p:plans[gym?4:2].name,g:'Bajar de peso',h:'Dolor lumbar ocasional',s:1,c:1,f:addDays(t,-1)}];
   const programs=[{id:uid(),mid:members[0].id,title:'Bloque 1 · Base de fuerza',week:weekStart(t),
     blocks:{patrones:'Sentadilla goblet · 3×8 con pausa de 2 s abajo\nBisagra de cadera con kettlebell · 3×10\nEmpuje y tracción horizontal · 3×8 cada uno',
     fuerza:'A1. Press con mancuernas · 4×6 (descanso 90 s)\nA2. Remo con apoyo · 4×8\nB. Peso muerto rumano · 3×8',hiit:'40 s de trabajo / 20 s de pausa · 6 rondas\nSwing, burpee sin salto, remo con banda'},created:Date.now()}];
   return {v:2,settings:settings,plans:plans,members:members,staff:staff,classes:classes,slots:slots,res:res,classAtt:classAtt,attendance:attendance,access:access,
-    payments:payments,invoices:invoices,invSeq:seq,products:products,sales:sales,shifts:shifts,clock:clock,expenses:expenses,cash:[],msgs:[],programs:programs};
+    payments:payments,invoices:invoices,invSeq:seq,products:products,sales:sales,shifts:shifts,clock:clock,expenses:expenses,cash:[],msgs:[],leads:leads,programs:programs};
 }
 function planOfIn(plans,m){return plans.find(p=>p.id===m.planId)||{name:'Sin plan',weekly:0,price:0,kind:'libre'}}
 function nextDate(day,from){let d=from||todayStr();for(let i=0;i<7;i++){if(parse(d).getDay()===day)return d;d=addDays(d,1)}return d}
-function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.v===2&&o.members){S=o;return}}}catch(e){}S=seed('gym')}
+function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.v===2&&o.members){S=o;migrate();return}}}catch(e){}S=seed('gym')}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
 /* ---------- consultas ---------- */
@@ -390,6 +404,7 @@ function addStamp(m,ds){m.stampDates=m.stampDates||[];if(m.stampDates.indexOf(ds
 function status(m){
   if(!m.active)return {k:'mute',t:'Baja'};
   const t=todayStr();
+  if(m.nuevo&&m.due<t)return {k:'warn',t:'Pendiente de primer pago'};
   if(m.due<t)return {k:'bad',t:'Vencido hace '+daysBetween(m.due,t)+' d'};
   const left=daysBetween(t,m.due);
   if(left===0)return {k:'warn',t:'Vence hoy'};
@@ -418,7 +433,7 @@ function registerPayment(mid,lines){
   const base=m.due>t?m.due:t,until=addMonths(base,1);
   S.payments.push({id:uid(),mid:mid,date:t,kind:'cuota',lines:lines,total:total,until:until,planName:plan.name});
   newInvoice({mid:mid,concept:'Cuota '+plan.name+' · hasta '+dmy(until),total:total,method:lines.map(l=>l.m).join(' + ')});
-  m.due=until;m.active=true;save();return until;
+  m.due=until;m.active=true;m.nuevo=false;save();return until;
 }
 function fillTpl(key,m,extra){
   const f=(m.name||'').split(' ')[0];
@@ -429,7 +444,7 @@ function segments(){
   const t=todayStr(),act=S.members.filter(m=>m.active),sd=S.settings.alertDays;
   return {
     venc:act.filter(m=>m.due>=t&&m.due<=addDays(t,sd)),
-    vencida:act.filter(m=>m.due<t),
+    vencida:act.filter(m=>m.due<t&&!m.nuevo),
     cumple:act.filter(m=>isBirthday(m)),
     resena:act.filter(m=>m.due>=t&&attCount(m.id)>=6&&!(m.reviewAt&&daysBetween(m.reviewAt,t)<60)),
     reactiva:act.filter(m=>{if(m.due<t)return false;const l=lastAtt(m.id);return !l||daysBetween(l,t)>=14})
@@ -448,6 +463,49 @@ function viewsVisible(){
 }
 const ROLES={a:'Administrador',s:'Supervisor',r:'Recepción'};
 
+function b64e(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64d(s){try{s=String(s).replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return JSON.parse(decodeURIComponent(escape(atob(s))))}catch(e){return null}}
+function migrate(){
+  S.leads=S.leads||[];const s=S.settings,g=s.mode==='gym';
+  if(!s.wa)s.wa='5493874484132';
+  if(!s.publicUrl)s.publicUrl='https://raveholding.github.io/MovimientoInteligente/menu.html';
+  if(s.address==null)s.address='';
+  if(!s.about)s.about=g?'Gimnasio y centro de fitness: musculación, clases grupales, entrenamiento personalizado y buffet saludable.':'Programa de entrenamiento para la salud. Entrenamiento personalizado para cualquier persona que quiera mejorar su estilo de vida a través del movimiento.';
+  if(!s.hours)s.hours=g?'Lunes a sábado. Consultá el horario de cada clase.':'Lunes a viernes, horarios a coordinar. Presencial y programación virtual.';
+}
+function parseLead(text){const m=String(text||'').match(/ALTA1\.([A-Za-z0-9_-]+)/);if(!m)return null;const o=b64d(m[1]);return o&&o.n&&o.d?o:null}
+function menuCfg(){
+  const s=S.settings;
+  return {b:s.biz,o:s.owner,w:s.wa,a:s.address,t:s.about,h:s.hours,m:isGym()?'g':'t',
+    k:isGym()?[]:[['Patrones de movimiento','Aprendés a moverte bien: sentadilla, bisagra de cadera, empuje, tracción y rotación.'],['Entrenamiento de fuerza','Cargas progresivas para ganar fuerza, salud y confianza.'],['Formato HIIT','Intervalos intensos y cortos para mejorar tu resistencia.']],
+    p:S.plans.map(p=>[p.name,p.price,p.weekly,p.desc||'']),c:isGym()?S.classes.map(c=>[c.name,c.day,c.time,c.cap]):[]};
+}
+const menuLink=()=>S.settings.publicUrl+'#cfg='+b64e(menuCfg());
+const cardLink=m=>S.settings.publicUrl+'#tarjeta='+b64e({n:m.name,c:code(m),p:planOf(m).name,b:S.settings.biz});
+const cardWa=m=>waLink(m,'Hola '+m.name.split(' ')[0]+', esta es tu tarjeta del Club de '+S.settings.biz+'. Abrí el enlace en tu celular y se guarda sola: '+cardLink(m));
+function approveLead(id){
+  const l=S.leads.find(x=>x.id===id);if(!l)return null;
+  const ex=S.members.find(m=>l.d&&m.dni===l.d);
+  if(ex){S.leads=S.leads.filter(x=>x.id!==id);save();return ex}
+  const plan=S.plans.find(p=>p.name===l.p)||S.plans[0],t=todayStr();
+  const m={id:uid(),name:l.n,dni:l.d,phone:l.w,email:'',birth:'',planId:plan.id,mode:'presencial',due:addDays(t,-1),nuevo:true,active:true,goal:l.g||'',health:l.h||'',decl:!!l.s,consent:!!l.c,nfcId:'',fingerId:'',debt:0,stampDates:[],spent:0,reviewAt:'',created:t,trainerId:''};
+  S.members.push(m);S.leads=S.leads.filter(x=>x.id!==id);save();return m;
+}
+function leadsCard(){
+  if(!S.leads.length)return '';
+  return '<section class="glass"><div class="hd"><h2>Solicitudes nuevas</h2><span class="chip">'+S.leads.length+' pendientes</span></div><div class="list">'+S.leads.map(l=>'<div class="item"><div class="grow"><div class="nm">'+esc(l.n)+'</div><div class="meta">'+esc(l.p)+' · DNI '+esc(l.d)+' · '+dmy(l.f)+(l.g?' · '+esc(l.g):'')+'</div>'+(l.h?'<div class="meta">Cuidado de salud: '+esc(l.h)+'</div>':'')+'</div>'+(l.c?'':pill('mute','Sin consentimiento de WhatsApp'))+B('leadOk','Aprobar y cobrar','data-id="'+l.id+'"','sm')+B('leadDel','Descartar','data-id="'+l.id+'"','sm ghost')+'</div>').join('')+'</div></section>';
+}
+function menuSection(){
+  const link=menuLink();
+  return '<section class="glass c12"><div class="hd"><h2>Menú público para nuevos '+W().ss+'</h2><span class="chip">Se abre desde el celular, sin instalar nada</span></div><p class="note" style="margin:-6px 0 14px">Muestra planes, horarios y un formulario de alta. La solicitud llega por WhatsApp al número del negocio; pegala en '+W().SS+' → Importar solicitud y se carga sola.</p><div class="toolbar"><a class="btn" target="_blank" rel="noopener" href="'+esc(link)+'">Abrir el menú</a>'+B('qrMenu','Ver QR para el local','','ghost')+B('copyMenuLink','Copiar enlace con mis planes','','ghost')+B('copyMenuMsg','Copiar mensaje para redes','','ghost')+'</div><p class="meta" style="margin-top:12px">Dirección del menú: '+esc(S.settings.publicUrl)+'</p><p class="meta">El enlace incluye tus planes y horarios actuales. Si cambiás precios, copiá el enlace de nuevo.</p></section>';
+}
+function leadModal(){
+  return '<h2>Importar solicitud</h2><p class="note" style="margin:0">Pegá el mensaje de WhatsApp que mandó la persona. Tiene que incluir el código de alta del final.</p><form class="form" data-form="lead" style="grid-template-columns:1fr"><label for="ld-t">Mensaje recibido<textarea id="ld-t" name="t" style="min-height:160px" required></textarea></label><div class="toolbar"><button class="btn" type="submit">Importar</button>'+B('closeModal','Cancelar','','ghost')+'</div></form>';
+}
+function qrMenuModal(){
+  const link=menuLink(),long=link.length>1800;
+  return '<h2>QR del menú público</h2><div class="qr" id="qrm" style="width:264px;height:264px;margin:0 auto"></div><p class="note" style="text-align:center;margin:0">'+(long?'El enlace con tus datos es muy largo para un QR: este abre el menú general.':'Escaneá para abrir el menú con tus planes y horarios.')+'</p><div class="meta" style="overflow-wrap:anywhere;text-align:center">'+esc(long?S.settings.publicUrl:S.settings.publicUrl+' (con tus datos)')+'</div>'+B('closeModal','Cerrar','','ghost');
+}
 function devFooter(){
   const msg='Hola Vincular Business, vi la demo de '+S.settings.biz+' y quiero más información.';
   return '<footer class="glass devfoot"><div class="dl"><img src="'+DEV.logo+'" width="216" height="68" alt="Logo de Vincular Business"><div><div class="eyebrow">Sistema desarrollado por</div><div class="nm" style="font-size:18px">'+DEV.name+'</div><div class="tg">'+DEV.tag+'</div><div class="meta" style="margin-top:6px">Personalizamos tu sistema, 100 % a medida.</div></div></div>'+
@@ -490,6 +548,7 @@ function panel(){
   if(debtors.length&&isGym())alerts.push(['warn',debtors.length+' con deuda de buffet',money(debtSum)+' en cuentas corrientes','goFlt','data-flt="deuda"']);
   if(low.length)alerts.push(['warn',low.length+(low.length===1?' producto con stock bajo':' productos con stock bajo'),low.slice(0,3).map(p=>p.name).join(', '),'nav','data-v="pos"']);
   if(noDecl.length)alerts.push(['warn',noDecl.length+' sin declaración de salud','Es obligatoria para entrenar','goFlt','data-flt="sindecl"']);
+  if(S.leads.length)alerts.push(['warn',S.leads.length+(S.leads.length===1?' solicitud de alta nueva':' solicitudes de alta nuevas'),'Llegaron desde el menú público','nav','data-v="socios"']);
   if(sg.cumple.length)alerts.push(['ok','Cumple hoy: '+sg.cumple.map(m=>m.name.split(' ')[0]).join(', '),'Mandales el saludo con beneficio','nav','data-v="club"']);
   const alertHtml=alerts.length?'<div class="list">'+alerts.map(a=>'<button class="item" type="button" data-a="'+a[3]+'" '+a[4]+'><div class="grow"><div class="nm">'+esc(a[1])+'</div><div class="meta">'+esc(a[2])+'</div></div>'+pill(a[0]==='bad'?'bad':a[0],a[0]==='bad'?'Urgente':a[0]==='warn'?'Atención':'Hoy')+'</button>').join('')+'</div>':'<div class="empty">Sin alertas por ahora.</div>';
   const live=S.access.slice().sort((a,b)=>b.ts-a.ts).slice(0,7);
@@ -534,6 +593,7 @@ function processAccess(m,method){
   if(last&&Date.now()-last.ts<6000&&ui.accRes&&ui.accRes.mid===m.id)return ui.accRes;
   const warns=[],notes=[];let res='ok',why='';
   if(!m.active){res='denied';why='Dado de baja'}
+  else if(m.nuevo&&m.due<t){res='denied';why='Pendiente de primer pago'}
   else if(m.due<t){res='denied';why='Cuota vencida desde el '+dmy(m.due)}
   else if(S.settings.blockDebt&&m.debt>S.settings.creditLimit){res='denied';why='Deuda de buffet sobre el límite'}
   if(res!=='denied'){
@@ -635,7 +695,7 @@ function memberList(){
   const sl=L.slice(ui.page*PAGE,ui.page*PAGE+PAGE);
   if(!L.length)return '<div class="empty">No hay '+W().ss+' para mostrar con este filtro.</div>';
   return '<div class="meta" style="margin-bottom:10px">'+L.length+' resultado'+(L.length===1?'':'s')+'</div><div class="list">'+sl.map(m=>{
-    const st=status(m),over=m.active&&m.due<todayStr(),soon=st.k==='warn';
+    const st=status(m),over=m.active&&m.due<todayStr()&&!m.nuevo,soon=st.k==='warn'&&!m.nuevo;
     const wa=(over||soon)?waLink(m,fillTpl(over?'vencida':'venc',m)):'';
     return '<article class="item"><div class="grow"><div class="nm">'+esc(m.name)+(m.ejemplo?' <span class="chip">Demo</span>':'')+'</div><div class="meta">'+esc(planTxt(m))+(isGym()?'':' · '+MODES[m.mode])+' · DNI '+esc(m.dni)+' · paga hasta '+dmy(m.due)+'</div></div>'+
     pill(st.k,st.t)+(m.debt>0?pill('warn','Deuda '+money(m.debt)):'')+(!m.decl&&m.active?pill('mute','Sin declaración'):'')+
@@ -644,7 +704,7 @@ function memberList(){
 }
 function socios(){
   const F=[['activos','Activos'],['aldia','Al día'],['porvencer','Por vencer'],['vencidos','Con cuota vencida'],['deuda','Con deuda de buffet'],['sindecl','Sin declaración de salud'],['cumple','Cumplen este mes'],['baja','Dados de baja'],['todos','Todos']];
-  return exampleBanner()+'<div class="hd" style="margin:0"><h1>'+W().SS+'</h1>'+B('newMember','Nuevo '+W().s)+'</div>'+
+  return exampleBanner()+'<div class="hd" style="margin:0"><h1>'+W().SS+'</h1>'+'<div class="acts">'+B('leadImport','Importar solicitud','','ghost')+B('newMember','Nuevo '+W().s)+'</div></div>'+leadsCard()+
   '<div class="glass"><div class="toolbar" style="margin-bottom:14px"><label class="grow" for="q">Buscar por nombre, documento o código<input id="q" type="search" value="'+esc(ui.q)+'" placeholder="Ej: Lucía, 33123456 o MI-"></label>'+
   '<label for="flt">Mostrar<select id="flt">'+F.map(f=>'<option value="'+f[0]+'"'+(ui.flt===f[0]?' selected':'')+'>'+f[1]+'</option>').join('')+'</select></label>'+
   '<label for="pln">Plan<select id="pln"><option value="">Todos</option>'+S.plans.map(p=>'<option value="'+p.id+'"'+(ui.plan===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</select></label></div><div id="list">'+memberList()+'</div></div>';
@@ -770,7 +830,7 @@ function cobros(){
   todayPay.forEach(p=>p.lines.forEach(l=>{byM[l.m]=(byM[l.m]||0)+l.a}));
   S.sales.filter(s=>s.date===t&&s.method!=='Cuenta corriente').forEach(s=>{byM[s.method]=(byM[s.method]||0)+s.total});
   const mHtml=Object.keys(byM).length?Object.keys(byM).map(k=>'<div class="hbar" style="grid-template-columns:minmax(120px,170px) 1fr"><span>'+esc(k)+'</span><b style="text-align:left">'+money(byM[k])+'</b></div>').join(''):'<div class="note">Todavía no hay cobros hoy.</div>';
-  const over=act.filter(m=>m.due<t).sort((a,b)=>a.due.localeCompare(b.due));
+  const over=act.filter(m=>m.due<t&&!m.nuevo).sort((a,b)=>a.due.localeCompare(b.due));
   let inv=S.invoices.slice().sort((a,b)=>b.n.localeCompare(a.n));
   if(ui.invFlt==='pend')inv=inv.filter(i=>!i.arca);else if(ui.invFlt==='emit')inv=inv.filter(i=>i.arca);
   const pend=S.invoices.filter(i=>!i.arca).length;
@@ -796,7 +856,7 @@ function club(){
   const reviewAsked=S.members.filter(m=>m.reviewAt).length;
   const cards=Object.keys(SEGINFO).map(k=>{const L=sg[k],ok=L.filter(m=>m.consent&&m.phone);
     return '<div class="item"><div class="grow"><div class="nm">'+SEGINFO[k][0]+'</div><div class="meta">'+SEGINFO[k][1]+'</div><div class="meta">'+L.length+' en total · '+ok.length+' con consentimiento y teléfono</div></div>'+B('queue','Abrir cola de envíos','data-k="'+k+'"','sm'+(ok.length?'':' ghost'))+'</div>'}).join('');
-  return '<h1>Club y WhatsApp</h1><div class="bento">'+
+  return '<h1>Club y WhatsApp</h1><div class="bento">'+menuSection()+
   '<section class="glass c7"><div class="hd"><h2>Campañas por WhatsApp</h2></div><p class="note" style="margin:-6px 0 14px">Cada cola abre un mensaje por persona, con el texto ya armado. Solo aparecen quienes aceptaron recibir mensajes.</p><div class="list">'+cards+'</div></section>'+
   '<section class="glass c5"><div class="hd"><h2>Reseñas</h2></div><div class="kpi"><div class="v">'+reviewAsked+'</div><div class="f">'+W().ss+' a quienes ya se les pidió una reseña de Google</div></div><p class="note">Elegibles hoy: '+sg.resena.length+'. Se les pide después de 6 asistencias y no se repite antes de 60 días.</p></section>'+
   '<section class="glass c6"><div class="hd"><h2>Premios del Club</h2><span class="chip">1 sello por día de asistencia o compra</span></div><div class="list">'+rw.map(r=>'<div class="item"><div class="grow"><div class="nm">'+esc(r.name)+'</div></div>'+pill('mute',r.sellos+' sellos')+'</div>').join('')+'</div><h3 style="margin:18px 0 10px">Más sellos acumulados</h3><div class="list">'+top.map(m=>{const s=stamps(m),av=rw.filter(r=>r.sellos<=s);return '<div class="item"><div class="grow"><div class="nm">'+esc(m.name)+'</div><div class="meta">'+s+' sellos</div></div>'+av.map(r=>B('canje','Canjear: '+esc(r.name),'data-id="'+m.id+'" data-rid="'+r.id+'"','sm')).join('')+'</div>'}).join('')+'</div></section>'+
@@ -885,6 +945,7 @@ function ajustes(){
   '<label for="s-rz">Razón social<input id="s-rz" name="razon" value="'+esc(s.razon)+'"></label><label for="s-cuit">CUIT<input id="s-cuit" name="cuit" value="'+esc(s.cuit)+'" inputmode="numeric"></label>'+
   '<label for="s-pv">Punto de venta<input id="s-pv" name="pv" value="'+esc(s.pv)+'" maxlength="4" inputmode="numeric"></label>'+
   '<label for="s-iva">Condición frente al IVA<select id="s-iva" name="iva">'+['Monotributo','Responsable Inscripto','Exento'].map(x=>'<option'+(s.iva===x?' selected':'')+'>'+x+'</option>').join('')+'</select></label>'+
+  '<label for="s-wa">WhatsApp del negocio (recibe las solicitudes)<input id="s-wa" name="wa" value="'+esc(s.wa)+'" inputmode="numeric" placeholder="Ej: 5493875551234"></label><label for="s-url">Dirección del menú público<input id="s-url" name="publicUrl" value="'+esc(s.publicUrl)+'"></label><label for="s-addr">Dirección del local<input id="s-addr" name="address" value="'+esc(s.address)+'"></label><label class="full" for="s-about">Texto de presentación del menú<textarea id="s-about" name="about">'+esc(s.about)+'</textarea></label><label class="full" for="s-hrs">Horarios para mostrar<input id="s-hrs" name="hours" value="'+esc(s.hours)+'"></label>'+
   '<label for="s-al">Avisar vencimientos con (días)<input id="s-al" name="alertDays" type="number" min="1" max="30" value="'+s.alertDays+'"></label>'+
   '<label for="s-cl">Límite de cuenta corriente<input id="s-cl" name="creditLimit" type="number" min="0" value="'+s.creditLimit+'"></label>'+
   '<label class="chk" for="s-auto"><input id="s-auto" name="autoReg" type="checkbox"'+(s.autoReg?' checked':'')+'> Registrar la asistencia al validar el acceso</label>'+
@@ -930,6 +991,7 @@ function ficha(m){
   '<div class="meta">Paga hasta '+dmy(m.due)+' · '+attCount(m.id)+' asistencias · '+(m.decl?'Declaración de salud entregada':'Falta la declaración de salud')+(m.debt>0?' · Deuda de buffet '+money(m.debt):'')+'</div>'+
   (m.goal?'<div><div class="eyebrow">Objetivo</div><div>'+esc(m.goal)+'</div></div>':'')+(m.health?'<div><div class="eyebrow">Salud y lesiones</div><div style="overflow-wrap:anywhere">'+esc(m.health)+'</div></div>':'')+
   (acc.length?'<div><div class="eyebrow" style="margin-bottom:6px">Últimos accesos</div>'+acc.map(a=>'<div class="meta">'+dmy(dateOfTs(a.ts))+' '+hhmm(a.ts)+' · '+METH[a.method]+' · '+(a.res==='ok'?'Autorizado':a.res==='warn'?'Con aviso':'Denegado')+'</div>').join('')+'</div>':'')+
+  '<div class="toolbar">'+B('copyCardLink','Copiar enlace de la tarjeta','data-id="'+m.id+'"','sm ghost')+(m.phone?'<a class="btn sm ghost" target="_blank" rel="noopener" href="'+cardWa(m)+'" data-a="waSent" data-id="'+m.id+'" data-k="tarjeta">Enviar tarjeta por WhatsApp</a>':'')+'</div>'+
   '<div class="toolbar">'+B('payFor','Cobrar','data-id="'+m.id+'"','sm')+B('editMember','Editar','data-id="'+m.id+'"','sm ghost')+(wa?'<a class="btn sm ghost" target="_blank" rel="noopener" href="'+wa+'" data-a="waSent" data-id="'+m.id+'">WhatsApp</a>':'')+B('toggleActive',m.active?'Dar de baja':'Reactivar','data-id="'+m.id+'"','sm ghost')+B('delMember',ui.confirm==='del'+m.id?'¿Confirmar eliminación?':'Eliminar','data-id="'+m.id+'"','sm danger')+B('closeModal','Cerrar','','sm ghost')+'</div>';
 }
 function classModal(c){
@@ -952,6 +1014,8 @@ function modalHtml(){
   else if(m.t==='class'){const c=S.classes.find(z=>z.id===m.id);inner=c?classModal(c):''}
   else if(m.t==='queue')inner=queueModal(m.k);
   else if(m.t==='arca'){const i=S.invoices.find(z=>z.id===m.id);inner=i?arcaModal(i):''}
+  else if(m.t==='lead')inner=leadModal();
+  else if(m.t==='qrmenu')inner=qrMenuModal();
   else if(m.t==='text')inner='<h2>'+esc(m.title)+'</h2><p class="note" style="margin:0">Tu navegador no permite copiar con un botón. Seleccioná el texto y copialo.</p><textarea id="cp-text" style="min-height:220px" readonly>'+esc(m.text)+'</textarea>'+B('closeModal','Cerrar','','ghost');
   return '<div class="overlay" data-a="overlay"><div class="sheet" role="dialog" aria-modal="true">'+inner+'</div></div>';
 }
@@ -966,6 +1030,7 @@ function render(){
     const m=mem(ui.modal.id),el=$('#qr');
     if(m&&el){try{new QRCode(el,{text:code(m),width:132,height:132,colorDark:'#04122a',colorLight:'#ffffff'})}catch(e){el.textContent=code(m)}}
   }
+  if(ui.modal&&ui.modal.t==='qrmenu'){const el=$('#qrm'),link=menuLink();if(el){try{new QRCode(el,{text:link.length>1800?S.settings.publicUrl:link,width:240,height:240,colorDark:'#04122a',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.L})}catch(e){el.textContent=S.settings.publicUrl}}}
   if(ui.modal&&ui.modal.t==='text'){const t=$('#cp-text');if(t){t.focus();t.select()}}
   if(!ui.modal&&ui.view==='acceso'){const i=$('#acc-q');if(i&&window.innerWidth>700)i.focus()}
 }
@@ -1041,12 +1106,19 @@ const A={
   arcaClear(d){const i=S.invoices.find(x=>x.id===d.id);if(i)i.arca=null;save();ui.modal=null;render()},
   copyCsv(d){copy(csvOf(d.k),'Exportación CSV')},
   copyText(d){copy(d.t,'Copiar texto')},
+  leadOk(d){const m=approveLead(d.id);if(m){ui.payMid=m.id;go('cobros');toast('Aprobado: cobrá la primera cuota')}},
+  leadDel(d){S.leads=S.leads.filter(x=>x.id!==d.id);save();render()},
+  leadImport(){ui.modal={t:'lead'};render()},
+  qrMenu(){ui.modal={t:'qrmenu'};render()},
+  copyMenuLink(){copy(menuLink(),'Enlace del menú público')},
+  copyMenuMsg(){copy('Sumate a '+S.settings.biz+': mirá los planes y horarios y pedí tu alta desde el celular: '+menuLink(),'Mensaje para redes')},
+  copyCardLink(d){const m=mem(d.id);if(m)copy(cardLink(m),'Enlace de la tarjeta')},
   copyBackup(){copy(JSON.stringify(S),'Respaldo completo')},
   rmExamples(){askConfirm('ex',()=>{const ids=new Set(S.members.filter(m=>m.ejemplo).map(m=>m.id));S.members=S.members.filter(m=>!ids.has(m.id));
     ['slots','attendance','payments','programs','access','res','classAtt','sales','invoices','msgs'].forEach(k=>{S[k]=S[k].filter(x=>!ids.has(x.mid))});
-    S.clock=[];S.shifts=[];S.expenses=[];S.products=[];S.classes=S.classes.filter(c=>false);S.res=[];S.classAtt=[];save();render();toast('Ejemplos quitados')})},
+    S.leads=[];S.clock=[];S.shifts=[];S.expenses=[];S.products=[];S.classes=S.classes.filter(c=>false);S.res=[];S.classAtt=[];save();render();toast('Ejemplos quitados')})},
   loadDemo(d){askConfirm('demo-'+d.m,()=>{const role=S.settings.role;S=seed(d.m);S.settings.role=role;ui.cart=[];save();render();toast('Demo cargada')})},
-  wipe(){askConfirm('wipe',()=>{const st=S.settings;S=seed(st.mode);const keep=S.plans;S={v:2,settings:st,plans:keep,members:[],staff:S.staff.slice(0,1),classes:[],slots:[],res:[],classAtt:[],attendance:[],access:[],payments:[],invoices:[],invSeq:0,products:[],sales:[],shifts:[],clock:[],expenses:[],cash:[],msgs:[],programs:[]};save();render();toast('Datos borrados')})},
+  wipe(){askConfirm('wipe',()=>{const st=S.settings;S=seed(st.mode);const keep=S.plans;S={v:2,settings:st,plans:keep,members:[],staff:S.staff.slice(0,1),classes:[],slots:[],res:[],classAtt:[],attendance:[],access:[],payments:[],invoices:[],invSeq:0,products:[],sales:[],shifts:[],clock:[],expenses:[],cash:[],msgs:[],leads:[],programs:[]};save();render();toast('Datos borrados')})},
   rmExpense(d){S.expenses=S.expenses.filter(e=>e.id!==d.id);save();render()},
   delStaff(d){askConfirm('st'+d.id,()=>{S.staff=S.staff.filter(s=>s.id!==d.id);S.shifts=S.shifts.filter(x=>x.sid!==d.id);S.clock=S.clock.filter(x=>x.sid!==d.id);save();render()})},
   clockSim(d){const s=staffOf(d.id);if(s){ui.clockRes=punch(s,'nfc');render()}},
@@ -1105,12 +1177,13 @@ const FORMS={
   settings(fd){
     const s=S.settings;
     s.biz=fd.get('biz').trim()||s.biz;s.owner=fd.get('owner').trim();s.razon=fd.get('razon').trim();s.cuit=fd.get('cuit').trim();s.pv=(fd.get('pv').replace(/\D/g,'')||'1').padStart(4,'0').slice(-4);s.iva=fd.get('iva');
+    s.wa=fd.get('wa').replace(/\D/g,'');s.publicUrl=fd.get('publicUrl').trim()||s.publicUrl;s.address=fd.get('address').trim();s.about=fd.get('about').trim();s.hours=fd.get('hours').trim();
     s.alertDays=Math.min(30,Math.max(1,+fd.get('alertDays')||5));s.creditLimit=Math.max(0,+fd.get('creditLimit')||0);s.autoReg=fd.get('autoReg')==='on';s.blockDebt=fd.get('blockDebt')==='on';
     const rw=String(fd.get('rewards')||'').split('\n').map(l=>l.split('|')).filter(a=>a.length>=2&&+a[0]>0&&a[1].trim()).map(a=>{const old=s.rewards.find(r=>r.name===a[1].trim());return {id:old?old.id:uid(),sellos:+a[0],name:a[1].trim()}});
     if(rw.length)s.rewards=rw;
     save();render();toast('Ajustes guardados');
   },
-  restore(fd){try{const o=JSON.parse(fd.get('json'));if(!o||o.v!==2||!Array.isArray(o.members))throw 0;S=o;save();render();toast('Respaldo restaurado')}catch(e){toast('El texto no es un respaldo válido')}},
+  restore(fd){try{const o=JSON.parse(fd.get('json'));if(!o||o.v!==2||!Array.isArray(o.members))throw 0;S=o;migrate();save();render();toast('Respaldo restaurado')}catch(e){toast('El texto no es un respaldo válido')}},
   clock(fd){
     const q=String(fd.get('q')||'').trim();if(!q)return;
     const s=S.staff.find(x=>x.pin===q||x.nfc.toUpperCase()===q.toUpperCase());
@@ -1121,6 +1194,12 @@ const FORMS={
   cash(fd){
     const t=todayStr();let exp=0;S.payments.filter(p=>p.date===t).forEach(p=>p.lines.forEach(l=>{if(l.m==='Efectivo')exp+=l.a}));S.sales.filter(s=>s.date===t&&s.method==='Efectivo').forEach(s=>{exp+=s.total});
     S.cash.push({date:t,expected:exp,counted:+fd.get('counted')||0});save();render();toast('Caja cerrada');
+  },
+  lead(fd){
+    const l=parseLead(fd.get('t'));
+    if(!l){toast('No encontré el código de alta en el mensaje');return}
+    if(S.leads.some(x=>x.d===l.d)||S.members.some(m=>m.dni===l.d)){toast('Ya existe una solicitud o un '+W().s+' con ese documento');return}
+    S.leads.push(Object.assign({id:uid()},l));save();ui.modal=null;render();toast('Solicitud importada: '+l.n);
   },
   arca(fd){const i=S.invoices.find(x=>x.id===fd.get('id'));if(i){i.arca={num:fd.get('num').trim(),cae:fd.get('cae').trim()};save();ui.modal=null;render();toast('Número de ARCA guardado')}}
 };
@@ -1148,3 +1227,6 @@ try{const th=localStorage.getItem('mi-theme');if(th)document.documentElement.dat
 load();render();
 })();
 </script>
+
+<script>if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script>
+</body></html>
